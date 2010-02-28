@@ -1,0 +1,27 @@
+<table>
+  <tr>
+    <td><label><%=t("name")%></label></td>
+    <td><%= text_field :store, :name, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%=t("code")%></label></td>
+    <td><%= text_field :store, :code, {"style" => "width:50px"} %></td>
+  </tr>
+  <tr>
+    <td><label><%= t("default") %></label></td>
+    <td>
+      <label class="sub">
+        <%= radio_button(:store, :default, true ) %>
+        <%= t("yes") %>
+      </label> &nbsp;
+      <label class="sub">
+        <%= radio_button(:store, :default, false ) %>
+        <%= t("no") %>
+      </label>
+    </td>
+  </tr>
+  <tr>
+    <td><label><%=t("domains")%></label></td>
+    <td><%= text_area :store, :domains, {:cols => 60, :rows => 4} %></td>
+  </tr>
+</table>

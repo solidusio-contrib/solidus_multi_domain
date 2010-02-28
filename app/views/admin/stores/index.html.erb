@@ -1,0 +1,34 @@
+<%= render :partial => 'admin/shared/configuration_menu' %>
+
+<div class='toolbar'>
+  <ul class='actions'>
+    <li>
+      <%= button_link_to t("new_store"), new_object_url, :icon => 'add'  %>
+    </li>
+  </ul>
+  <br class='clear' />
+</div>
+
+<h1><%= t("stores") %></h1>
+
+<table class="index">
+  <thead>
+    <th><%= t("name") %></th>
+    <th><%= t("code") %></th>
+    <th><%= t("domains") %></th>
+    <th><%= t("action") %></th>
+  </thead>
+  <tbody>
+    <% @stores.each do |store|%>
+      <tr id="<%= dom_id store %>">
+        <td width="120px"><%= store.name %></td>
+        <td width="80px"><%= store.code %></td>
+        <td width="220"><%= store.domains %></td>
+        <td width="140px">
+          <%= link_to_edit store %> &nbsp;
+          <%= link_to_delete store %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

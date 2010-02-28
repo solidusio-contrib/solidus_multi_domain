@@ -1,0 +1,8 @@
+en-US:
+  stores: Stores
+  new_store: New Store
+  domains: Domains
+  stores_admin: "Stores & Domains"
+  manage_stores: Configure multiple stores and associated domain names
+  editing_store: Editing Store
+  default: Default

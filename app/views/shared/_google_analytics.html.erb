@@ -1,0 +1,56 @@
+<% if tracker = Tracker.current %>
+
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+
+  <% if @analytics_page %>
+    <script type="text/javascript">document.strTrackPageView="<%= @analytics_page %>";</script>
+  <% end %>
+
+  <!-- Primary Tracking -->
+  <script type="text/javascript" src="/javascripts/VKIga.js"></script>
+
+  <% if flash[:commerce_tracking] %>
+    <script type="text/javascript">
+
+      try {
+        // report e-commerce transaction information when applicable
+        /*
+         *  transaction ID - prepend dev/QA sites with 'QA-'
+         *  affiliate - always empty string
+         *  total - order total including tax & shipping
+         *  tax
+         *  shipping
+         *  ship-to city
+         *  ship-to province
+         *  ship-to country
+         */
+        VKIPageTracker._addTrans(
+          "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
+          "",
+          "<%= @order.total %>",
+          "<%= @order.tax_charges.sum(:amount).to_s %>",
+          "<%= @order.shipping_charges.sum(:amount).to_s %>",
+          "<%= @order.ship_address.city if @order.ship_address %>",
+          "<%= @order.ship_address.state.name if @order.ship_address && @order.ship_address.state %><%= @order.ship_address.state_name if @order.ship_address && @order.ship_address.state.nil? %>",
+          "<%= @order.ship_address.country.name if @order.ship_address && @order.ship_address.country %>"
+        );
+        <% @order.line_items.each do |line_item| -%>
+        VKIPageTracker._addItem(
+          "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
+          "<%= line_item.variant.sku %>",
+          "<%= line_item.variant.product.name %>",
+          "-",
+          "<%= line_item.price %>",
+          "<%= line_item.quantity %>"
+        );
+        <% end -%>
+        VKIPageTracker._trackTrans();
+      } catch (err) {
+      }
+
+    </script>
+  <% end %>
+<% end %>
