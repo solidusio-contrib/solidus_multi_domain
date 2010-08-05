@@ -12,6 +12,11 @@ class MultiDomainExtension < Spree::Extension
   def activate
 
     Spree::BaseController.send(:include, Spree::MultiDomain::BaseControllerOverrides)
+    
+    Spree::BaseController.class_eval do
+      attr_accessor :current_store
+      helper_method :current_store
+    end
 
     Product.class_eval do
       has_and_belongs_to_many :stores
@@ -97,6 +102,7 @@ class MultiDomainExtension < Spree::Extension
 
     Order.class_eval do
       belongs_to :store
+      named_scope :by_store, lambda { |store| { :conditions => {:store_id => store.id} } }
     end
 
     OrdersController.class_eval do
@@ -108,9 +114,9 @@ class MultiDomainExtension < Spree::Extension
       end
     end
 
-    # Taxonomy.class_eval do
-    #   belongs_to :store
-    # end
+    Taxonomy.class_eval do
+      belongs_to :store
+    end
 
     Tracker.class_eval do
       belongs_to :store
@@ -125,8 +131,10 @@ class MultiDomainExtension < Spree::Extension
     # Spree::BaseController.class_eval do
     #   helper YourHelper
     # end
+    
   end
 end
+
 
 
 # Make it possible to add to existing resource controller hooks with '<<' even when there's no hook of a given type defined yet.

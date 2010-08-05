@@ -15,8 +15,8 @@ module Spree::MultiDomain::BaseControllerOverrides
   end
 
   def set_store
-    @current_store ||= Store.by_domain(request.env['SERVER_NAME']).first
-    @current_store ||= Store.default.first
+    @current_store ||= ::Store.by_domain(request.env['SERVER_NAME']).first
+    @current_store ||= ::Store.default.first
   end
 
   def get_taxonomies
