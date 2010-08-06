@@ -31,7 +31,6 @@ module ActionView::Layouts
   def find_layout_with_multi_store(layout)
     if respond_to?(:current_store) && current_store && !controller.is_a?(Admin::BaseController)
       layout.gsub!("layouts/", "layouts/#{current_store.code}/")
-      puts "with store: #{layout}"
     end
     find_layout_without_multi_store(layout)
   end
