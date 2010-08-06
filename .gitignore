@@ -7,6 +7,7 @@
 .idea
 .loadpath
 .project
+*.swp
 public/dispatch.cgi
 public/dispatch.fcgi
 public/dispatch.rb

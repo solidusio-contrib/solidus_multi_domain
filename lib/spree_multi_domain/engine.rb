@@ -3,6 +3,9 @@ require "spree_multi_domain"
 module SpreeMultiDomain
 
   class Engine < Rails::Engine
+
+    engine_name :spree_multi_domain
+
     def self.activate
 
       Spree::BaseController.send(:include, SpreeMultiDomain::BaseControllerOverrides)
@@ -121,6 +124,7 @@ module SpreeMultiDomain
         end
       end
 
+    end
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.to_prepare &method(:activate).to_proc

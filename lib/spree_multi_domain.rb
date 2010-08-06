@@ -1,5 +1,6 @@
 require 'spree_core'
 require 'spree_multi_domain_hooks'
+require 'spree_multi_domain/engine'
 require 'spree_multi_domain/base_controller_overrides'
 
 
