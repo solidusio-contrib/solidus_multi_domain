@@ -8,11 +8,30 @@ module SpreeMultiDomain
 
     def self.activate
 
-      Spree::BaseController.send(:include, SpreeMultiDomain::BaseControllerOverrides)
-      
       Spree::BaseController.class_eval do
-        attr_accessor :current_store
         helper_method :current_store
+        helper :products, :taxons
+
+        private
+
+        # Tell Rails to look in layouts/#{@store.code} whenever we're inside of a store (instead of the standard /layouts location)
+        def find_layout(layout, format, html_fallback=false) #:nodoc:
+          layout_dir = current_store ? "layouts/#{current_store.code.downcase}" : "layouts"
+          view_paths.find_template(layout.to_s =~ /\A\/|layouts\// ? layout : "#{layout_dir}/#{layout}", format, html_fallback)
+        rescue ActionView::MissingTemplate
+          raise if Mime::Type.lookup_by_extension(format.to_s).html?
+        end
+
+        def current_store
+          @current_store ||= ::Store.by_domain(request.env['SERVER_NAME']).first
+          @current_store ||= ::Store.default.first
+        end
+
+        def get_taxonomies
+          @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
+          @taxonomies
+        end
+
       end
 
       Product.class_eval do
@@ -62,7 +81,7 @@ module SpreeMultiDomain
           end
 
           #SITE SPECIFIC: only retrieve products for the current store.
-          @product_group.add_scope('by_store', @current_store.id)
+          @product_group.add_scope('by_store', current_store.id)
           @product_group.add_scope('in_taxon', @taxon) unless @taxon.blank?
           @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
           @product_group = @product_group.from_search(params[:search]) if params[:search]
@@ -107,7 +126,7 @@ module SpreeMultiDomain
 
         private
         def assign_to_store
-          @order.store = @current_store
+          @order.store = current_store
         end
       end
 
@@ -123,12 +142,11 @@ module SpreeMultiDomain
           trackers.select { |t| t.store.name == Spree::Config[:site_name] }.first
         end
       end
-
     end
 
     config.autoload_paths += %W(#{config.root}/lib)
     config.to_prepare &method(:activate).to_proc
-  
+
   end
 
 end

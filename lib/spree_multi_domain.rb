@@ -1,7 +1,6 @@
 require 'spree_core'
 require 'spree_multi_domain_hooks'
 require 'spree_multi_domain/engine'
-require 'spree_multi_domain/base_controller_overrides'
 
 
 # Make it possible to add to existing resource controller hooks with '<<' even when there's no hook of a given type defined yet.
@@ -24,5 +23,20 @@ ResourceController::Accessors.module_eval do
       end_eval
     end
   end
+end
+
+
+module ActionView::Layouts
+
+  def find_layout_with_multi_store(layout)
+    if respond_to?(:current_store) && current_store && !controller.is_a?(Admin::BaseController)
+      layout.gsub!("layouts/", "layouts/#{current_store.code}/")
+      puts "with store: #{layout}"
+    end
+    find_layout_without_multi_store(layout)
+  end
+
+  alias_method_chain :find_layout, :multi_store
+
 end
 
