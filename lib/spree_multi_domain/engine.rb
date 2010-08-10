@@ -4,8 +4,6 @@ module SpreeMultiDomain
 
   class Engine < Rails::Engine
 
-    engine_name :spree_multi_domain
-
     def self.activate
 
       Spree::BaseController.class_eval do
@@ -36,8 +34,7 @@ module SpreeMultiDomain
 
       Product.class_eval do
         has_and_belongs_to_many :stores
-
-        named_scope :by_store, lambda { |*args| { :joins => :stores, :conditions => ["products_stores.store_id = ?", args.first] } }
+        scope :by_store, lambda {|store| joins(:stores).where("products_stores.store_id = ?", store)}
       end
 
       ProductsController.class_eval do
@@ -60,12 +57,12 @@ module SpreeMultiDomain
           # add taxon id to params for searcher
           params[:taxon] = @taxon.id if @taxon
           @keywords = params[:keywords]
-
+          
           per_page = params[:per_page].to_i
           per_page = per_page > 0 ? per_page : Spree::Config[:products_per_page]
           params[:per_page] = per_page
           params[:page] = 1 if (params[:page].to_i <= 0)
-
+          
           # Prepare a search within the parameters
           Spree::Config.searcher.prepare(params)
 
@@ -80,13 +77,14 @@ module SpreeMultiDomain
             @product_group = ProductGroup.new
           end
 
-          #SITE SPECIFIC: only retrieve products for the current store.
-          @product_group.add_scope('by_store', current_store.id)
-          @product_group.add_scope('in_taxon', @taxon) unless @taxon.blank?
-          @product_group.add_scope('keywords', @keywords) unless @keywords.blank?
           @product_group = @product_group.from_search(params[:search]) if params[:search]
-
+       
           base_scope = @cached_product_group ? @cached_product_group.products.active : Product.active
+          base_scope = base_scope.by_store(current_store.id) if current_store.present?
+
+          base_scope = base_scope.in_taxon(@taxon) unless @taxon.blank? 
+          base_scope = base_scope.keywords(@keywords) unless @keywords.blank?
+          
           base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
           @products_scope = @product_group.apply_on(base_scope)
 
@@ -118,7 +116,7 @@ module SpreeMultiDomain
 
       Order.class_eval do
         belongs_to :store
-        named_scope :by_store, lambda { |store| { :conditions => {:store_id => store.id} } }
+        scope :by_store, lambda { |store| where(:store_id => store.id) }
       end
 
       OrdersController.class_eval do
