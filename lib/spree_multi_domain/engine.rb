@@ -119,15 +119,6 @@ module SpreeMultiDomain
         scope :by_store, lambda { |store| where(:store_id => store.id) }
       end
 
-      OrdersController.class_eval do
-        create.before << :assign_to_store
-
-        private
-        def assign_to_store
-          @order.store = current_store
-        end
-      end
-
       Taxonomy.class_eval do
         belongs_to :store
       end
@@ -147,5 +138,17 @@ module SpreeMultiDomain
 
   end
 
+end
+
+
+Spree::CurrentOrder.module_eval do
+  def current_order_with_multi_domain(create_order_if_necessary = false)
+    current_order_without_multi_domain(create_order_if_necessary)
+    if @current_order and current_store and @current_order.store.nil?
+      @current_order.update_attribute(:store_id, current_store.id)
+    end
+    @current_order
+  end
+  alias_method_chain :current_order, :multi_domain
 end
 
