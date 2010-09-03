@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   # s.homepage          = 'http://www.rubyonrails.org'
   # s.rubyforge_project = 'actionmailer'
 
-  s.files        = Dir['CHANGELOG', 'README', 'MIT-LICENSE', 'lib/**/*']
+  s.files        = Dir['CHANGELOG', 'README', 'MIT-LICENSE', 'lib/**/*', 'app/**/*']
   s.require_path = 'lib'
   s.requirements << 'none'
 
