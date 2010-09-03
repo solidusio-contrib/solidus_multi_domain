@@ -1,4 +1,4 @@
-class MultiDomainHooks < Spree::ThemeSupport::HookListener
+class SpreeMultiDomainHooks < Spree::ThemeSupport::HookListener
 
   insert_after :admin_products_index_headers, :partial => "admin/products/index_headers"
   insert_after :admin_products_index_rows, :partial => "admin/products/index_rows"

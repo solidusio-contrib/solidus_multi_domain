@@ -5,6 +5,6 @@ class Store < ActiveRecord::Base
 
   validates_presence_of :name, :code, :domains
 
-  named_scope :default, :conditions => {:default => true}
-  named_scope :by_domain, lambda { |domain| { :conditions => ["domains like ?", "%#{domain}%"] } }
+  scope :default, where(:default => true)
+  scope :by_domain, lambda { |domain| where("domains like ?", "%#{domain}%") }
 end
