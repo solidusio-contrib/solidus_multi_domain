@@ -1,4 +1,4 @@
-version = '3.0.0'
+version = '3.0.1'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   # s.homepage          = 'http://www.rubyonrails.org'
   # s.rubyforge_project = 'actionmailer'
 
-  s.files        = Dir['CHANGELOG', 'README', 'MIT-LICENSE', 'lib/**/*', 'app/**/*']
+  s.files        = Dir['CHANGELOG', 'README', 'MIT-LICENSE', 'lib/**/*', 'app/**/*', 'config/*']
   s.require_path = 'lib'
   s.requirements << 'none'
 
