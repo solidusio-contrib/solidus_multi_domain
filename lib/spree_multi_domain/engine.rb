@@ -6,10 +6,13 @@ module SpreeMultiDomain
 
     def self.activate
 
+      #override search to make it multi-store aware
+      Spree::Config.searcher_class = Spree::Search::MultiDomain
+
       Spree::BaseController.class_eval do
         helper_method :current_store
         helper :products, :taxons
-
+        before_filter :add_current_store_id_to_params
         private
 
         # Tell Rails to look in layouts/#{@store.code} whenever we're inside of a store (instead of the standard /layouts location)
@@ -26,8 +29,13 @@ module SpreeMultiDomain
         end
 
         def get_taxonomies
-          @taxonomies ||= Taxonomy.find(:all, :include => {:root => :children}, :conditions => ["store_id = ?", @site.id])
+          @taxonomies ||= current_store.present? ? Taxonomy.where(["store_id = ?", current_store.id]) : Taxonomy
+          @taxonomies = @taxonomies.find(:all, :include => {:root => :children})
           @taxonomies
+        end
+        
+        def add_current_store_id_to_params
+          params[:current_store_id] = current_store.try(:id)
         end
 
       end
@@ -47,57 +55,6 @@ module SpreeMultiDomain
          end
         end
 
-      end
-
-      #override search to make it multi-store aware
-      Spree::Search.module_eval do
-        def retrieve_products
-          # taxon might be already set if this method is called from TaxonsController#show
-          @taxon ||= Taxon.find_by_id(params[:taxon]) unless params[:taxon].blank?
-          # add taxon id to params for searcher
-          params[:taxon] = @taxon.id if @taxon
-          @keywords = params[:keywords]
-          
-          per_page = params[:per_page].to_i
-          per_page = per_page > 0 ? per_page : Spree::Config[:products_per_page]
-          params[:per_page] = per_page
-          params[:page] = 1 if (params[:page].to_i <= 0)
-          
-          # Prepare a search within the parameters
-          Spree::Config.searcher.prepare(params)
-
-          if !params[:order_by_price].blank?
-            @product_group = ProductGroup.new.from_route([params[:order_by_price]+"_by_master_price"])
-          elsif params[:product_group_name]
-            @cached_product_group = ProductGroup.find_by_permalink(params[:product_group_name])
-            @product_group = ProductGroup.new
-          elsif params[:product_group_query]
-            @product_group = ProductGroup.new.from_route(params[:product_group_query])
-          else
-            @product_group = ProductGroup.new
-          end
-
-          @product_group = @product_group.from_search(params[:search]) if params[:search]
-       
-          base_scope = @cached_product_group ? @cached_product_group.products.active : Product.active
-          base_scope = base_scope.by_store(current_store.id) if current_store.present?
-
-          base_scope = base_scope.in_taxon(@taxon) unless @taxon.blank? 
-          base_scope = base_scope.keywords(@keywords) unless @keywords.blank?
-          
-          base_scope = base_scope.on_hand unless Spree::Config[:show_zero_stock_products]
-          @products_scope = @product_group.apply_on(base_scope)
-
-          curr_page = Spree::Config.searcher.manage_pagination ? 1 : params[:page]
-          @products = @products_scope.all.paginate({
-              :include  => [:images, :master],
-              :per_page => per_page,
-              :page     => curr_page
-            })
-          @products_count = @products_scope.count
-
-          return(@products)
-        end
       end
 
       Admin::ProductsController.class_eval do

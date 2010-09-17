@@ -1,7 +1,7 @@
 <%= render :partial => 'admin/shared/configuration_menu' %>
 
 <h1><%= t("editing_store") %></h1>
-<%= error_messages_for :store %>
+<%= render "shared/error_messages", :target => @store %>
 <% form_for(@store, :url => object_url, :html => { :method => :put }) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p class="form-buttons">
