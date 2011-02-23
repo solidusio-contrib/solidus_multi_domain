@@ -15,6 +15,7 @@
   <thead>
     <th><%= t("name") %></th>
     <th><%= t("code") %></th>
+    <th><%= t("send_mails_as") %></th>
     <th><%= t("domains") %></th>
     <th><%= t("action") %></th>
   </thead>
@@ -23,6 +24,7 @@
       <tr id="<%= dom_id store %>">
         <td width="120px"><%= store.name %></td>
         <td width="80px"><%= store.code %></td>
+        <td width="80px"><%= store.email %></td>
         <td width="220"><%= store.domains %></td>
         <td width="140px">
           <%= link_to_edit store %> &nbsp;

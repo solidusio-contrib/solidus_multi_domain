@@ -21,6 +21,10 @@
     </td>
   </tr>
   <tr>
+    <td><label><%=t("send_mails_as")%></label></td>
+    <td><%= text_field :store, :email, {"style" => "width:200px"} %></td>
+  </tr>
+  <tr>
     <td><label><%=t("domains")%></label></td>
     <td><%= text_area :store, :domains, {:cols => 60, :rows => 4} %></td>
   </tr>
