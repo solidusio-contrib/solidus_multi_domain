@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_multi_domain'
-  s.version     = '3.0.2'
+  s.version     = '3.0.3'
   s.summary     = 'Adds multiple site support to Spree'
   s.description = 'Multiple Spree stores on different domains - single unified backed for processing orders.'
   s.required_ruby_version = '>= 1.8.7'
@@ -17,5 +17,5 @@ Gem::Specification.new do |s|
 
   s.has_rdoc = false
 
-  s.add_dependency('spree_core',  '>= 0.30.0.beta1')
+  s.add_dependency('spree_core',  '>= 0.30.1')
 end
