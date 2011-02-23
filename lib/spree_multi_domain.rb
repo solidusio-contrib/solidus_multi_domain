@@ -53,6 +53,47 @@ Spree::CurrentOrder.module_eval do
   alias_method_chain :current_order, :multi_domain
 end
 
+
+module SpreeBase
+  module InstanceMethods
+    private
+
+    def current_store
+      @current_store ||= ::Store.current(request.env['SERVER_NAME'])
+    end
+    
+    def current_tracker
+      @current_tracker ||= Tracker.current(request.env['SERVER_NAME'])
+    end
+
+    def get_taxonomies
+      @taxonomies ||= current_store.present? ? Taxonomy.where(["store_id = ?", current_store.id]) : Taxonomy
+      @taxonomies = @taxonomies.find(:all, :include => {:root => :children})
+      @taxonomies
+    end
+    
+    def add_current_store_id_to_params
+      params[:current_store_id] = current_store.try(:id)
+    end
+  end
+
+  class << self
+
+    def included_with_multi_domain(receiver)
+      included_without_multi_domain(receiver)
+
+      receiver.send :helper, 'products'
+      receiver.send :helper, 'taxons'
+      receiver.send :before_filter, 'add_current_store_id_to_params'
+      receiver.send :helper_method, 'current_store'
+      receiver.send :helper_method, 'current_tracker'
+    end
+    
+    alias_method_chain :included, :multi_domain
+  end
+end
+
+
 module ActionView::Layouts
 
   def find_layout_with_multi_store(layout)
