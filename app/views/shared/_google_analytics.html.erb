@@ -1,8 +1,14 @@
-<% if tracker = Tracker.current %>
+<% if tracker = current_tracker %>
 
   <script type="text/javascript">
     var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
     document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+
+  <script type="text/javascript">
+    var pageTracker = _gat._getTracker("<%= tracker.analytics_id %>");
+    pageTracker._initData();
+    pageTracker._trackPageview();
   </script>
 
   <% if @analytics_page %>
@@ -31,8 +37,8 @@
           "<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>",
           "",
           "<%= @order.total %>",
-          "<%= @order.tax_charges.sum(:amount).to_s %>",
-          "<%= @order.shipping_charges.sum(:amount).to_s %>",
+          "<%= @order.adjustments.tax.sum(:amount).to_s %>",
+          "<%= @order.adjustments.shipping.sum(:amount).to_s %>",
           "<%= @order.ship_address.city if @order.ship_address %>",
           "<%= @order.ship_address.state.name if @order.ship_address && @order.ship_address.state %><%= @order.ship_address.state_name if @order.ship_address && @order.ship_address.state.nil? %>",
           "<%= @order.ship_address.country.name if @order.ship_address && @order.ship_address.country %>"
