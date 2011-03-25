@@ -1,7 +1,7 @@
 Admin::ProductsController.class_eval do
-  update.before << :set_stores
+  update.before :set_stores
 
-  create.before << :add_to_all_stores
+  create.before :add_to_all_stores
 
   private
   def set_stores
