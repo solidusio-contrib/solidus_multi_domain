@@ -1,41 +1,42 @@
+lolwut
 <% if tracker = current_tracker %>
 
-  <% if flash[:commerce_tracking] %>
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', '<%= tracker.analytics_id -%>']);
-      _gaq.push(['_trackPageview']);
-      _gaq.push(['_addTrans',
-        '<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>',           // order ID - required
-        '<%= tracker.store.name -%>',  // affiliation or store name
-        '<%= @order.total -%>',          // total - required
-        '<%= @order.adjustments.tax.sum(:amount).to_s -%>',           // tax
-        '<%= @order.adjustments.shipping.sum(:amount).to_s -%>',              // shipping
-        '<%= @order.ship_address.city if @order.ship_address -%>',       // city
-        '<%= @order.ship_address.state.name if @order.ship_address and @order.ship_address.state -%>',     // state or province
-        '<%= @order.ship_address.country.name if @order.ship_address && @order.ship_address.country -%>'             // country
-      ]);
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', '<%= tracker.analytics_id -%>']);
+  _gaq.push(['_trackPageview']);
+  
+  <%- if flash[:commerce_tracking] -%>
+  
+  _gaq.push(['_addTrans',
+    '<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>', // order ID - required
+    '<%= tracker.store.name -%>', // affiliation or store name
+    '<%= @order.total -%>', // total - required
+    '<%= @order.adjustments.tax.sum(:amount).to_s -%>', // tax
+    '<%= @order.adjustments.shipping.sum(:amount).to_s -%>', // shipping
+    '<%= @order.ship_address.city if @order.ship_address -%>', // city
+    '<%= @order.ship_address.state.name if @order.ship_address and @order.ship_address.state -%>', // state or province
+    '<%= @order.ship_address.country.name if @order.ship_address && @order.ship_address.country -%>' // country
+  ]);
 
-       // add item might be called for every item in the shopping cart
-       // where your ecommerce engine loops through each item in the cart and
-       // prints out _addItem for each
-       <%- @order.line_items.each do |line_item| -%>
-      _gaq.push(['_addItem',
-        '<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>',           // order ID - required
-        '<%= line_item.variant.sku -%>',           // SKU/code - required
-        '<%= line_item.variant.product.name -%>',        // product name
-        '-',   // category or variation
-        '<%= line_item.price -%>',          // unit price - required
-        '<%= line_item.quantity -%>'               // quantity - required
-      ]);
-      <%- end -%>
-      _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
-
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
-  <% end %>
+   <%- @order.line_items.each do |line_item| -%>
+  _gaq.push(['_addItem',
+    '<%= "#{"QA-" if request.server_name =~ /^(dev.|localhost)/ }#{@order.number}" %>', // order ID - required
+    '<%= line_item.variant.sku -%>', // SKU/code - required
+    '<%= line_item.variant.product.name -%>', // product name
+    '-', // category or variation
+    '<%= line_item.price -%>', // unit price - required
+    '<%= line_item.quantity -%>' // quantity - required
+  ]);
+  <%- end -%>
+  _gaq.push(['_trackTrans']); //submits transaction to the Analytics servers
+  
+  <%- end -%>
+  
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+  </script>
 <% end %>
