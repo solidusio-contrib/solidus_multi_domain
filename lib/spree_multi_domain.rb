@@ -1,5 +1,4 @@
 require 'spree_core'
-require 'spree_multi_domain_hooks'
 
 module SpreeMultiDomain
   class Engine < Rails::Engine
@@ -7,11 +6,13 @@ module SpreeMultiDomain
     config.autoload_paths += %W(#{config.root}/lib)
 
     def self.activate
+
+      require 'spree_multi_domain_hooks'
       #override search to make it multi-store aware
       Spree::Config.searcher_class = Spree::Search::MultiDomain
-      
+
       Dir.glob(File.join(File.dirname(__FILE__), "../app/**/*_decorator*.rb")) do |c|
-        Rails.env.production? ? require(c) : load(c)
+        # Rails.env.production? ? require(c) : load(c)
       end
 
     end
