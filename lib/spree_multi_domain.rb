@@ -97,15 +97,15 @@ end
 
 module ActionView
   class TemplateRenderer
-    def find_layout_with_multi_store(layout)
+    def find_layout_with_multi_store(layout, locals)
       store_layout = layout
       if respond_to?(:current_store) && current_store && !controller.is_a?(Admin::BaseController)
         store_layout = layout.gsub("layouts/", "layouts/#{current_store.code}/")
       end
       begin
-        find_layout_without_multi_store(store_layout)
+        find_layout_without_multi_store(store_layout, locals)
       rescue ::ActionView::MissingTemplate
-        find_layout_without_multi_store(layout)
+        find_layout_without_multi_store(layout, locals)
       end
     end
 
