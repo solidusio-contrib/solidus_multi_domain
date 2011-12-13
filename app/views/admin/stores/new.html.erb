@@ -3,7 +3,7 @@
 <h1><%= t("new_store") %></h1>
 <%= render "shared/error_messages", :target => @store %>
 
-<% form_for(:store, :url => collection_url) do |f| %>
+<%= form_for(:store, :url => collection_url) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
   <p class="form-buttons">
     <%= button t('continue') %>
