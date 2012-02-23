@@ -1,4 +1,4 @@
-class OrderMailer < ActionMailer::Base
+class Spree::OrderMailer < ActionMailer::Base
   helper "spree/base"
 
   def confirm_email(order, resend=false)

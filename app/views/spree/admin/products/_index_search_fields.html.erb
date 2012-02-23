@@ -1,0 +1,4 @@
+<p>
+  <label><%= t("store") %></label><br />
+  <%= f.select :stores_id_equals, Spree::Store.all.collect {|s| [s.name, s.id ] }, {:include_blank => true} %></p>
+</p>

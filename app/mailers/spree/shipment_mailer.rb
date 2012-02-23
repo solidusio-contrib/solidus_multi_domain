@@ -1,4 +1,4 @@
-class ShipmentMailer < ActionMailer::Base
+class Spree::ShipmentMailer < ActionMailer::Base
   helper "spree/base"
 
   def shipped_email(shipment, resend=false)
