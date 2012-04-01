@@ -1,7 +1,7 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
 <h1><%= t("new_store") %></h1>
-<%= render "shared/error_messages", :target => @store %>
+<%= render "spree/shared/error_messages", :target => @store %>
 
 <%= form_for(:store, :url => collection_url) do |f| %>
   <%= render :partial => "form", :locals => { :f => f } %>
