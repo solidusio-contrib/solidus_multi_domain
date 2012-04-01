@@ -8,5 +8,5 @@
 
 <p>
   <%= f.label :name, t("store") %> <span class="required">*</span><br />
-  <%= collection_select :taxonomy, :store_id, Store.all, :id, :name  %>
+  <%= collection_select :taxonomy, :store_id, Spree::Store.all, :id, :name  %>
 </p>
