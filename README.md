@@ -27,11 +27,12 @@ a code of "alpha" you should store it's default layout in app/views/layouts/alph
 
 5. Google analytics trackers can be associated with a store.
 
-(Unofficial) Install Instructions
+Install Instructions
 --------------------
-1. Backup your site db and codebase.
-2. Database migrations require Spree 1.0 namespacing (IE, Spree::Order).
-3. ````bundle exec rails g spree_multi_domain:install````
+
+```
+bundle exec rails g spree_multi_domain:install
+```
 
 Features To-do
 --------------
