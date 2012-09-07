@@ -3,12 +3,12 @@ require 'spec_helper'
 describe Spree::Product do
 
   before(:each) do
-    @store = Factory(:store)
-    @product = Factory(:product, :stores => [@store])
-    
-    @product2 = Factory(:product, :permalink => 'something else')
+    @store = FactoryGirl.create(:store)
+    @product = FactoryGirl.create(:product, :stores => [@store])
+
+    @product2 = FactoryGirl.create(:product, :permalink => 'something else')
   end
-  
+
   it 'should correctly find products by store' do
     products_by_store = Spree::Product.by_store(@store).all
 

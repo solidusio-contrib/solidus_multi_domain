@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Spree::Order do
-  
+
   before(:each) do
-    @store = Factory(:store)
-    @order = Factory(:order, :store => @store)
-    
-    @order2 = Factory(:order)
+    @store = FactoryGirl.create(:store)
+    @order = FactoryGirl.create(:order, :store => @store)
+
+    @order2 = FactoryGirl.create(:order)
   end
-  
+
   it 'should correctly find products by store' do
     by_store = Spree::Order.by_store(@store).all
 
