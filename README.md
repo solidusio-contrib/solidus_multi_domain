@@ -30,9 +30,19 @@ a code of "alpha" you should store it's default layout in app/views/layouts/alph
 Install Instructions
 --------------------
 
+Add to your Gemfile:
+
+```ruby
+gem 'spree_multi_domain', git: 'git@github.com:spree/spree-multi-domain.git'
+```
+
+Then run `bundle`, and then run:
+
 ```
 bundle exec rails g spree_multi_domain:install
 ```
+
+You should see 'Stores & Domains' in Configuration tab of Spree Admin.
 
 Features To-do
 --------------
