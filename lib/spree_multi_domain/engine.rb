@@ -36,7 +36,7 @@ module SpreeMultiDomain
     end
 
     initializer "current order decoration" do |app|
-      ::Spree::Core::CurrentOrder.module_eval do
+      ::Spree::Core::ControllerHelpers::Order.module_eval do
         def current_order_with_multi_domain(create_order_if_necessary = false)
           current_order_without_multi_domain(create_order_if_necessary)
 
