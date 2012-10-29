@@ -1,31 +1,44 @@
-<table>
-  <tr>
-    <td><label><%=t("name")%></label></td>
-    <td><%= text_field :store, :name, {"style" => "width:200px"} %></td>
-  </tr>
-  <tr>
-    <td><label><%=t("code")%></label></td>
-    <td><%= text_field :store, :code, {"style" => "width:50px"} %></td>
-  </tr>
-  <tr>
-    <td><label><%= t("default") %></label></td>
-    <td>
-      <label class="sub">
-        <%= radio_button(:store, :default, true ) %>
-        <%= t("yes") %>
-      </label> &nbsp;
-      <label class="sub">
-        <%= radio_button(:store, :default, false ) %>
-        <%= t("no") %>
-      </label>
-    </td>
-  </tr>
-  <tr>
-    <td><label><%=t("send_mails_as")%></label></td>
-    <td><%= text_field :store, :email, {"style" => "width:200px"} %></td>
-  </tr>
-  <tr>
-    <td><label><%=t("domains")%></label></td>
-    <td><%= text_area :store, :domains, {:cols => 60, :rows => 4} %></td>
-  </tr>
-</table>
+<div data-hook="admin_store_form_fields">
+  <div class="alpha four columns">
+    <%= f.field_container :name do %>
+      <%= f.label :name, t(:name) %><br />
+      <%= f.text_field :name, :class => 'fullwidth' %>
+      <%= error_message_on :store, :name %>
+    <% end %>
+  </div>
+
+  <div class="four columns">
+    <%= f.field_container :code do %>
+      <%= f.label :code, t(:code) %><br />
+      <%= f.text_field :code, :class => 'fullwidth' %>
+      <%= error_message_on :store, :code %>
+    <% end %>
+  </div>
+
+  <div class="two columns">
+    <%= f.field_container :default do %>
+      <%= f.label :default, t(:default) %>
+      <ul>
+        <li><%= f.radio_button :default, :class => 'fullwidth' %> <%= t(:yes) %></li>
+        <li><%= f.radio_button :default, :class => 'fullwidth' %> <%= t(:no) %></li>
+      </ul>
+      <%= error_message_on :store, :default %>
+    <% end %>
+  </div>
+
+  <div class="four columns">
+    <%= f.field_container :send_mails_as do %>
+      <%= f.label :send_mails_as, t(:send_mails_as) %><br />
+      <%= f.text_field :email, :class => 'fullwidth' %>
+      <%= error_message_on :store, :email %>
+    <% end %>
+  </div>
+
+  <div class="omega six columns">
+    <%= f.field_container :domains do %>
+      <%= f.label :domains, t(:domains) %><br />
+      <%= f.text_area :domains, :cols => 60, :rows => 4, :class => 'fullwidth' %>
+      <%= error_message_on :store, :domains %>
+    <% end %>
+  </div>
+</div>

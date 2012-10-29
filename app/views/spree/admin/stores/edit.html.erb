@@ -1,11 +1,29 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<h1><%= t("editing_store") %></h1>
-<%= render "spree/shared/error_messages", :target => @store %>
-<%= form_for(@store, :url => object_url, :html => { :method => :put }) do |f| %>
-  <%= render :partial => "form", :locals => { :f => f } %>
-  <p class="form-buttons">
-    <%= button t('update') %>
-    <%= t("or") %> <%= link_to t("actions.cancel"), admin_stores_url %>
-  </p>
+<% content_for :page_title do %>
+  <%= t(:editing_store) %>
 <% end %>
+
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to t(:back_to_stores_list), spree.admin_stores_path, :icon => 'icon-arrow-left' %>
+  </li>
+<% end %>
+
+<div data-hook="admin_store_edit_form_header">
+  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @store } %>
+</div>
+
+<div data-hook="admin_store_edit_form">
+  <%= form_for [:admin, @store] do |f| %>
+    <fieldset class="no-border-top">
+      <%= render :partial => 'form', :locals => { :f => f } %>
+
+      <div class="clear"></div>
+
+      <div data-hook="admin_store_edit_form_buttons">
+        <%= render :partial => 'spree/admin/shared/edit_resource_links' %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
