@@ -1,34 +1,41 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
-<div class='toolbar'>
-  <ul class='actions'>
-    <li>
-      <%= button_link_to t("new_store"), new_object_url, :icon => 'add'  %>
-    </li>
-  </ul>
-  <br class='clear' />
-</div>
+<% content_for :page_title do %>
+  <%= t(:stores) %>
+<% end %>
 
-<h1><%= t("stores") %></h1>
+<% content_for :page_actions do %>
+  <li>
+    <%= button_link_to t(:new_store), new_object_url,  :icon => 'icon-plus', :id => 'admin_new_store_link' %>
+  </li>
+<% end %>
 
-<table class="index">
+<table class="index" id='listing_stores'>
+  <colgroup>
+    <col style="width: 120px">
+    <col style="width: 80px">
+    <col style="width: 80px">
+    <col style="width: 220px">
+    <col style="width: 15%">
+  </colgroup>
   <thead>
-    <th><%= t("name") %></th>
-    <th><%= t("code") %></th>
-    <th><%= t("send_mails_as") %></th>
-    <th><%= t("domains") %></th>
-    <th><%= t("action") %></th>
+    <th><%= t(:name) %></th>
+    <th><%= t(:code) %></th>
+    <th><%= t(:send_mails_as) %></th>
+    <th><%= t(:domains) %></th>
+    <th data-hook="admin_stores_index_header_actions" class="actions"></th>
   </thead>
   <tbody>
     <% @stores.each do |store|%>
-      <tr id="<%= dom_id store %>">
-        <td width="120px"><%= store.name %></td>
-        <td width="80px"><%= store.code %></td>
-        <td width="80px"><%= store.email %></td>
-        <td width="220"><%= store.domains %></td>
-        <td width="140px">
-          <%= link_to_edit store %> &nbsp;
-          <%= link_to_delete store %>
+      <tr id="<%= spree_dom_id store %>"
+          data-hook="admin_stores_index_rows" class="<%= cycle('odd', 'even') %>">
+        <td><%= store.name %></td>
+        <td><%= store.code %></td>
+        <td><%= store.email %></td>
+        <td><%= store.domains %></td>
+        <td data-hook="admin_stores_index_row_actions" class="actions">
+          <%= link_to_edit store, :no_text => true %> &nbsp;
+          <%= link_to_delete store, :no_text => true %>
         </td>
       </tr>
     <% end %>
