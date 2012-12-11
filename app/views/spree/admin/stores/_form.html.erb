@@ -41,7 +41,7 @@
     <% end %>
   </div>
 
-  <div class="omega six columns">
+  <div class="six columns">
     <%= f.field_container :domains do %>
       <%= f.label :domains, t(:domains) %><br />
       <%= f.text_area :domains, :cols => 60, :rows => 4, :class => 'fullwidth' %>
@@ -58,4 +58,16 @@
     <% end %>
   </div>
 
+  <div class="omega eight columns">
+    <%= f.field_container :payment_methods do %>
+      <%= f.label :payment_methods, t(:payment_methods) %><br />
+      <% @payment_methods.each do |payment_method| %>
+        <label class="sub">
+          <%= check_box_tag 'store[payment_method_ids][]', payment_method.id, @store.payment_methods.include?(payment_method) %>
+        </label> &nbsp;
+        <%= "#{payment_method.name} (#{payment_method.environment})" %>
+      <% end %>
+      <%= hidden_field_tag 'store[payment_method_ids][]', '' %>
+    <% end %>
+  </div>
 </div>
