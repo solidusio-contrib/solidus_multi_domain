@@ -1,0 +1,10 @@
+pl:
+  store: "Sklep"
+  stores: "Sklepy"
+  new_store: "Nowy Sklep"
+  domains: "Domeny"
+  stores_admin: "Sklepy & Domeny"
+  manage_stores: "Skonfiguruj wiele sklepów i powiązane z nimi domeny"
+  editing_store: "Edcja sklepu"
+  default: "Domyślny"
+
