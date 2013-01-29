@@ -6,7 +6,9 @@ class Spree::ShipmentMailer < ActionMailer::Base
     subject = (resend ? "[RESEND] " : "")
     subject += "#{Spree::Config[:site_name]} Shipment Notification ##{shipment.order.number}"
     mail_params = {:to => shipment.order.email, :subject => subject}
-    mail_params[:from] = shipment.order.store.email if shipment.order.store.email.present?
+    if shipment.order.store && shipment.order.store.email.present?
+      mail_params[:from] = shipment.order.store.email
+    end
     mail(mail_params)
   end
 end
