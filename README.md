@@ -33,7 +33,7 @@ Install Instructions
 Add to your Gemfile:
 
 ```ruby
-gem 'spree_multi_domain', git: 'git@github.com:spree/spree-multi-domain.git'
+gem 'spree_multi_domain', git: 'git://github.com/spree/spree-multi-domain.git'
 ```
 
 Then run `bundle`, and then run:
