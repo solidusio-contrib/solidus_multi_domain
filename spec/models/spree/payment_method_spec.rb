@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'PaymentMethod' do
   describe '.available' do
-    subject { Spree::PaymentMethod.available(store) }
+    subject { Spree::PaymentMethod.available(:front_end, store) }
 
     let!(:payment_method) { FactoryGirl.create :payment_method }
     let(:payment_method_store) { FactoryGirl.create :store, :payment_methods => [payment_method] }
