@@ -34,6 +34,13 @@
     <% end %>
   </div>
 
+  <div class="four columns">
+    <%= f.field_container :default_currency do %>
+      <%= f.label :default_currency, t(:default_currency) %>
+      <%= f.text_field :default_currency %>
+    <% end %>
+  </div>
+
   <div class="omega six columns">
     <%= f.field_container :domains do %>
       <%= f.label :domains, t(:domains) %><br />
