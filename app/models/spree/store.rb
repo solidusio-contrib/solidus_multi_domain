@@ -1,6 +1,5 @@
 module Spree
   class Store < ActiveRecord::Base
-    include Spree::Core::S3Support
     has_and_belongs_to_many :products, :join_table => 'spree_products_stores'
     has_many :taxonomies
     has_many :orders
@@ -17,6 +16,9 @@ module Spree
       :url => 'stores/:id/:style/:basename.:extension',
       :path => 'stores/:id/:style/:basename.:extension',
       :convert_options => { :all => '-strip -auto-orient' }
+
+    include Spree::Core::S3Support
+    supports_s3 :logo
 
     def self.current(domain = nil)
       current_store = domain ? Store.by_domain(domain).first : nil
