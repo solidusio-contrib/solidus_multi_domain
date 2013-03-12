@@ -25,18 +25,22 @@ describe "Global controller helpers" do
   end
 
   describe '.current_currency' do
+    subject { controller.current_currency }
+
     context "when store default_currency is nil" do
-      it 'returns the global default' do
-        controller.current_currency.should == 'USD'
-      end
+      it { should == 'USD' }
     end
 
-    context "when the current store default_currency is not nil" do
+    context "when the current store default_currency empty" do
+      let!(:store) { FactoryGirl.create :store, :default_currency => '' }
+
+      it { should == 'USD' }
+    end
+
+    context "when the current store default_currency is a currency" do
       let!(:store) { FactoryGirl.create :store, :default_currency => 'EUR' }
 
-      it "returns the default currency for the current store" do
-        controller.current_currency.should == 'EUR'
-      end
+      it { should == 'EUR' }
     end
   end
 

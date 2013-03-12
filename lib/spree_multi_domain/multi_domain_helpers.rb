@@ -13,10 +13,6 @@ module SpreeMultiDomain
       @current_store ||= Spree::Store.current(request.env['SERVER_NAME'])
     end
 
-    def current_currency
-      @current_store.try(:default_currency) || Spree::Config[:currency]
-    end
-
     def current_tracker
       @current_tracker ||= Spree::Tracker.current(request.env['SERVER_NAME'])
     end
