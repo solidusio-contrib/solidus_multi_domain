@@ -58,16 +58,33 @@
     <% end %>
   </div>
 
-  <div class="omega eight columns">
-    <%= f.field_container :payment_methods do %>
-      <%= f.label :payment_methods, t(:payment_methods) %><br />
-      <% @payment_methods.each do |payment_method| %>
-        <label class="sub">
-          <%= check_box_tag 'store[payment_method_ids][]', payment_method.id, @store.payment_methods.include?(payment_method) %>
-        </label> &nbsp;
-        <%= "#{payment_method.name} (#{payment_method.environment})" %>
+  <div class='row'>
+    <div class="alpha six columns">
+      <%= f.field_container :payment_methods do %>
+        <%= f.label :payment_methods, t(:payment_methods) %><br />
+        <% @payment_methods.each do |payment_method| %>
+          <label class="sub">
+            <%= check_box_tag 'store[payment_method_ids][]', payment_method.id, @store.payment_methods.include?(payment_method) %>
+          </label> &nbsp;
+          <%= "#{payment_method.name} (#{payment_method.environment})" %>
+          <br>
+        <% end %>
+        <%= hidden_field_tag 'store[payment_method_ids][]', '' %>
       <% end %>
-      <%= hidden_field_tag 'store[payment_method_ids][]', '' %>
-    <% end %>
+    </div>
+
+    <div class="omega six columns">
+      <%= f.field_container :shipping_methods do %>
+        <%= f.label :shipping_methods, t(:shipping_methods) %><br />
+        <% @shipping_methods.each do |shipping_method| %>
+          <label class="sub">
+            <%= check_box_tag 'store[shipping_method_ids][]', shipping_method.id, @store.shipping_methods.include?(shipping_method) %>
+          </label> &nbsp;
+          <%= shipping_method.name %>
+          <br>
+        <% end %>
+        <%= hidden_field_tag 'store[shipping_method_ids][]', '' %>
+      <% end %>
+    </div>
   </div>
 </div>

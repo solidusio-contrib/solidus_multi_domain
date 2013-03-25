@@ -74,8 +74,8 @@ GEM
       rails (~> 3.1)
     diff-lcs (1.2.1)
     erubis (2.7.0)
-    factory_girl (4.2.0)
-      activesupport (>= 3.0.0)
+    factory_girl (2.6.4)
+      activesupport (>= 2.3.9)
     ffaker (1.12.1)
     ffi (1.4.0)
     highline (1.6.11)
@@ -212,7 +212,7 @@ PLATFORMS
 
 DEPENDENCIES
   capybara (~> 1.0.1)
-  factory_girl
+  factory_girl (~> 2.6.4)
   ffaker
   rails
   rspec-rails (~> 2.7)
