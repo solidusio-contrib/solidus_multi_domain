@@ -7,3 +7,9 @@ en:
   manage_stores: Configure multiple stores and associated domain names
   editing_store: Editing Store
   default: Default
+  promotion_rule_types:
+    store:
+      name: "Store"
+      description: "Store must match one from the list"
+  store_rule:
+    choose_stores: "Choose Stores"
