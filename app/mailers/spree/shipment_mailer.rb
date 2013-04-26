@@ -2,7 +2,7 @@ class Spree::ShipmentMailer < ActionMailer::Base
   helper "spree/base"
 
   def shipped_email(shipment, resend=false)
-    @shipment = shipment
+    @shipment = shipment.respond_to?(:id) ? shipment : Spree::Shipment.find(shipment)
     subject = (resend ? "[RESEND] " : "")
     subject += "#{Spree::Config[:site_name]} Shipment Notification ##{shipment.order.number}"
     mail_params = {:to => shipment.order.email, :subject => subject}
