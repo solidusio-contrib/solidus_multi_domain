@@ -1,5 +1,5 @@
 <div class="field alpha omega eight columns">
-  <label><%= t('store_rule.choose_stores') %></label><br>
+  <label><%= Spree.t('store_rule.choose_stores') %></label><br>
   <input type='hidden' name='<%= param_prefix %>[store_ids_string]' class='store_picker fullwidth' value='<%= promotion_rule.store_ids.join(",") %>'>
 </div>
 <script>

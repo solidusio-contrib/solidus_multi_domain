@@ -1,15 +1,26 @@
 en:
-  store: Store
-  stores: Stores
-  new_store: New Store
-  domains: Domains
-  stores_admin: "Stores & Domains"
-  manage_stores: Configure multiple stores and associated domain names
-  editing_store: Editing Store
-  default: Default
-  promotion_rule_types:
-    store:
-      name: "Store"
-      description: "Store must match one from the list"
-  store_rule:
-    choose_stores: "Choose Stores"
+  spree:
+    back_to_store_list: Back To Store List
+    default_currency: Default Currency
+    send_mail_as: Send Mail As
+    logo: Logo
+    yes: Yes
+    no: No
+    name: Store Name
+    code: Store Code
+    payment_method: Payment Method
+    shipping_method: Shipping Method
+    store: Store
+    stores: Stores
+    new_store: New Store
+    domains: Domains
+    stores_admin: "Stores & Domains"
+    manage_stores: Configure multiple stores and associated domain names
+    editing_store: Editing Store
+    default: Default
+    promotion_rule_types:
+      store:
+        name: Store
+        description: "Store must match one from the list"
+    store_rule:
+      choose_stores: "Choose Stores"
