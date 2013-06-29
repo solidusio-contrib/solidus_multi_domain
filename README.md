@@ -18,8 +18,8 @@ Current features:
 
 2. Stores and domains can be maintained via the configuration section of the Admin interface
 
-2. Each store can have it's own layout(s) - these layouts should be located in your site's theme extension in the app/views/layouts/_store#code_/ directory. So, if you have a store with
-a code of "alpha" you should store it's default layout in app/views/layouts/alpha/spree_application.html.erb
+2. Each store can have its own layout(s) - these layouts should be located in your site's theme extension in the app/views/spree/layouts/_store#code_/ directory. So, if you have a store with
+a code of "alpha" you should store its default layout in app/views/spree/layouts/alpha/spree_application.html.erb
 
 3. Each product can be assigned to one or more stores.
 
