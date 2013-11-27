@@ -13,7 +13,6 @@ module Spree
     has_and_belongs_to_many :promotion_rules, :class_name => 'Spree::Promotion::Rules::Store', :join_table => 'spree_promotion_rules_stores', :association_foreign_key => 'promotion_rule_id'
 
     validates_presence_of :name, :code, :domains
-    attr_accessible :name, :code, :default, :email, :domains, :logo, :default_currency, :payment_method_ids, :shipping_method_ids
 
     scope :default, where(:default => true)
     scope :by_domain, lambda { |domain| where("domains like ?", "%#{domain}%") }
