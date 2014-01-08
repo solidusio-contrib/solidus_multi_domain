@@ -27,3 +27,4 @@ vendor/extensions/google_base
 public/google_base.xml
 public/template_google_base.xml
 coverage/*
+.bundle
