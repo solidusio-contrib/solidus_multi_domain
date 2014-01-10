@@ -4,10 +4,6 @@ en:
     default_currency: Default Currency
     send_mail_as: Send Mail As
     logo: Logo
-    yes: Yes
-    no: No
-    name: Store Name
-    code: Store Code
     payment_method: Payment Method
     shipping_method: Shipping Method
     store: Store
@@ -18,6 +14,8 @@ en:
     manage_stores: Configure multiple stores and associated domain names
     editing_store: Editing Store
     default: Default
+    store_name: Name
+    store_code: Code
     promotion_rule_types:
       store:
         name: Store

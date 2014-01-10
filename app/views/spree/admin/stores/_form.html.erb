@@ -1,7 +1,7 @@
 <div data-hook="admin_store_form_fields">
   <div class="alpha four columns">
     <%= f.field_container :name do %>
-      <%= f.label :name, Spree.t(:name) %><br />
+      <%= f.label :name, Spree.t(:store_name) %><br />
       <%= f.text_field :name, :class => 'fullwidth' %>
       <%= error_message_on :store, :name %>
     <% end %>
@@ -9,7 +9,7 @@
 
   <div class="four columns">
     <%= f.field_container :code do %>
-      <%= f.label :code, Spree.t(:code) %><br />
+      <%= f.label :code, Spree.t(:store_code) %><br />
       <%= f.text_field :code, :class => 'fullwidth' %>
       <%= error_message_on :store, :code %>
     <% end %>
