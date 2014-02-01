@@ -35,7 +35,6 @@ describe "Global controller helpers" do
 
     context "when the current store default_currency is a currency" do
       let!(:store) { FactoryGirl.create :store, :default_currency => 'EUR' }
-
       it { should == 'EUR' }
     end
   end
