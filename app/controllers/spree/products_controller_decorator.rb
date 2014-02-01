@@ -5,7 +5,7 @@ Spree::ProductsController.class_eval do
   def can_show_product
     @product ||= Spree::Product.find_by_permalink!(params[:id])
     if @product.stores.empty? || !@product.stores.include?(current_store)
-      render :file => "#{::Rails.root}/public/404", :status => 404, :formats => [:html]
+      raise ActiveRecord::RecordNotFound
     end
   end
 
