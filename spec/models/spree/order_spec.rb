@@ -10,7 +10,7 @@ describe Spree::Order do
   end
 
   it 'should correctly find products by store' do
-    by_store = Spree::Order.by_store(@store).all
+    by_store = Spree::Order.by_store(@store)
 
     by_store.should include(@order)
     by_store.should_not include(@order2)

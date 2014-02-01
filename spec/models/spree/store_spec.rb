@@ -8,7 +8,7 @@ describe Spree::Store do
   end
 
   it "should find stores by domain" do
-    by_domain = Spree::Store.by_domain('www.subdomain.com').all
+    by_domain = Spree::Store.by_domain('www.subdomain.com')
 
     by_domain.should include(@store)
     by_domain.should_not include(@store2)
