@@ -14,7 +14,7 @@ module Spree
 
     validates_presence_of :name, :code, :domains
 
-    scope :default, where(:default => true)
+    scope :default, lambda { where(:default => true) }
     scope :by_domain, lambda { |domain| where("domains like ?", "%#{domain}%") }
 
     has_attached_file :logo,
