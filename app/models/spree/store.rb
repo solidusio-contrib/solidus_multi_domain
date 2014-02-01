@@ -24,9 +24,6 @@ module Spree
       :path => 'stores/:id/:style/:basename.:extension',
       :convert_options => { :all => '-strip -auto-orient' }
 
-    include Spree::Core::S3Support
-    supports_s3 :logo
-
     def self.current(domain = nil)
       current_store = domain ? Store.by_domain(domain).first : nil
       current_store || first_found_default
