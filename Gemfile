@@ -9,5 +9,3 @@ gem 'spree_frontend', :github => "spree/spree", :branch => version
 gem 'spree_api', :github => "spree/spree", :branch => version
 
 gemspec
-
-gem 'ffaker'
