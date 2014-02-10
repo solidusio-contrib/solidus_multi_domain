@@ -3,7 +3,7 @@ module SpreeMultiDomain
     class InstallGenerator < Rails::Generators::Base
 
       def add_javascripts
-        append_file "app/assets/javascripts/admin/all.js", "//= require admin/spree_multi_domain\n"
+        append_file "vendor/assets/javascripts/spree/backend/all.js", "//= require admin/spree_multi_domain\n"
       end
 
       def add_migrations
