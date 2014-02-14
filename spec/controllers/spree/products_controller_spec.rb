@@ -43,4 +43,20 @@ describe Spree::ProductsController do
       response.response_code.should == 200
     end
   end
+
+  describe "on :show when the product hasn't been found" do
+    let!(:store) { FactoryGirl.create(:store) }
+
+    before(:each) do
+      product.stores << store
+    end
+
+    it 'finds the store' do
+      pending 'I cannot figure out how to get a test into this state, but it does happen in my app' do
+        # the line that fixes this comes from 167d40124c9167fc7fed4c5dee1bf73fd4145b03
+        # but there are no tests that hit it, ideally this test would, but I can't figure out how to write it
+        spree_get :show, :id => ??
+      end
+    end
+  end
 end
