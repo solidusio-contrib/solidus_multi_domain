@@ -28,3 +28,4 @@ public/google_base.xml
 public/template_google_base.xml
 coverage/*
 .bundle
+Gemfile.lock
