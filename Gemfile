@@ -1,6 +1,4 @@
-source 'http://rubygems.org'
-
-gem 'rails'
+source 'https://rubygems.org'
 
 version = '2-2-stable'
 gem 'spree_core', :github => "spree/spree", :branch => version
