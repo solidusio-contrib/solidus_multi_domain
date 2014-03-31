@@ -27,10 +27,10 @@
   </div>
 
   <div class="four columns">
-    <%= f.field_container :send_mails_as do %>
-      <%= f.label :send_mails_as, Spree.t(:send_mails_as) %><br />
-      <%= f.text_field :email, :class => 'fullwidth' %>
-      <%= error_message_on :store, :email %>
+    <%= f.field_container :mail_from_address do %>
+      <%= f.label :mail_from_address, Spree.t(:send_mails_as) %><br />
+      <%= f.text_field :mail_from_address, :class => 'fullwidth' %>
+      <%= error_message_on :store, :mail_from_address %>
     <% end %>
   </div>
 
@@ -42,7 +42,7 @@
   </div>
 
   <div class="six columns">
-    <%= f.field_container :domains do %>
+    <%= f.field_container :url do %>
       <%= f.label :url, Spree.t(:domains) %><br />
       <%= f.text_area :url, :cols => 60, :rows => 4, :class => 'fullwidth' %>
       <%= error_message_on :store, :url %>
