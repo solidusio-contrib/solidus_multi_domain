@@ -43,9 +43,9 @@
 
   <div class="six columns">
     <%= f.field_container :domains do %>
-      <%= f.label :domains, Spree.t(:domains) %><br />
-      <%= f.text_area :domains, :cols => 60, :rows => 4, :class => 'fullwidth' %>
-      <%= error_message_on :store, :domains %>
+      <%= f.label :url, Spree.t(:domains) %><br />
+      <%= f.text_area :url, :cols => 60, :rows => 4, :class => 'fullwidth' %>
+      <%= error_message_on :store, :url %>
     <% end %>
   </div>
 
