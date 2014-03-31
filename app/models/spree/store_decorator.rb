@@ -20,7 +20,7 @@ module Spree
       :convert_options => { :all => '-strip -auto-orient' }
 
     def self.current(domain = nil)
-      current_store = url ? Store.by_url(domain).first : nil
+      current_store = domain ? Store.by_url(domain).first : nil
       current_store || cached_default
     end
 
