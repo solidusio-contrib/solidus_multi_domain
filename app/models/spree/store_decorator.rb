@@ -21,7 +21,7 @@ module Spree
 
     def self.current(domain = nil)
       current_store = domain ? Store.by_url(domain).first : nil
-      current_store || cached_default
+      current_store || Store.default
     end
 
   end
