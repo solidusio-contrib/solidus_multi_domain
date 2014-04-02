@@ -23,7 +23,11 @@ module SpreeMultiDomain
           store_layout = layout
 
           if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
-            store_layout = layout.call.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+            store_layout = if layout.is_a?(String)
+              layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+            else
+              layout.call.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+            end            
           end
 
           begin
