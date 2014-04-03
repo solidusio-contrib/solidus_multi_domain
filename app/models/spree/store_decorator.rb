@@ -19,10 +19,5 @@ module Spree
       :path => 'stores/:id/:style/:basename.:extension',
       :convert_options => { :all => '-strip -auto-orient' }
 
-    def self.current(domain = nil)
-      current_store = domain ? Store.by_url(domain).first : nil
-      current_store || Store.default
-    end
-
   end
 end
