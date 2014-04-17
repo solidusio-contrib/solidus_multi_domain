@@ -44,8 +44,9 @@ module SpreeMultiDomain
     initializer "current order decoration" do |app|
       require 'spree/core/controller_helpers/order'
       ::Spree::Core::ControllerHelpers::Order.module_eval do
-        def current_order_with_multi_domain(create_order_if_necessary = false)
-          current_order_without_multi_domain(create_order_if_necessary: create_order_if_necessary)
+        def current_order_with_multi_domain(options = {})
+          options[:create_order_if_necessary] ||= false
+          current_order_without_multi_domain(options)
 
           if @current_order and current_store and @current_order.store.blank?
             @current_order.update_attribute(:store_id, current_store.id)
