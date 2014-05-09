@@ -18,13 +18,13 @@ $.fn.storeAutocomplete = function() {
       }
     },
     formatResult: function(store) {
-      return store.store.name;
+      return store.name;
     },
     formatSelection: function(store) {
-      return store.store.name;
+      return store.name;
     },
     id: function(store) {
-      return store.store.id
+      return store.id
     }
   });
 }
