@@ -5,7 +5,7 @@ Gem::Specification.new do |s|
   s.version     = '2.2.0'
   s.summary     = 'Adds multiple site support to Spree'
   s.description = 'Multiple Spree stores on different domains - single unified backed for processing orders.'
-  s.required_ruby_version = '>= 1.8.7'
+  s.required_ruby_version = '>= 1.9.2'
 
   s.authors           = ['Brian Quinn', 'Roman Smirnov', 'David North']
   s.email             = 'brian@railsdog.com'
