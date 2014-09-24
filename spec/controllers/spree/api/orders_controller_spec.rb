@@ -35,10 +35,10 @@ describe Spree::Api::OrdersController do
       order2 = FactoryGirl.create(:order, store: store2, state: :cart, user: user)
 
       controller.stub(current_store: store1)
-      expect(controller.find_current_order).to eql(order1)
+      expect(controller.send(:find_current_order)).to eql(order1)
 
       controller.stub(current_store: store2)
-      expect(controller.find_current_order).to eql(order2)
+      expect(controller.send(:find_current_order)).to eql(order2)
     end
   end
 end
