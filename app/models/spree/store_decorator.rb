@@ -19,5 +19,7 @@ module Spree
       :path => 'stores/:id/:style/:basename.:extension',
       :convert_options => { :all => '-strip -auto-orient' }
 
+    validates_attachment_file_name :logo, :matches => [/png\Z/, /jpe?g\Z/]
+
   end
 end
