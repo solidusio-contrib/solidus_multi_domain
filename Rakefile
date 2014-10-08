@@ -10,7 +10,13 @@ require 'spree/testing_support/common_rake'
 
 RSpec::Core::RakeTask.new
 
-task :default => [:spec]
+task :default do
+  if Dir["spec/dummy"].empty?
+    Rake::Task[:test_app].invoke
+    Dir.chdir("../../")
+  end
+  Rake::Task[:spec].invoke
+end
 
 spec = eval(File.read('spree_multi_domain.gemspec'))
 
