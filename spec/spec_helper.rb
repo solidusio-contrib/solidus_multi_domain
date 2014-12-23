@@ -14,6 +14,10 @@ Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each {|f| require f }
 require 'spree/testing_support/factories'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/authorization_helpers'
+require 'spree/testing_support/preferences'
+
+require 'spree/api/testing_support/helpers'
+require 'spree/api/testing_support/setup'
 
 require 'spree_multi_domain/factories'
 
@@ -37,4 +41,9 @@ RSpec.configure do |config|
 
   config.include FactoryGirl::Syntax::Methods
   config.include Spree::TestingSupport::ControllerRequests
+  config.include Spree::TestingSupport::Preferences, :type => :controller
+
+  config.include Spree::Api::TestingSupport::Helpers, :type => :controller
+  config.extend Spree::Api::TestingSupport::Setup, :type => :controller
+  config.include Spree::TestingSupport::Preferences, :type => :controller
 end
