@@ -1,4 +1,4 @@
-<p>
+<p data-hook="admin_product_form_stores" class="omega two columns">
   <%= f.label :stores, Spree.t(:stores)%><br />
   <% Spree::Store.all.each do |store| %>
     <%= check_box_tag "product[store_ids][]", store.id, @product.stores.include?(store) %> <%= store.name %>
