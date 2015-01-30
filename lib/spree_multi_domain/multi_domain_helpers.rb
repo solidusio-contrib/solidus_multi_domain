@@ -10,11 +10,11 @@ module SpreeMultiDomain
     end
 
     def current_store
-      @current_store ||= Spree::Store.current(request.env['SERVER_NAME'])
+      @current_store ||= Spree::Store.current(store_key)
     end
 
     def current_tracker
-      @current_tracker ||= Spree::Tracker.current(request.env['SERVER_NAME'])
+      @current_tracker ||= Spree::Tracker.current(store_key)
     end
 
     def get_taxonomies
@@ -25,6 +25,11 @@ module SpreeMultiDomain
 
     def add_current_store_id_to_params
       params[:current_store_id] = current_store.try(:id)
+    end
+
+    private
+    def store_key
+      request.headers['SPREE_STORE'] || request.env['SERVER_NAME']
     end
   end
 end

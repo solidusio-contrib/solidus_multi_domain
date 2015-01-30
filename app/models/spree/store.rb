@@ -13,7 +13,7 @@ module Spree
     has_and_belongs_to_many :promotion_rules, :class_name => 'Spree::Promotion::Rules::Store', :join_table => 'spree_promotion_rules_stores', :association_foreign_key => 'promotion_rule_id'
 
     validates_presence_of :name, :code, :domains
-    
+
     before_create :ensure_default_exists_and_is_unique
 
     scope :default, lambda { where(:default => true) }
@@ -26,8 +26,8 @@ module Spree
       :path => 'stores/:id/:style/:basename.:extension',
       :convert_options => { :all => '-strip -auto-orient' }
 
-    def self.current(domain = nil)
-      current_store = domain ? Store.by_domain(domain).first : nil
+    def self.current(store_key = nil)
+      current_store = Store.find_by(code: store_key) || Store.by_domain(store_key).first
       current_store || first_found_default
     end
 
