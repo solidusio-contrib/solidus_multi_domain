@@ -13,13 +13,13 @@ describe "Template renderer with dynamic layouts" do
     FactoryGirl.create :store
 
     get "http://www.example.com"
-    response.body.should eql("Store layout hello")
+    expect(response.body).to eql("Store layout hello")
   end
 
   it "should fall back to the default layout if none are found for the current store" do
     ApplicationController.stub(:current_store).and_return(nil)
 
     get "http://www.example.com"
-    response.body.should eql("Store layout hello")
+    expect(response.body).to eql("Store layout hello")
   end
 end
