@@ -10,7 +10,7 @@ describe Spree::ProductsController do
     it 'should return 404' do
       spree_get :show, :id => product.to_param
 
-      response.response_code.should == 404
+      expect(response.response_code) == 404
     end
   end
 
@@ -27,7 +27,7 @@ describe Spree::ProductsController do
       controller.stub(:current_store => store_2)
       spree_get :show, :id => product.to_param
 
-      response.response_code.should == 404
+      expect(response.response_code) == 404
     end
   end
 
@@ -42,7 +42,7 @@ describe Spree::ProductsController do
       controller.stub(:current_store => store)
       spree_get :show, :id => product.to_param
 
-      response.response_code.should == 200
+      expect(response.response_code) == 200
     end
   end
 

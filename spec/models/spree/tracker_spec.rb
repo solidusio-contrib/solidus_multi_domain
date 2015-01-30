@@ -10,6 +10,6 @@ describe Spree::Tracker do
   end
 
   it "should pull out the current tracker" do
-    Spree::Tracker.current('www.example.com').should == @tracker
+    expect(Spree::Tracker.current('www.example.com')) == @tracker
   end
 end

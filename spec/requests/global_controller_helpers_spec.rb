@@ -10,15 +10,15 @@ describe "Global controller helpers" do
   end
 
   it "should include the right tracker" do
-    response.body.should include(@tracker.analytics_id)
+    expect(response.body).to include(@tracker.analytics_id)
   end
 
   it "should create a store-aware order" do
-    controller.current_store.should == store
+    expect(controller.current_store) == store
   end
 
   it "should instantiate the correct store-bound tracker" do
-    controller.current_tracker.should == @tracker
+    expect(controller.current_tracker) == @tracker
   end
 
   describe '.current_currency' do

@@ -16,7 +16,7 @@ describe Spree::LineItem do
       let(:product) { create(:product, stores: [order_store])}
 
       it 'does not raise an error' do
-        expect{ subject }.to_not raise_error(SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError)
+        expect{ subject }.to_not raise_error
       end
     end
 
@@ -32,7 +32,7 @@ describe Spree::LineItem do
       let(:product) { create(:product, stores: [order_store])}
 
       it "does not raise an error" do
-        expect{ subject }.to_not raise_error(SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError)
+        expect{ subject }.to_not raise_error
       end
     end
   end
