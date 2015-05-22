@@ -12,7 +12,7 @@ describe Spree::Order do
   it 'should correctly find products by store' do
     by_store = Spree::Order.by_store(@store)
 
-    by_store.should include(@order)
-    by_store.should_not include(@order2)
+    expect(by_store).to include(@order)
+    expect(by_store).not_to include(@order2)
   end
 end

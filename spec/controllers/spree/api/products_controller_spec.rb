@@ -1,14 +1,17 @@
 require 'spec_helper'
 
-describe Spree::ProductsController do
+describe Spree::Api::ProductsController do
 
   let!(:product) { FactoryGirl.create(:product) }
+
+  let(:user)  { create(:user) }
+  before { allow(controller).to receive(:current_spree_user) { user } }
 
   describe 'on :show to a product without any stores' do
     let!(:store) { FactoryGirl.create(:store) }
 
     it 'should return 404' do
-      spree_get :show, :id => product.to_param
+      spree_get :show, :id => product.to_param, format: :json
 
       expect(response.response_code) == 404
     end
@@ -25,7 +28,7 @@ describe Spree::ProductsController do
 
     it 'should return 404' do
       controller.stub(:current_store => store_2)
-      spree_get :show, :id => product.to_param
+      spree_get :show, :id => product.to_param, format: :json
 
       expect(response.response_code) == 404
     end
@@ -40,7 +43,7 @@ describe Spree::ProductsController do
 
     it 'should return 200' do
       controller.stub(:current_store => store)
-      spree_get :show, :id => product.to_param
+      spree_get :show, :id => product.to_param, format: :json
 
       expect(response.response_code) == 200
     end

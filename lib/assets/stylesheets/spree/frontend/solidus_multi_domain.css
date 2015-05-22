@@ -1,0 +1,5 @@
+.admin .edit_product .stores label {
+  display: inline;
+  text-transform: none;
+  margin-right: 10px;
+}
