@@ -9,11 +9,11 @@ describe Spree::Tracker do
     @tracker2 = FactoryGirl.create(:tracker, store: another_store)
   end
 
-  it "should pull out the current tracker based on store code" do
-    expect(Spree::Tracker.current('STORE2')) == @tracker
+  it "pulls out the current tracker based on store code" do
+    expect(Spree::Tracker.current('STORE2')).to eq @tracker2
   end
 
-  it "should pull out the current tracker based on url" do
-    expect(Spree::Tracker.current('www.example.com')) == @tracker
+  it "pulls out the current tracker" do
+    expect(Spree::Tracker.current('www.example.com')).to eq @tracker
   end
 end

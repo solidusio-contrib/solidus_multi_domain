@@ -17,7 +17,7 @@ describe "Template renderer with dynamic layouts" do
   end
 
   it "should fall back to the default layout if none are found for the current store" do
-    ApplicationController.stub(:current_store).and_return(nil)
+    allow(ApplicationController).to receive(:current_store).and_return(nil)
 
     get "http://www.example.com"
     expect(response.body).to eql("Default layout hello")

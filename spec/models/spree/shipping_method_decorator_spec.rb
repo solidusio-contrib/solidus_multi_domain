@@ -10,17 +10,17 @@ describe Spree::ShippingMethod do
 
     context 'when store contains this shipping method' do
       before { store.shipping_methods << shipping_method }
-      it { should == true }
+      it { is_expected.to eq(true) }
     end
 
     context "when the store does not contain this shipping method" do
       context "when the store has no shipping methods" do
-        it { should == true }
+        it { is_expected.to eq(true) }
       end
 
       context "when the store has at least on shipping method" do
         before { store.shipping_methods << FactoryGirl.create(:shipping_method) }
-        it { should == false}
+        it { is_expected.to eq(false)}
       end
     end
   end
