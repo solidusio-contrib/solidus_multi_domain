@@ -7,10 +7,10 @@ describe Spree::ProductsController do
   describe 'on :show to a product without any stores' do
     let!(:store) { FactoryGirl.create(:store) }
 
-    it 'should return 404' do
+    it 'returns 404' do
       spree_get :show, :id => product.to_param
 
-      expect(response.response_code) == 404
+      expect(response.response_code).to eq 404
     end
   end
 
@@ -23,11 +23,11 @@ describe Spree::ProductsController do
       product.stores << store_1
     end
 
-    it 'should return 404' do
-      controller.stub(:current_store => store_2)
+    it 'returns 404' do
+      allow(controller).to receive_messages(:current_store => store_2)
       spree_get :show, :id => product.to_param
 
-      expect(response.response_code) == 404
+      expect(response.response_code).to eq 404
     end
   end
 
@@ -38,11 +38,11 @@ describe Spree::ProductsController do
       product.stores << store
     end
 
-    it 'should return 200' do
-      controller.stub(:current_store => store)
+    it 'returns 200' do
+      allow(controller).to receive_messages(:current_store => store)
       spree_get :show, :id => product.to_param
 
-      expect(response.response_code) == 200
+      expect(response.response_code).to eq 200
     end
   end
 

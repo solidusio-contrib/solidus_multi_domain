@@ -13,6 +13,6 @@ describe Spree::Product do
     products_by_store = Spree::Product.by_store(@store)
 
     expect(products_by_store).to include(@product)
-    expect(products_by_store).not_to include(@product2)
+    expect(products_by_store).to_not include(@product2)
   end
 end

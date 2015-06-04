@@ -13,6 +13,6 @@ describe Spree::Order do
     by_store = Spree::Order.by_store(@store)
 
     expect(by_store).to include(@order)
-    expect(by_store).not_to include(@order2)
+    expect(by_store).to_not include(@order2)
   end
 end

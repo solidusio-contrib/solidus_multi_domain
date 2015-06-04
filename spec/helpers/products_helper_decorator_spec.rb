@@ -7,7 +7,7 @@ module Spree
       @taxonomy  = FactoryGirl.create(:taxonomy, :store => @store)
       @taxonomy2 = FactoryGirl.create(:taxonomy)
 
-      helper.stub(:current_store) { @store }
+      allow(helper).to receive(:current_store) { @store }
     end
 
     describe "#get_taxonomies" do
@@ -15,7 +15,7 @@ module Spree
         taxonomies = helper.get_taxonomies
 
         expect(taxonomies).to include(@taxonomy)
-        expect(taxonomies).not_to include(@taxonomy2)
+        expect(taxonomies).to_not include(@taxonomy2)
       end
     end
   end

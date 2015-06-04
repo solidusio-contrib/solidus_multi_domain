@@ -10,7 +10,7 @@ describe 'PaymentMethod' do
     context "when store is not specified" do
       let(:store) { nil }
 
-      it { should include(check_payment_method) }
+      it { is_expected.to include(check_payment_method) }
     end
 
     context "when store is specified" do
@@ -19,14 +19,14 @@ describe 'PaymentMethod' do
       context "when store has payment methods" do
         let(:non_matching_check_payment_method) { FactoryGirl.create :check_payment_method }
 
-        it { should include(check_payment_method) }
-        it { should_not include(non_matching_check_payment_method) }
+        it { is_expected.to include(check_payment_method) }
+        it { is_expected.not_to include(non_matching_check_payment_method) }
       end
 
       context "when store does not have payment_methods" do
         let(:payment_method_store) { FactoryGirl.create :store }
 
-        it { should include(check_payment_method) }
+        it { is_expected.to include(check_payment_method) }
       end
     end
   end

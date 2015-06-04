@@ -3,8 +3,8 @@ module Spree
     def confirm_email(order, resend = false)
       find_order(order)
       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-      subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
-      mail_params = {to: @order.email, subject: subject}
+      subject += "#{Spree::Store.default.name} #{Spree.t('order_mailer.confirm_email.subject')} ##{@order.number}"
+      mail_params = {:to => @order.email, :subject => subject}
       if @order.store.present? && @order.store.mail_from_address.present?
         mail_params[:from] = @order.store.mail_from_address
       else
@@ -16,8 +16,8 @@ module Spree
     def cancel_email(order, resend = false)
       find_order(order)
       subject = (resend ? "[#{Spree.t(:resend).upcase}] " : '')
-      subject += "#{Spree::Config[:site_name]} #{Spree.t('order_mailer.cancel_email.subject')} ##{@order.number}"
-      mail_params = {to: @order.email, subject: subject}
+      subject += "#{Spree::Store.default.name} #{Spree.t('order_mailer.cancel_email.subject')} ##{@order.number}"
+      mail_params = {:to => @order.email, :subject => subject}
       if @order.store.present? && @order.store.mail_from_address.present?
         mail_params[:from] = @order.store.mail_from_address
       else

@@ -32,17 +32,7 @@ describe Spree::Admin::ProductsController do
         spree_put :update, :id => @product.to_param,
                       :product => {:name => @product.name, :store_ids => [@store.id]}, update_store_ids: 'true'
 
-        expect(@product.reload.store_ids) == [@store.id]
-      end
-    end
-
-    describe "when not updating stores" do
-      it "does not touch existing stores" do
-        @product.stores << @store
-
-        spree_put :update, :id => @product.to_param, :product => {:name => "Test"}
-
-        expect(@product.reload.store_ids) == [@store.id]
+        expect(@product.reload.store_ids).to eq [@store.id]
       end
     end
   end
