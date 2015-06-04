@@ -1,6 +1,6 @@
 module SpreeMultiDomain
   class Engine < Rails::Engine
-    engine_name 'spree_multi_domain'
+    engine_name 'solidus_multi_domain'
 
     config.autoload_paths += %W(#{config.root}/lib)
 
@@ -20,9 +20,7 @@ module SpreeMultiDomain
     initializer "templates with dynamic layouts" do |app|
       ActionView::TemplateRenderer.class_eval do
         def find_layout_with_multi_store(layout, locals)
-          store_layout = layout
-
-          if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
+          if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController) && layout.call.present?
             store_layout = if layout.is_a?(String)
               layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
             else

@@ -14,8 +14,8 @@ module Spree
       it "only show taxonomies on current_store" do
         taxonomies = helper.get_taxonomies
 
-        taxonomies.should include(@taxonomy)
-        taxonomies.should_not include(@taxonomy2)
+        expect(taxonomies).to include(@taxonomy)
+        expect(taxonomies).not_to include(@taxonomy2)
       end
     end
   end

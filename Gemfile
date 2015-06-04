@@ -1,8 +1,9 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-branch = '2-4-stable'
+gem "spree", github: "solidusio/solidus", branch: "master"
 
-gem 'spree', github: 'spree/spree', branch: branch
-gem 'spree_multi_currency', github: 'spree/spree_multi_currency', branch: branch
+group :development, :test do
+  gem "pry-rails"
+end
 
 gemspec

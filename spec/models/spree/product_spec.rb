@@ -12,7 +12,7 @@ describe Spree::Product do
   it 'should correctly find products by store' do
     products_by_store = Spree::Product.by_store(@store)
 
-    products_by_store.should include(@product)
-    products_by_store.should_not include(@product2)
+    expect(products_by_store).to include(@product)
+    expect(products_by_store).not_to include(@product2)
   end
 end
