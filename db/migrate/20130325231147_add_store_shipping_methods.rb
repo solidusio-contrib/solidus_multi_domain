@@ -4,7 +4,7 @@ class AddStoreShippingMethods < ActiveRecord::Migration
       t.integer :store_id
       t.integer :shipping_method_id
 
-      t.timestamps
+      t.timestamps null: true
     end
 
     add_index :spree_store_shipping_methods, :store_id

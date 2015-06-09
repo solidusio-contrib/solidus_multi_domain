@@ -4,7 +4,7 @@ class AddStorePaymentMethods < ActiveRecord::Migration
       t.integer :store_id
       t.integer :payment_method_id
 
-      t.timestamps
+      t.timestamps null: true
     end
   end
 end
