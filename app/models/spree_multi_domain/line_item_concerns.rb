@@ -1,4 +1,4 @@
-module SpreeMultiDomain::LineItemDecorator
+module SpreeMultiDomain::LineItemConcerns
   extend ActiveSupport::Concern
 
   class ProductDoesNotBelongToStoreError < StandardError; end
@@ -12,9 +12,7 @@ module SpreeMultiDomain::LineItemDecorator
     private
 
     def ensure_product_belongs_to_store
-      raise SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError if order.store.present? && !product.stores.include?(order.store)
+      raise ProductDoesNotBelongToStoreError if order.store.present? && !product.stores.include?(order.store)
     end
   end
 end
-
-Spree::LineItem.include(SpreeMultiDomain::LineItemDecorator)

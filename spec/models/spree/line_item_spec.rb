@@ -24,7 +24,7 @@ describe Spree::LineItem do
       let(:product) { create(:product, stores: [other_store]) }
 
       it 'raises the correct error' do
-        expect{ subject }.to raise_error(SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError)
+        expect{ subject }.to raise_error(SpreeMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError)
       end
     end
 
