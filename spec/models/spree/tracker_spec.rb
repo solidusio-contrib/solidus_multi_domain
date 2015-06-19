@@ -2,11 +2,11 @@ require 'spec_helper'
 
 describe Spree::Tracker do
   before(:each) do
-    store = FactoryGirl.create(:store, default: true)
-    @tracker = FactoryGirl.create(:tracker, store: store)
+    @store = FactoryGirl.create(:store, default: true)
+    @tracker = FactoryGirl.create(:tracker, store: @store)
 
-    another_store = FactoryGirl.create(:store, code: 'STORE2', url: 'completely-different-store.com')
-    @tracker2 = FactoryGirl.create(:tracker, store: another_store)
+    @another_store = FactoryGirl.create(:store, code: 'STORE2', url: 'completely-different-store.com')
+    @tracker2 = FactoryGirl.create(:tracker, store: @another_store)
   end
 
   it "pulls out the current tracker based on store code" do
@@ -14,6 +14,6 @@ describe Spree::Tracker do
   end
 
   it "pulls out the current tracker" do
-    expect(Spree::Tracker.current('www.example.com')).to eq @tracker
+    expect(Spree::Tracker.current(@store.url)).to eq @tracker
   end
 end

@@ -6,7 +6,7 @@ describe "Global controller helpers" do
 
   before(:each) do
     @tracker = FactoryGirl.create :tracker, :store => store
-    get '/'
+    get "http://#{store.url}"
   end
 
   it "should include the right tracker" do
