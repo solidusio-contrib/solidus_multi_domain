@@ -10,9 +10,9 @@ describe "Template renderer with dynamic layouts" do
   end
 
   it "should render the layout corresponding to the current store" do
-    FactoryGirl.create :store, code: "my_store"
+    store = FactoryGirl.create :store, code: "my_store"
 
-    get "http://www.example.com"
+    get "http://#{store.url}"
     expect(response.body).to eql("Store layout hello")
   end
 
