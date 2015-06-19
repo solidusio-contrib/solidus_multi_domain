@@ -9,20 +9,20 @@ describe Spree::Api::ShipmentsController do
     let!(:order_from_store2) { FactoryGirl.create(:order, store: store2, user: user) }
 
     before(:each) do
-      controller.stub(current_api_user: user)
+      allow(controller).to receive_messages(current_api_user: user)
     end
 
     it 'should return only shipments from the correct store' do
       FactoryGirl.create(:shipment, order: order_from_store1)
       FactoryGirl.create(:shipment, order: order_from_store2)
 
-      controller.stub(current_store: store1)
+      allow(controller).to receive_messages(current_store: store1)
       controller.mine
 
       expect(assigns(:shipments).length).to eq(1)
       expect(assigns(:shipments).first.order.store_id).to eq(store1.id)
 
-      controller.stub(current_store: store2)
+      allow(controller).to receive_messages(current_store: store2)
       controller.mine
 
       expect(assigns(:shipments).length).to eq(1)
