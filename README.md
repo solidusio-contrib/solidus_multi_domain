@@ -51,7 +51,7 @@ Then run from the command line:
 
 ```shell
 bundle install
-rails g spree_multi_domain:install
+rails g solidus_multi_domain:install
 ```
 
 You should see 'Stores & Domains' in Configuration tab of Spree Admin.

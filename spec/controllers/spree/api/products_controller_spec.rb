@@ -27,7 +27,7 @@ describe Spree::Api::ProductsController do
     end
 
     it 'should return 404' do
-      controller.stub(:current_store => store_2)
+      allow(controller).to receive_messages(:current_store => store_2)
       spree_get :show, :id => product.to_param, format: :json
 
       expect(response.response_code) == 404
@@ -42,7 +42,7 @@ describe Spree::Api::ProductsController do
     end
 
     it 'should return 200' do
-      controller.stub(:current_store => store)
+      allow(controller).to receive_messages(:current_store => store)
       spree_get :show, :id => product.to_param, format: :json
 
       expect(response.response_code) == 200

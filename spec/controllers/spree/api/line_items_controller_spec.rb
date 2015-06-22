@@ -17,7 +17,7 @@ describe Spree::Api::LineItemsController do
     context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
       before(:each) do
         def controller.create
-          raise SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError
+          raise SpreeMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError
         end
       end
 

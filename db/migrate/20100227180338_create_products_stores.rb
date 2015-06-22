@@ -3,7 +3,7 @@ class CreateProductsStores < ActiveRecord::Migration
     create_table :products_stores, :id => false do |t|
       t.references :product
       t.references :store
-      t.timestamps
+      t.timestamps null: true
     end
   end
 
