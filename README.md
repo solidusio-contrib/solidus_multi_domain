@@ -56,11 +56,6 @@ rails g solidus_multi_domain:install
 
 You should see 'Stores & Domains' in Configuration tab of Spree Admin.
 
-Features To-do
---------------
-
-1. Taxonomies - associate stores with taxonomies.
-
 Testing
 -------
 
