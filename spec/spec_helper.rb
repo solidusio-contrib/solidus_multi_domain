@@ -17,6 +17,8 @@ require 'spree/testing_support/preferences'
 require 'spree/api/testing_support/helpers'
 require 'spree/api/testing_support/setup'
 
+require 'cancan/matchers'
+
 Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
 
 RSpec.configure do |config|
