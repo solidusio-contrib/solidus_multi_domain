@@ -56,6 +56,14 @@ rails g solidus_multi_domain:install
 
 You should see 'Stores & Domains' in Configuration tab of Spree Admin.
 
+Authorization
+-------------
+
+For discrete authorization, two permission sets have been added to allow for granular display in the admin.
+
+`Spree::PermissionSets::StoreDisplay` and `Spree::PermissionSets::StoreManagement` have been added and can be assigned via [RoleConfiguration](http://docs.solidus.io/Spree/RoleConfiguration.html)
+
+
 Testing
 -------
 
