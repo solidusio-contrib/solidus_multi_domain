@@ -5,9 +5,11 @@
 <% end %>
 
 <% content_for :page_actions do %>
-  <li>
-    <%= button_link_to Spree.t(:new_store), new_object_url,  :icon => 'icon-plus', :id => 'admin_new_store_link' %>
-  </li>
+  <% if can?(:create, Spree::Store) %>
+    <li>
+      <%= button_link_to Spree.t(:new_store), new_object_url,  :icon => 'icon-plus', :id => 'admin_new_store_link' %>
+    </li>
+  <% end %>
 <% end %>
 
 <table class="index" id='listing_stores'>
@@ -34,8 +36,12 @@
         <td><%= store.mail_from_address %></td>
         <td><%= store.url %></td>
         <td data-hook="admin_stores_index_row_actions" class="actions">
-          <%= link_to_edit store, :no_text => true %> &nbsp;
-          <%= link_to_delete store, :no_text => true %>
+          <% if can? :update, store %>
+            <%= link_to_edit store, :no_text => true %>
+          <% end %>
+          <% if can? :destroy, store %>
+            <%= link_to_delete store, :no_text => true %>
+          <% end %>
         </td>
       </tr>
     <% end %>
