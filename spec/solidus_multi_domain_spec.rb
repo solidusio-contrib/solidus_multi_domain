@@ -1,8 +1,13 @@
 require 'spec_helper'
 
-describe 'PaymentMethod' do
-  describe '.available' do
-    subject { Spree::PaymentMethod.available(:front_end, store) }
+describe 'SpreeMultiDomain' do
+  describe '.payment_methods_by_store' do
+    subject do
+      SpreeMultiDomain.payment_methods_by_store(
+        Spree::PaymentMethod.available(:front_end),
+        store,
+      )
+    end
 
     let!(:check_payment_method) { FactoryGirl.create :check_payment_method }
     let(:payment_method_store) { FactoryGirl.create :store, :payment_methods => [check_payment_method] }
