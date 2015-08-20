@@ -6,7 +6,6 @@ en:
       products_from_different_stores_may_not_be_added_to_this_order: Products from different stores may not be added to this order.
     send_mail_as: Send Mail As
     logo: Logo
-    payment_method: Payment Method
     shipping_method: Shipping Method
     store: Store
     stores: Stores

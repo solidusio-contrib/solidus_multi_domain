@@ -60,20 +60,6 @@
 
   <div class='row'>
     <div class="alpha six columns">
-      <%= f.field_container :payment_methods do %>
-        <%= f.label :payment_methods, Spree.t(:payment_methods) %><br />
-        <% @payment_methods.each do |payment_method| %>
-          <label class="sub">
-            <%= check_box_tag 'store[payment_method_ids][]', payment_method.id, @store.payment_methods.include?(payment_method) %>
-          </label> &nbsp;
-          <%= "#{payment_method.name} (#{payment_method.environment})" %>
-          <br>
-        <% end %>
-        <%= hidden_field_tag 'store[payment_method_ids][]', '' %>
-      <% end %>
-    </div>
-
-    <div class="omega six columns">
       <%= f.field_container :shipping_methods do %>
         <%= f.label :shipping_methods, Spree.t(:shipping_methods) %><br />
         <% @shipping_methods.each do |shipping_method| %>
