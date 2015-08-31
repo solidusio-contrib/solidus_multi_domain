@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = "solidus_multi_domain"
-  s.version     = "1.0.1"
+  s.version     = "1.0.3"
   s.summary     = "Adds multiple site support to Solidus"
   s.description = "Multiple Solidus stores on different domains - single unified backed for processing orders."
   s.required_ruby_version = ">= 2.1"
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
   s.requirements << "none"
 
-  s.add_dependency "solidus", [">= 1.0.0.pre", "< 2"]
+  s.add_dependency "solidus", "~> 1.0.0"
 
   s.add_development_dependency "rspec-rails",  "~> 3.2"
   s.add_development_dependency "simplecov"
