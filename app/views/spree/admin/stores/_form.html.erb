@@ -66,7 +66,7 @@
           <label class="sub">
             <%= check_box_tag 'store[payment_method_ids][]', payment_method.id, @store.payment_methods.include?(payment_method) %>
           </label> &nbsp;
-          <%= "#{payment_method.name} (#{payment_method.environment})" %>
+          <%= payment_method.name %>
           <br>
         <% end %>
         <%= hidden_field_tag 'store[payment_method_ids][]', '' %>
