@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = "solidus_multi_domain"
-  s.version     = "1.1.0"
+  s.version     = "1.1.1"
   s.summary     = "Adds multiple site support to Solidus"
   s.description = "Multiple Solidus stores on different domains - single unified backed for processing orders."
   s.required_ruby_version = ">= 2.1"
