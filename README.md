@@ -63,6 +63,20 @@ For discrete authorization, two permission sets have been added to allow for gra
 
 `Spree::PermissionSets::StoreDisplay` and `Spree::PermissionSets::StoreManagement` have been added and can be assigned via [RoleConfiguration](http://docs.solidus.io/Spree/RoleConfiguration.html)
 
+Associating Stores with Products and vice-versa
+-------------
+
+Making these associations on the backend is easy. Simply set the desired store or product's associated relationship to an array equal to the an array of ids. For example:
+```ruby
+#Sets Product 1's stores to 1 and 2. Same form for stores.
+Spree::Product.find(7).store_ids = [1,2]
+
+#and the result
+Spree::Product.find(7).store_ids
+#=> [1, 2]
+
+```
+
 
 Testing
 -------
