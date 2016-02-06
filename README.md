@@ -68,7 +68,7 @@ Associating Stores with Products and vice-versa
 
 Making these associations on the backend is easy. Simply set the desired store or product's associated relationship to an array equal to the an array of ids. For example:
 ```ruby
-#Sets Product 1's stores to 1 and 2. Same form for stores.
+#Sets Product 7's stores to 1 and 2. Same form for stores.
 Spree::Product.find(7).store_ids = [1,2]
 
 #and the result
