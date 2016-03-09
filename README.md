@@ -63,6 +63,46 @@ For discrete authorization, two permission sets have been added to allow for gra
 
 `Spree::PermissionSets::StoreDisplay` and `Spree::PermissionSets::StoreManagement` have been added and can be assigned via [RoleConfiguration](http://docs.solidus.io/Spree/RoleConfiguration.html)
 
+Persisting the current_spree_user across vendors
+--------------------
+
+If you would like the current_spree_user to persist across subdomains, change this line in `config/initializers/session_store.rb`:
+
+```ruby
+ Rails.application.config.session_store :cookie_store, key: '_your_app_session', domain: :all, tld_length: 2
+```
+Furthermore, to persist the cart across subdomains and to add items smoothly, there is a little more work you have to do.  The cart/checkout does accept multiple vendor items at once out of the box, but you will encounter problems of it a) not persisting the cart across subdomains correctly and b) raising an error once you do persist it correctly. 
+
+To overcome the first problem, you need to override the default behavior for setting the `guest_token`. Create a file under `app/helpers/spree/auth_decorator.rb`:
+```ruby
+Spree::Core::ControllerHelpers::Auth.class_eval do
+  def set_guest_token
+    unless cookies.signed[:guest_token].present?
+      cookies.permanent.signed[:guest_token] = {
+        value: SecureRandom.urlsafe_base64(nil, false),
+        domain: :all,
+        tld_length: 2
+      }
+    end
+  end
+end
+```
+This change makes it so all the domains are under the same `guest_token` cookies, instead of having unique `guest_token` cookies for each.
+
+The second change requires patching how the order params are set in `order.rb`. Under `app/helpers/spree/order_decorator.rb`, patch it with the following:
+```ruby
+Spree::Core::ControllerHelpers::Order.class_eval do
+  def current_order_params
+    { currency: current_currency, guest_token: cookies.signed[:guest_token], user_id: try_spree_current_user.try(:id) }
+  end
+end
+```
+This change prevents the cart from only including items specific to a subdomain/store. You will also need to comment out 
+```ruby
+raise ProductDoesNotBelongToStoreError if order.store.present? && !product.stores.include?(order.store)
+```
+in `app/models/spree_multi_domain/line_item_concerns.rb` in order to add items without raising this error.
+
 
 Testing
 -------
