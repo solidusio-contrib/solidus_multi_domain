@@ -56,6 +56,15 @@ rails g solidus_multi_domain:install
 
 You should see 'Stores & Domains' in Configuration tab of Spree Admin.
 
+Development
+-------
+
+To see if your stores indeed do point to the correct and unique domains, start your server with 
+```shell
+rails s -p 3000 -b lvh.me
+```
+and give a store a domain like http://store1.lvh.me:3000/.
+
 Authorization
 -------------
 
