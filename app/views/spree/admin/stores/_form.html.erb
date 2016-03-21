@@ -19,8 +19,8 @@
     <%= f.field_container :default do %>
       <%= f.label :default, Spree.t(:default) %>
       <ul>
-        <li><%= f.radio_button :default, "true", :class => 'fullwidth' %> <%= Spree.t(:yes) %></li>
-        <li><%= f.radio_button :default, "false", :class => 'fullwidth' %> <%= Spree.t(:no) %></li>
+        <li><%= f.radio_button :default, "true", :class => 'fullwidth' %> <%= Spree.t(:say_yes) %></li>
+        <li><%= f.radio_button :default, "false", :class => 'fullwidth' %> <%= Spree.t(:say_no) %></li>
       </ul>
       <%= error_message_on :store, :default %>
     <% end %>
