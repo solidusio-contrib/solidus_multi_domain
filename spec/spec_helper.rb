@@ -10,6 +10,7 @@ require 'ffaker'
 
 # Requires factories defined in spree_core
 require 'spree/testing_support/factories'
+require 'spree_multi_domain/testing_support/factory_overrides'
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/preferences'
