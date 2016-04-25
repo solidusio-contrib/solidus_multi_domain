@@ -12,4 +12,18 @@ describe Spree::Tracker do
   it "finds tracker by store" do
     expect(Spree::Tracker.current(@store)).to eq @tracker
   end
+
+  it "finds tracker based on store code" do
+    aggregate_failures do
+      expect(ActiveSupport::Deprecation).to receive(:warn)
+      expect(Spree::Tracker.current('STORE2')).to eq @tracker2
+    end
+  end
+
+  it "finds tracker based on store url" do
+    aggregate_failures do
+      expect(ActiveSupport::Deprecation).to receive(:warn)
+      expect(Spree::Tracker.current(@store.url)).to eq @tracker
+    end
+  end
 end
