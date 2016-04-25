@@ -1,12 +1,17 @@
 module SpreeMultiDomain
   module MultiDomainHelpers
-    def self.included(receiver)
-      receiver.send :helper, 'spree/products'
-      receiver.send :helper, 'spree/taxons'
+    extend ActiveSupport::Concern
 
-      receiver.send :before_filter, :add_current_store_id_to_params
-      receiver.send :helper_method, :current_store
-      receiver.send :helper_method, :current_tracker
+    include Spree::Core::ControllerHelpers::Common #layout :get_layout
+    include Spree::Core::ControllerHelpers::Store #current_store
+
+    included do
+      helper 'spree/products'
+      helper 'spree/taxons'
+
+      before_filter :add_current_store_id_to_params
+      helper_method :current_store
+      helper_method :current_tracker
     end
 
     def current_tracker
