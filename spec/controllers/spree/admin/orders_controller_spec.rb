@@ -36,7 +36,7 @@ describe Spree::Admin::OrdersController do
   end
 
   def expect_only_one_order
-    order_numbers = assigns[:orders].map { |o| o.number }
+    order_numbers = assigns[:orders].map(&:number)
 
     expect(order_numbers).to include(order.number)
     expect(order_numbers).to_not include(another_order.number)
