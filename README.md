@@ -61,11 +61,17 @@ You should see 'Stores & Domains' in Configuration tab of Spree Admin.
 Development
 -------
 
-To see if your stores indeed do point to the correct and unique domains, start your server with 
+To see if your stores indeed do point to the correct and unique domains, start your server with
 ```shell
 rails s -p 3000 -b lvh.me
 ```
 and give a store a domain like http://store1.lvh.me:3000/.
+
+If you'd like access to Solidus factories for your own tests that work well
+with this extension, add the following to your `spec_helper`:
+```ruby
+require "spree_multi_domain/testing_support/factory_overrides"
+```
 
 Authorization
 -------------
