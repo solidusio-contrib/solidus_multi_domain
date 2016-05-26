@@ -41,4 +41,30 @@ describe "Template renderer with dynamic layouts" do
       expect(response.body).to eq("Store layout just normal")
     end
   end
+
+  context "with an explicit `layout` passed to render" do
+    ExplicitLayoutController = Class.new(ApplicationController) do
+      def index
+        render :index, layout: 'fancy'
+      end
+    end
+
+    before do
+      ApplicationController.view_paths += [ActionView::FixtureResolver.new(
+          "layouts/fancy.html.erb"         => "Fancy <%= yield %>",
+          "explicit_layout/index.html.erb" => "explicit layout index"
+        )]
+      Rails.application.routes.draw do
+        get 'explicit_layout', to: 'explicit_layout#index'
+      end
+    end
+    it "should use explicit layout for unmatched store" do
+      get "http://www.example.com/explicit_layout"
+      expect(response.body).to eq("Fancy explicit layout index")
+    end
+    it "should use explicit layout for the current store" do
+      get "http://#{store.url}/explicit_layout"
+      expect(response.body).to eq("Fancy explicit layout index")
+    end
+  end
 end
