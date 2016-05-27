@@ -40,6 +40,8 @@ Current features:
 
 5. Google analytics trackers can be associated with a store.
 
+Looking for additional information? Checkout out the [wiki](https://github.com/solidusio/solidus_multi_domain/wiki).
+
 Install Instructions
 --------------------
 
