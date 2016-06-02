@@ -1,39 +1,36 @@
 <% if tracker = current_tracker %>
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  <%= javascript_tag do %>
-    var _gaq = _gaq || [];
-    _gaq.push(['_setAccount', '<%= tracker.analytics_id %>']);
-    _gaq.push(['_trackPageview']);
+    ga('create', '<%= tracker.analytics_id %>', 'auto');
+    ga('require', 'displayfeatures');
+    ga('send', 'pageview');
 
-    <% if flash[:commerce_tracking] && @order.present? %>
-      <%# more info: https://developers.google.com/analytics/devguides/collection/gajs/methods/gaJSApiEcommerce %>
-      _gaq.push(['_addTrans',
-        "<%= j @order.number %>",
-        "<%= tracker.store.name %>",
-        "<%= @order.total %>",
-        "<%= @order.adjustments.tax.sum(:amount) %>",
-        "<%= @order.adjustments.shipping.sum(:amount) %>",
-        "<%= j @order.bill_address.city %>",
-        "<%= j @order.bill_address.state_text %>",
-        "<%= j @order.bill_address.country.name %>"
-      ]);
+    <% if @order && order_just_completed?(@order) %>
+      <%# more info: https://developers.google.com/analytics/devguides/collection/analyticsjs/ecommerce %>
+      ga('require', 'ecommerce', 'ecommerce.js');
+      ga('ecommerce:addTransaction', {
+        'id': '<%= j @order.number %>',                                    // Transaction ID. Required.
+        'affiliation': '<%= @order.store.name %>',                 // Affiliation or store name.
+        'revenue': '<%= @order.total %>',                                // Grand Total.
+        'shipping': '<%= @order.ship_total %>',                                  // Shipping.
+        'tax': '<%= @order.tax_total %>',                                        // Tax.
+        'currency': '<%= @order.currency %>'                        // local currency code.
+      });
       <% @order.line_items.each do |line_item| %>
-        _gaq.push(['_addItem',
-          "<%= j @order.number %>",
-          "<%= j line_item.variant.sku %>",
-          "<%= j line_item.variant.product.name %>",
-          "",
-          "<%= line_item.price %>",
-          "<%= line_item.quantity %>"
-        ]);
+        ga('ecommerce:addItem', {
+          'id': '<%= j @order.number %>',                        // Transaction ID. Required.
+          'name': '<%= j line_item.variant.product.name %>',    // Product name. Required.
+          'sku': '<%= j (line_item.variant.sku || line_item.variant_id) %>', // SKU/code.
+          'category': '',                                     // Category or variation.
+          'price': '<%= line_item.price %>',                 // Unit price.
+          'quantity': '<%= line_item.quantity %>'           // Quantity.
+        });
       <% end %>
-      _gaq.push(['_trackTrans']);
+      ga('ecommerce:send');
     <% end %>
-
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-  <% end %>
+  </script>
 <% end %>
