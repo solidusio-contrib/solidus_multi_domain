@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.requirements << "none"
 
   s.add_dependency "solidus", '~> 1.1'
+  s.add_dependency "deface"
 
   s.add_development_dependency "rspec-rails",  "~> 3.2"
   s.add_development_dependency "simplecov"
