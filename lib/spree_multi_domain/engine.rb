@@ -4,15 +4,29 @@ module SpreeMultiDomain
 
     config.autoload_paths += %W(#{config.root}/lib)
 
-    def self.activate
-      ['app', 'lib'].each do |dir|
-        Dir.glob(File.join(File.dirname(__FILE__), "../../#{dir}/**/*_decorator*.rb")) do |c|
-          Rails.application.config.cache_classes ? require(c) : load(c)
+    class << self
+      def activate
+        ['app', 'lib'].each do |dir|
+          Dir.glob(File.join(File.dirname(__FILE__), "../../#{dir}/**/*_decorator*.rb")) do |c|
+            Rails.application.config.cache_classes ? require(c) : load(c)
+          end
         end
+
+        Spree::Config.searcher_class = Spree::Search::MultiDomain
+        ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
       end
 
-      Spree::Config.searcher_class = Spree::Search::MultiDomain
-      ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
+      def admin_available?
+        const_defined?('Spree::Backend::Engine')
+      end
+
+      def api_available?
+        const_defined?('Spree::Api::Engine')
+      end
+
+      def frontend_available?
+        const_defined?('Spree::Frontend::Engine')
+      end
     end
 
     config.to_prepare &method(:activate).to_proc
