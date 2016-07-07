@@ -13,6 +13,9 @@ module SpreeMultiDomain
 
       Spree::Config.searcher_class = Spree::Search::MultiDomain
       ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
+
+      Spree::Order.whitelisted_ransackable_attributes << 'store_id'
+      Spree::Admin::OrdersController.include(SpreeMultiDomain::StoreAwareAdminOrders)
     end
 
     config.to_prepare &method(:activate).to_proc
