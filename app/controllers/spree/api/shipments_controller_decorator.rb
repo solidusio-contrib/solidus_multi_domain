@@ -13,5 +13,7 @@ module SpreeMultiStore
   end
 end
 
-Spree::Api::ShipmentsController.include SpreeMultiStore::Api::ShipmentsControllerDecorator
-Spree::Api::ShipmentsController.include SpreeMultiDomain::CreateLineItemSupport
+if SpreeMultiDomain::Engine.api_available?
+  Spree::Api::ShipmentsController.include(SpreeMultiStore::Api::ShipmentsControllerDecorator)
+  Spree::Api::ShipmentsController.include(SpreeMultiDomain::CreateLineItemSupport)
+end
