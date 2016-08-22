@@ -33,7 +33,7 @@ module SpreeMultiDomain
 
     initializer "templates with dynamic layouts" do |app|
       ActionView::TemplateRenderer.class_eval do
-        def find_layout_with_multi_store(layout, locals)
+        def find_layout_with_multi_store(layout, *args)
           if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
             store_layout = if layout.is_a?(String)
                              layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
@@ -42,12 +42,12 @@ module SpreeMultiDomain
                            end
 
             begin
-              find_layout_without_multi_store(store_layout, locals)
+              find_layout_without_multi_store(store_layout, *args)
             rescue ::ActionView::MissingTemplate
-              find_layout_without_multi_store(layout, locals)
+              find_layout_without_multi_store(layout, *args)
             end
           else
-            find_layout_without_multi_store(layout, locals)
+            find_layout_without_multi_store(layout, *args)
           end
         end
 
