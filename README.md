@@ -38,8 +38,6 @@ Current features:
 
 4. All orders are associated with the store / domain that they were placed on.
 
-5. Google analytics trackers can be associated with a store.
-
 Looking for additional information? Checkout out the [wiki](https://github.com/solidusio/solidus_multi_domain/wiki).
 
 Install Instructions
