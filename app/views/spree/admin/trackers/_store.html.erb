@@ -1,6 +1,0 @@
-<tr>
-  <td><label><%=t("store")%></label></td>
-  <td>
-    <%= collection_select(:tracker, :store_id, Spree::Store.all, :id, :name, {}) %>
-  </td>
-</tr>
