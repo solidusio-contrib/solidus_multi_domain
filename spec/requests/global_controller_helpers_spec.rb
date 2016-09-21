@@ -5,20 +5,11 @@ describe "Global controller helpers" do
   let!(:store) { FactoryGirl.create :store }
 
   before(:each) do
-    @tracker = FactoryGirl.create :tracker, :store => store
     get "http://#{store.url}"
-  end
-
-  it "should include the right tracker" do
-    expect(response.body).to include(@tracker.analytics_id)
   end
 
   it "should create a store-aware order" do
     expect(controller.current_store).to eq(store)
-  end
-
-  it "should instantiate the correct store-bound tracker" do
-    expect(controller.current_tracker).to eq(@tracker)
   end
 
   describe '.current_currency' do

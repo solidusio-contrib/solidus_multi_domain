@@ -11,11 +11,6 @@ module SpreeMultiDomain
 
       before_filter :add_current_store_id_to_params
       helper_method :current_store
-      helper_method :current_tracker
-    end
-
-    def current_tracker
-      @current_tracker ||= Spree::Tracker.current(current_store)
     end
 
     def get_taxonomies
