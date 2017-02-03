@@ -36,7 +36,7 @@ describe Spree::Api::ShipmentsController do
     let(:shipment) { create(:shipment) }
     let(:variant) { create(:variant) }
 
-    subject { spree_put :add, variant_id: variant.id, id: shipment.number, quantity: 1 }
+    subject { put :add, variant_id: variant.id, id: shipment.number, quantity: 1 }
 
     before(:each) do
       stub_authentication!

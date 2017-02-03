@@ -7,7 +7,7 @@ describe Spree::Admin::StoresController do
     render_views
 
     it 'renders' do
-      spree_get :index
+      get :index
       expect(response).to be_success
     end
   end
@@ -18,7 +18,7 @@ describe Spree::Admin::StoresController do
     let(:store) { create(:store) }
 
     it 'renders' do
-      spree_get :edit, id: store.to_param
+      get :edit, id: store.to_param
       expect(response).to be_success
     end
   end

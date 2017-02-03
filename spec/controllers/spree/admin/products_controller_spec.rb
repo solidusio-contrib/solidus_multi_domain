@@ -5,7 +5,7 @@ describe Spree::Admin::ProductsController do
 
   describe "on :index" do
     it "renders index" do
-      spree_get :index
+      get :index
       expect(response).to be_success
     end
   end
@@ -20,7 +20,7 @@ describe Spree::Admin::ProductsController do
       it "clears stores if they previously existed" do
         @product.stores << @store
 
-        spree_put :update, :id => @product.to_param,
+        put :update, :id => @product.to_param,
                       :product => {:name => @product.name}, update_store_ids: 'true'
 
         expect(@product.reload.store_ids).to be_empty
@@ -29,7 +29,7 @@ describe Spree::Admin::ProductsController do
 
     describe "when a store is selected" do
       it "clears stores" do
-        spree_put :update, :id => @product.to_param,
+        put :update, :id => @product.to_param,
                       :product => {:name => @product.name, :store_ids => [@store.id]}, update_store_ids: 'true'
 
         expect(@product.reload.store_ids).to eq [@store.id]
