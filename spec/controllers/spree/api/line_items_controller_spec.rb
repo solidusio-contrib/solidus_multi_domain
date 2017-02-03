@@ -12,7 +12,7 @@ describe Spree::Api::LineItemsController do
     let(:order) { create(:order, user: user) }
     let(:line_item) { build(:line_item, order: order) }
 
-    subject { post :create, line_item: line_item, order_id: line_item.order.number }
+    subject { post :create, params: { line_item: line_item, order_id: line_item.order.number } }
 
     context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
       before(:each) do

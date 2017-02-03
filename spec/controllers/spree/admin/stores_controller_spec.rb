@@ -18,7 +18,7 @@ describe Spree::Admin::StoresController do
     let(:store) { create(:store) }
 
     it 'renders' do
-      get :edit, id: store.to_param
+      get :edit, params: { id: store.to_param }
       expect(response).to be_success
     end
   end

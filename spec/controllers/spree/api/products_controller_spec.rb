@@ -11,7 +11,7 @@ describe Spree::Api::ProductsController do
     let!(:store) { FactoryGirl.create(:store) }
 
     it 'should return 404' do
-      get :show, :id => product.to_param, format: :json
+      get :show, params: { :id => product.to_param, format: :json }
 
       expect(response.response_code) == 404
     end
@@ -28,7 +28,7 @@ describe Spree::Api::ProductsController do
 
     it 'should return 404' do
       allow(controller).to receive_messages(:current_store => store_2)
-      get :show, :id => product.to_param, format: :json
+      get :show, params: { :id => product.to_param , format: :json }
 
       expect(response.response_code) == 404
     end
@@ -43,7 +43,7 @@ describe Spree::Api::ProductsController do
 
     it 'should return 200' do
       allow(controller).to receive_messages(:current_store => store)
-      get :show, :id => product.to_param, format: :json
+      get :show, params: { :id => product.to_param , format: :json }
 
       expect(response.response_code) == 200
     end

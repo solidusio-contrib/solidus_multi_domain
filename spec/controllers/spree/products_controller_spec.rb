@@ -8,7 +8,7 @@ describe Spree::ProductsController do
     let!(:store) { FactoryGirl.create(:store) }
 
     it 'returns 404' do
-      get :show, :id => product.to_param
+      get :show, params: { :id => product.to_param }
 
       expect(response.response_code).to eq 404
     end
@@ -25,7 +25,7 @@ describe Spree::ProductsController do
 
     it 'returns 404' do
       allow(controller).to receive_messages(:current_store => store_2)
-      get :show, :id => product.to_param
+      get :show, params: { :id => product.to_param }
 
       expect(response.response_code).to eq 404
     end
@@ -40,7 +40,7 @@ describe Spree::ProductsController do
 
     it 'returns 200' do
       allow(controller).to receive_messages(:current_store => store)
-      get :show, :id => product.to_param
+      get :show, params: { :id => product.to_param }
 
       expect(response.response_code).to eq 200
     end
