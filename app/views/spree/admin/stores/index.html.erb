@@ -1,4 +1,4 @@
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+<%= render partial: 'spree/admin/shared/configuration_menu' %>
 
 <% content_for :page_title do %>
   <%= Spree.t(:stores) %>
@@ -7,7 +7,7 @@
 <% content_for :page_actions do %>
   <% if can?(:create, Spree::Store) %>
     <li>
-      <%= button_link_to Spree.t(:new_store), new_object_url,  :icon => 'icon-plus', :id => 'admin_new_store_link' %>
+      <%= button_link_to Spree.t(:new_store), new_object_url, id: 'admin_new_store_link' %>
     </li>
   <% end %>
 <% end %>
@@ -37,10 +37,10 @@
         <td><%= store.url %></td>
         <td data-hook="admin_stores_index_row_actions" class="actions">
           <% if can? :update, store %>
-            <%= link_to_edit store, :no_text => true %>
+            <%= link_to_edit store, no_text: true %>
           <% end %>
           <% if can? :destroy, store %>
-            <%= link_to_delete store, :no_text => true %>
+            <%= link_to_delete store, no_text: true %>
           <% end %>
         </td>
       </tr>
