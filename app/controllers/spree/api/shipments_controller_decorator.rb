@@ -1,12 +1,8 @@
 module SpreeMultiStore
   module Api
     module ShipmentsControllerDecorator
-      def self.included(base)
-        base.alias_method_chain :mine, :store_scope
-      end
-
-      def mine_with_store_scope
-        mine_without_store_scope
+      def mine
+        super
         @shipments = @shipments.where(spree_orders: { store_id: current_store.id }) if @shipments
       end
     end
@@ -14,6 +10,6 @@ module SpreeMultiStore
 end
 
 if SpreeMultiDomain::Engine.api_available?
-  Spree::Api::ShipmentsController.include(SpreeMultiStore::Api::ShipmentsControllerDecorator)
+  Spree::Api::ShipmentsController.prepend(SpreeMultiStore::Api::ShipmentsControllerDecorator)
   Spree::Api::ShipmentsController.include(SpreeMultiDomain::CreateLineItemSupport)
 end
