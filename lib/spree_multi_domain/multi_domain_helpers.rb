@@ -9,7 +9,7 @@ module SpreeMultiDomain
       helper 'spree/products'
       helper 'spree/taxons'
 
-      before_filter :add_current_store_id_to_params
+      before_action :add_current_store_id_to_params
       helper_method :current_store
     end
 
