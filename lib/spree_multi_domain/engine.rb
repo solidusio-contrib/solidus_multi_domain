@@ -33,10 +33,10 @@ module SpreeMultiDomain
 
     initializer "current order decoration" do |app|
       require 'spree/core/controller_helpers/order'
-      ::Spree::Core::ControllerHelpers::Order.module_eval do
-        def current_order_with_multi_domain(options = {})
+      Spree::Core::ControllerHelpers::Order.prepend(Module.new do
+        def current_order(options = {})
           options[:create_order_if_necessary] ||= false
-          current_order_without_multi_domain(options)
+          super(options)
 
           if @current_order and current_store and @current_order.store.blank?
             @current_order.update_attribute(:store_id, current_store.id)
@@ -44,8 +44,7 @@ module SpreeMultiDomain
 
           @current_order
         end
-        alias_method_chain :current_order, :multi_domain
-      end
+      end)
     end
 
     initializer 'spree.promo.register.promotions.rules' do |app|
