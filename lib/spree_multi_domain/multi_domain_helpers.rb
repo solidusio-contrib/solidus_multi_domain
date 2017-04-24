@@ -9,6 +9,7 @@ module SpreeMultiDomain
       helper 'spree/products'
       helper 'spree/taxons'
 
+      before_action :prepend_current_store_path
       before_action :add_current_store_id_to_params
       helper_method :current_store
     end
@@ -17,6 +18,10 @@ module SpreeMultiDomain
       @taxonomies ||= current_store.present? ? Spree::Taxonomy.where(["store_id = ?", current_store.id]) : Spree::Taxonomy
       @taxonomies = @taxonomies.includes(:root => :children)
       @taxonomies
+    end
+
+    def prepend_current_store_path
+      prepend_view_path Rails.root.join("app/views/#{current_store.code}")
     end
 
     def add_current_store_id_to_params
