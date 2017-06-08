@@ -1,4 +1,4 @@
-class AddOrderStore < ActiveRecord::Migration
+class AddOrderStore < SolidusSupport::Migration[4.2]
   def self.up
     if table_exists?('orders')
       add_column :orders, :store_id, :integer

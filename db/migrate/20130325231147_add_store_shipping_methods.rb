@@ -1,4 +1,4 @@
-class AddStoreShippingMethods < ActiveRecord::Migration
+class AddStoreShippingMethods < SolidusSupport::Migration[4.2]
   def change
     create_table :spree_store_shipping_methods do |t|
       t.integer :store_id

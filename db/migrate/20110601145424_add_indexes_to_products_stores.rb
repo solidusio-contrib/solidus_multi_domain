@@ -1,4 +1,4 @@
-class AddIndexesToProductsStores < ActiveRecord::Migration
+class AddIndexesToProductsStores < SolidusSupport::Migration[4.2]
   def self.up
     add_index :products_stores, :product_id
     add_index :products_stores, :store_id

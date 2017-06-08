@@ -32,8 +32,8 @@ module SpreeMultiDomain
     config.to_prepare &method(:activate).to_proc
 
     initializer "templates with dynamic layouts" do |app|
-      ActionView::TemplateRenderer.class_eval do
-        def find_layout_with_multi_store(layout, *args)
+      ActionView::TemplateRenderer.prepend(Module.new do
+        def find_layout(layout, *args)
           if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
             store_layout = if layout.is_a?(String)
                              layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
@@ -42,22 +42,20 @@ module SpreeMultiDomain
                            end
 
             begin
-              find_layout_without_multi_store(store_layout, *args)
+              super(store_layout, *args)
             rescue ::ActionView::MissingTemplate
-              find_layout_without_multi_store(layout, *args)
+              super(layout, *args)
             end
           else
-            find_layout_without_multi_store(layout, *args)
+            super(layout, *args)
           end
         end
-
-        alias_method_chain :find_layout, :multi_store
-      end
+      end)
     end
 
     initializer "current order decoration" do |app|
       require 'spree/core/controller_helpers/order'
-      ::Spree::Core::ControllerHelpers::Order.module_eval do
+      ::Spree::Core::ControllerHelpers::Order.prepend(Module.new do
         def current_order_with_multi_domain(options = {})
           options[:create_order_if_necessary] ||= false
           current_order_without_multi_domain(options)
@@ -68,8 +66,7 @@ module SpreeMultiDomain
 
           @current_order
         end
-        alias_method_chain :current_order, :multi_domain
-      end
+      end)
     end
 
     initializer 'spree.promo.register.promotions.rules' do |app|
