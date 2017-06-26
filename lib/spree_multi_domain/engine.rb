@@ -32,25 +32,8 @@ module SpreeMultiDomain
     config.to_prepare &method(:activate).to_proc
 
     initializer "templates with dynamic layouts" do |app|
-      ActionView::TemplateRenderer.prepend(Module.new do
-        def find_layout(layout, *args)
-          if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
-            store_layout = if layout.is_a?(String)
-                             layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
-                           else
-                             layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
-                           end
-
-            begin
-              super(store_layout, *args)
-            rescue ::ActionView::MissingTemplate
-              super(layout, *args)
-            end
-          else
-            super(layout, *args)
-          end
-        end
-      end)
+      require 'spree_multi_domain/dynamic_template_renderer'
+      ActionView::TemplateRenderer.prepend(SpreeMultiDomain::DynamicTemplateRenderer)
     end
 
     initializer "current order decoration" do |app|
