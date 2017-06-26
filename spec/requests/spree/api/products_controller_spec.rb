@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Spree::Api::ProductsController, type: :request do
 
   let!(:product) { FactoryGirl.create(:product) }
-  let!(:user)  { create(:user, :api) }
+  let!(:user)  { create(:user, :with_api_key) }
   let!(:store) { FactoryGirl.create(:store) }
 
   subject {
