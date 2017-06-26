@@ -1,14 +1,5 @@
 module SpreeMultiDomain
   module DynamicTemplateRenderer
-    def controller_name
-      # check if it's not dangerous to call the method that way
-      @view.controller.class.to_s
-    end
-
-    def api_request?
-      return true if controller_name.include?('::Api::')
-    end
-
     def find_layout(layout, *args)
       unless api_request?
         if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(Spree::Admin::BaseController)
@@ -27,6 +18,15 @@ module SpreeMultiDomain
           super(layout, *args)
         end
       end
+    end
+
+    def controller_name
+      # check if it's not dangerous to call the method that way
+      @view.controller.class.to_s
+    end
+
+    def api_request?
+      return true if controller_name.include?('::Api::')
     end
   end
 end
