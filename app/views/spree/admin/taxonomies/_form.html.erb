@@ -1,12 +1,16 @@
-<div data-hook="admin_inside_taxonomy_form">
-  <%= f.field_container :name do %>
-    <%= f.label :name, Spree.t(:name) %> <span class="required">*</span><br />
-    <%= error_message_on :taxonomy, :name, :class => 'fullwidth title'  %>
-    <%= text_field :taxonomy, :name  %>
-  <% end %>
-</div>
+<div class="row">
+  <div class="offset-3 col-3" data-hook="admin_inside_taxonomy_form">
+    <%= f.field_container :name do %>
+      <%= f.label :name, class: 'required' %><br />
+      <%= error_message_on :taxonomy, :name, class: 'fullwidth title' %>
+      <%= text_field :taxonomy, :name, class: "fullwidth" %>
+    <% end %>
+  </div>
 
-<p>
-  <%= f.label :name, Spree.t(:store) %> <span class="required">*</span><br />
-  <%= collection_select :taxonomy, :store_id, Spree::Store.all, :id, :name  %>
-</p>
+  <div class="col-3">
+    <%= f.field_container :store do %>
+      <%= f.label :store, class: "required" %><br />
+      <%= collection_select :taxonomy, :store_id, Spree::Store.all, :id, :name, {}, class: "select2 fullwidth" %>
+    <% end %>
+  </div>
+</div>
