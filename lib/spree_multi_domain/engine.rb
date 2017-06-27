@@ -12,8 +12,21 @@ module SpreeMultiDomain
           end
         end
 
+        # Previous versions of solidus have the multi domain store selection
+        # logic directly in core (called Spree::Core::CurrentStore or
+        # Spree::CurrentStoreSelector). As long as Spree::Config responds to
+        # current_store_selector_class we can use the new domain selector
+        # class safely.
+        if store_selector_class?
+          Spree::Config.current_store_selector_class = Spree::MultiDomainStoreSelector
+        end
+
         Spree::Config.searcher_class = Spree::Search::MultiDomain
         ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
+      end
+
+      def store_selector_class?
+        Spree::Config.respond_to?(:current_store_selector_class)
       end
 
       def admin_available?
