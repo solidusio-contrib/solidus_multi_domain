@@ -9,7 +9,11 @@ RSpec.describe "Store promotion rule", js: true do
   it "Can add a store rule to a promotion" do
     visit spree.edit_admin_promotion_path(promotion)
 
-    select2 "Store", from: "Add rule of type"
+    if SolidusSupport.solidus_gem_version < Gem::Version.new('2.3.x')
+      select2 "Store", from: "Add rule of type"
+    else
+      select "Store", from: "Add rule of type"
+    end
     within("#rules_container") { click_button "Add" }
 
     select2_search store.name, from: "Choose Stores"
