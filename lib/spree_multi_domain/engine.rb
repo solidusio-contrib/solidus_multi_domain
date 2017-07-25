@@ -15,18 +15,6 @@ module SpreeMultiDomain
         Spree::Config.searcher_class = Spree::Search::MultiDomain
         ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
       end
-
-      def admin_available?
-        const_defined?('Spree::Backend::Engine')
-      end
-
-      def api_available?
-        const_defined?('Spree::Api::Engine')
-      end
-
-      def frontend_available?
-        const_defined?('Spree::Frontend::Engine')
-      end
     end
 
     config.to_prepare &method(:activate).to_proc

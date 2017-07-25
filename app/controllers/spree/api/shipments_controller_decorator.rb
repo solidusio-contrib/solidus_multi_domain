@@ -9,7 +9,7 @@ module SpreeMultiStore
   end
 end
 
-if SpreeMultiDomain::Engine.api_available?
+if SolidusSupport.api_available?
   Spree::Api::ShipmentsController.prepend(SpreeMultiStore::Api::ShipmentsControllerDecorator)
   Spree::Api::ShipmentsController.include(SpreeMultiDomain::CreateLineItemSupport)
 end

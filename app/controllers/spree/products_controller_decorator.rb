@@ -1,3 +1,3 @@
-if SpreeMultiDomain::Engine.frontend_available?
+if SolidusSupport.frontend_available?
   Spree::ProductsController.include(SpreeMultiDomain::ShowProductSupport)
 end

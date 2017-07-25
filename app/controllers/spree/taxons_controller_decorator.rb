@@ -7,4 +7,4 @@ Spree::TaxonsController.class_eval do
     @products = @searcher.retrieve_products
     @taxonomies = get_taxonomies
   end
-end if SpreeMultiDomain::Engine.frontend_available?
+end if SolidusSupport.frontend_available?
