@@ -1,45 +1,19 @@
-<div data-hook="admin_store_form_fields">
-  <div class="alpha four columns">
-    <%= f.field_container :name do %>
-      <%= f.label :name, Spree.t(:store_name) %><br />
-      <%= f.text_field :name, :class => 'fullwidth' %>
-      <%= error_message_on :store, :name %>
-    <% end %>
-  </div>
-
-  <div class="four columns">
-    <%= f.field_container :code do %>
-      <%= f.label :code, Spree.t(:store_code) %><br />
-      <%= f.text_field :code, :class => 'fullwidth' %>
-      <%= error_message_on :store, :code %>
-    <% end %>
-  </div>
-
-  <div class="four columns">
-    <%= f.field_container :mail_from_address do %>
-      <%= f.label :mail_from_address, Spree.t(:send_mails_as) %><br />
-      <%= f.text_field :mail_from_address, :class => 'fullwidth' %>
-      <%= error_message_on :store, :mail_from_address %>
-    <% end %>
-  </div>
-
-  <div class="four columns">
-    <%= f.field_container :default_currency do %>
-      <%= f.label :default_currency, Spree.t(:default_currency) %>
-      <%= f.text_field :default_currency %>
-    <% end %>
-  </div>
-
-  <div class="six columns">
-    <%= f.field_container :url do %>
-      <%= f.label :url, Spree.t(:domains) %><br />
-      <%= f.text_area :url, :cols => 60, :rows => 4, :class => 'fullwidth' %>
-      <%= error_message_on :store, :url %>
+<div data-hook="admin_store_multi_domain_fields">
+  <div class="two columns">
+    <%= f.field_container :default do %>
+      <%= f.label :default, Spree.t(:default) %>
+      <ul>
+        <li><%= f.radio_button :default, "true", :class => 'fullwidth' %> <%= Spree.t(:say_yes) %></li>
+        <li><%= f.radio_button :default, "false", :class => 'fullwidth' %> <%= Spree.t(:say_no) %></li>
+      </ul>
+      <%= error_message_on :store, :default %>
     <% end %>
   </div>
 
   <div class="eight columns">
-    <%= image_tag @store.logo.url %>
+    <% if @store.logo.exists? %>
+      <%= image_tag @store.logo %>
+    <% end %>
     <%= f.field_container :logo do %>
       <%= f.label :logo, Spree.t(:logo) %><br />
       <%= f.file_field :logo %>
