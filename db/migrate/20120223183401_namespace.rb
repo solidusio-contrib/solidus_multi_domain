@@ -1,4 +1,4 @@
-class Namespace < SolidusSupport::Migration[4.2]
+class Namespace < SolidusSupport::Migration[5.1]
   def up
     rename_table :products_stores, :spree_products_stores
   end
