@@ -1,19 +1,17 @@
-class StoreIdForTaxonomies < SolidusSupport::Migration[4.2]
+class StoreIdForTaxonomies < SolidusSupport::Migration[5.1]
   def self.up
     if table_exists?('taxonomies')
-      add_column :taxonomies, :store_id, :integer
-      add_index :taxonomies, :store_id
+      add_reference :taxonomies, :store
     elsif table_exists?('spree_taxonomies')
-      add_column :spree_taxonomies, :store_id, :integer
-      add_index :spree_taxonomies, :store_id
+      add_reference :spree_taxonomies, :store
     end
   end
 
   def self.down
     if table_exists?('taxonomies')
-      remove_column :taxonomies, :store_id
+      remove_reference :taxonomies, :store
     elsif table_exists?('spree_taxonomies')
-      remove_column :spree_taxonomies, :store_id
+      remove_reference :spree_taxonomies, :store
     end
   end
 end

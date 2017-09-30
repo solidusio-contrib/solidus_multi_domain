@@ -1,14 +1,10 @@
-class AddStoreShippingMethods < SolidusSupport::Migration[4.2]
+class AddStoreShippingMethods < SolidusSupport::Migration[5.1]
   def change
     create_table :spree_store_shipping_methods do |t|
-      t.integer :store_id
-      t.integer :shipping_method_id
+      t.references :store
+      t.references :shipping_method
 
       t.timestamps null: true
     end
-
-    add_index :spree_store_shipping_methods, :store_id
-    add_index :spree_store_shipping_methods, :shipping_method_id
   end
 end
-
