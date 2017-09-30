@@ -4,7 +4,7 @@ module SolidusMultiDomain
       class_option :auto_run_migrations, type: :boolean, default: false
 
       def add_javascripts
-        append_file "vendor/assets/javascripts/spree/backend/all.js", "//= require spree/backend/solidus_multi_domain\n"
+        # append_file "vendor/assets/javascripts/spree/backend/all.js", "//= require spree/backend/solidus_multi_domain\n"
       end
 
       def add_migrations
