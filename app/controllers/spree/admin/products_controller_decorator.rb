@@ -9,4 +9,4 @@ Spree::Admin::ProductsController.class_eval do
       @product.stores.clear
     end
   end
-end if SpreeMultiDomain::Engine.admin_available?
+end if SolidusSupport.backend_available?

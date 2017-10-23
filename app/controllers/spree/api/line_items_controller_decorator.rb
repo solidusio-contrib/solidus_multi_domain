@@ -1,3 +1,3 @@
-if SpreeMultiDomain::Engine.api_available?
+if SolidusSupport.api_available?
   Spree::Api::LineItemsController.include(SpreeMultiDomain::CreateLineItemSupport)
 end
