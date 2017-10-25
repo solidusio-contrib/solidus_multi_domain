@@ -9,7 +9,7 @@ describe "Template renderer with dynamic layouts" do
       )]
   end
 
-  let(:store) { FactoryGirl.create :store, code: "my_store" }
+  let(:store) { FactoryBot.create :store, code: "my_store" }
 
   it "should render the layout corresponding to the current store" do
     get "http://#{store.url}"

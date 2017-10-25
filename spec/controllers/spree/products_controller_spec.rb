@@ -2,10 +2,10 @@ require 'spec_helper'
 
 describe Spree::ProductsController do
 
-  let!(:product) { FactoryGirl.create(:product) }
+  let!(:product) { FactoryBot.create(:product) }
 
   describe 'on :show to a product without any stores' do
-    let!(:store) { FactoryGirl.create(:store) }
+    let!(:store) { FactoryBot.create(:store) }
 
     it 'returns 404' do
       get :show, params: { :id => product.to_param }
@@ -16,8 +16,8 @@ describe Spree::ProductsController do
 
   # Regression test for #75
   describe 'on :show to a product in the wrong store' do
-    let!(:store_1) { FactoryGirl.create(:store) }
-    let!(:store_2) { FactoryGirl.create(:store) }
+    let!(:store_1) { FactoryBot.create(:store) }
+    let!(:store_2) { FactoryBot.create(:store) }
 
     before(:each) do
       product.stores << store_1
@@ -32,7 +32,7 @@ describe Spree::ProductsController do
   end
 
   describe 'on :show to a product w/ store' do
-    let!(:store) { FactoryGirl.create(:store) }
+    let!(:store) { FactoryBot.create(:store) }
 
     before(:each) do
       product.stores << store

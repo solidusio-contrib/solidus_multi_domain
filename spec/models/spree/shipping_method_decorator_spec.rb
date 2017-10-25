@@ -19,7 +19,7 @@ describe Spree::ShippingMethod do
       end
 
       context "when the store has at least on shipping method" do
-        before { store.shipping_methods << FactoryGirl.create(:shipping_method) }
+        before { store.shipping_methods << FactoryBot.create(:shipping_method) }
         it { is_expected.to eq(false)}
       end
     end

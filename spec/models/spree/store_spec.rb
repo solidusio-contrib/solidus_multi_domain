@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Spree::Store do
-  let!(:default_store) { FactoryGirl.create(:store, default: true, url: "default.com") }
-  let!(:store_2)       { FactoryGirl.create(:store, code: 'STORE2', url: 'freethewhales.com') }
-  let!(:store_3)       { FactoryGirl.create(:store, code: 'STORE3', url: "website1.com\nwww.subdomain.com") }
+  let!(:default_store) { FactoryBot.create(:store, default: true, url: "default.com") }
+  let!(:store_2)       { FactoryBot.create(:store, code: 'STORE2', url: 'freethewhales.com') }
+  let!(:store_3)       { FactoryBot.create(:store, code: 'STORE3', url: "website1.com\nwww.subdomain.com") }
 
   it "should find stores by url" do
     by_url = Spree::Store.by_url('www.subdomain.com')

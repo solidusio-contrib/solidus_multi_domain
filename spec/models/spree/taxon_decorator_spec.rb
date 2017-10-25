@@ -4,13 +4,13 @@ describe Spree::Taxon do
   describe ".find_by_store_id_and_permalink!" do
     context "taxon exist in given store" do
 
-      let!(:store) { FactoryGirl.create :store }
-      let!(:taxonomy) { FactoryGirl.create :taxonomy , store: store}
-      let!(:taxon) { FactoryGirl.create :taxon , taxonomy: taxonomy}
+      let!(:store) { FactoryBot.create :store }
+      let!(:taxonomy) { FactoryBot.create :taxonomy , store: store}
+      let!(:taxon) { FactoryBot.create :taxon , taxonomy: taxonomy}
 
-      let!(:anotherstore) { FactoryGirl.create :store, name: "second-test-store" }
-      let!(:anothertaxonomy) { FactoryGirl.create :taxonomy , store: anotherstore}
-      let!(:anothertaxon) { FactoryGirl.create :taxon , taxonomy: anothertaxonomy}
+      let!(:anotherstore) { FactoryBot.create :store, name: "second-test-store" }
+      let!(:anothertaxonomy) { FactoryBot.create :taxonomy , store: anotherstore}
+      let!(:anothertaxon) { FactoryBot.create :taxon , taxonomy: anothertaxonomy}
 
       it "returns a taxon" do
         found_taxon = Spree::Taxon.find_by_store_id_and_permalink!(store.id, taxon.permalink)

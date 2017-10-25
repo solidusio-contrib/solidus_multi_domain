@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Spree::Product do
 
   before(:each) do
-    @store = FactoryGirl.create(:store)
-    @product = FactoryGirl.create(:product, :stores => [@store])
+    @store = FactoryBot.create(:store)
+    @product = FactoryBot.create(:product, :stores => [@store])
 
-    @product2 = FactoryGirl.create(:product, :slug => 'something else')
+    @product2 = FactoryBot.create(:product, :slug => 'something else')
   end
 
   it 'should correctly find products by store' do

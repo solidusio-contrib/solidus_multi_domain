@@ -12,8 +12,8 @@ describe Spree::Admin::ProductsController do
 
   describe "on a PUT to :update" do
     before(:each) do
-      @product = FactoryGirl.create(:product)
-      @store = FactoryGirl.create(:store)
+      @product = FactoryBot.create(:product)
+      @store = FactoryBot.create(:store)
     end
 
     describe "when no stores are selected" do

@@ -2,9 +2,9 @@ require 'spec_helper'
 
 describe Spree::Api::ProductsController, type: :request do
 
-  let!(:product) { FactoryGirl.create(:product) }
+  let!(:product) { FactoryBot.create(:product) }
   let!(:user)  { create(:user, :with_api_key) }
-  let!(:store) { FactoryGirl.create(:store) }
+  let!(:store) { FactoryBot.create(:store) }
 
   subject {
     get "/api/products/#{product.to_param}", headers: {
@@ -24,7 +24,7 @@ describe Spree::Api::ProductsController, type: :request do
       before(:each) { product.stores << store }
 
       describe 'requesting a wrong store for the product' do
-        let!(:store_2) { FactoryGirl.create(:store) }
+        let!(:store_2) { FactoryBot.create(:store) }
 
         it 'returns 404' do
           host! store_2.url
