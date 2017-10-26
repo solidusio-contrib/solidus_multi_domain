@@ -1,4 +1,4 @@
-FactoryGirl.modify do
+FactoryBot.modify do
   # Products need to belong to the same store as the order.
   factory :line_item do
     after(:build) do |line_item, evaluator|
