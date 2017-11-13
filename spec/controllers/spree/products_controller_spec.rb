@@ -8,9 +8,14 @@ describe Spree::ProductsController do
     let!(:store) { FactoryBot.create(:store) }
 
     it 'returns 404' do
-      get :show, params: { :id => product.to_param }
-
-      expect(response.response_code).to eq 404
+      if SolidusSupport.solidus_gem_version < Gem::Version.new('2.5.x')
+        get :show, params: { id: product.to_param }
+        expect(response.response_code).to eq 404
+      else
+        expect {
+          get :show, params: { :id => product.to_param }
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
     end
   end
 
@@ -25,9 +30,15 @@ describe Spree::ProductsController do
 
     it 'returns 404' do
       allow(controller).to receive_messages(:current_store => store_2)
-      get :show, params: { :id => product.to_param }
 
-      expect(response.response_code).to eq 404
+      if SolidusSupport.solidus_gem_version < Gem::Version.new('2.5.x')
+        get :show, params: { id: product.to_param }
+        expect(response.response_code).to eq 404
+      else
+        expect {
+          get :show, params: { :id => product.to_param }
+        }.to raise_error(ActiveRecord::RecordNotFound)
+      end
     end
   end
 
