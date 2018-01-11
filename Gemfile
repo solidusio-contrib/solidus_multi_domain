@@ -10,7 +10,7 @@ else
   gem "rails_test_params_backport", group: :test
 end
 
-gem 'pg'
+gem 'pg', '~> 0.21'
 gem 'mysql2'
 
 group :development, :test do
