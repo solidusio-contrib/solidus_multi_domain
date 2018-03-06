@@ -17,6 +17,9 @@ Capybara.register_driver(:poltergeist) do |app|
 end
 Capybara.javascript_driver = :poltergeist
 Capybara.default_max_wait_time = 10
+Capybara.configure do |config|
+  config.always_include_port = true
+end
 
 # Requires factories defined in spree_core
 require 'spree/testing_support/factories'
@@ -43,6 +46,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
   config.include Spree::TestingSupport::ControllerRequests, type: :controller
   config.include Spree::Api::TestingSupport::Helpers, type: :controller
+  config.include FeatureHelpers, type: :feature
 
   config.before :suite do
     DatabaseCleaner.clean_with :truncation
