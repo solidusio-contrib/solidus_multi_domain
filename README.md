@@ -65,7 +65,9 @@ To see if your stores indeed do point to the correct and unique domains, start y
 ```shell
 rails s -p 3000 -b lvh.me
 ```
-and give a store a domain like http://store1.lvh.me:3000/.
+and give a store a domain like `store1.lvh.me`.
+
+Then you can access to your store by going to `http://store1.lvh.me:3000/` in your browser.
 
 If you'd like access to Solidus factories for your own tests that work well
 with this extension, add the following to your `spec_helper`:
