@@ -12,10 +12,6 @@ module Spree
           stores.none? or stores.include?(order.store)
         end
 
-        def applicable?(promotable)
-          promotable.is_a?(Spree::Order)
-        end
-
         def store_ids_string
           store_ids.join(',')
         end
