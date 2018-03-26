@@ -11,7 +11,7 @@ else
 end
 
 gem 'pg', '~> 0.21'
-gem 'mysql2'
+gem 'mysql2', '~> 0.4.10'
 
 group :development, :test do
   gem "pry-rails"
