@@ -6,7 +6,7 @@ module SpreeMultiDomain
           store_layout = if layout.is_a?(String)
                            layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
                          else
-                           layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
+                           layout.call(args.last).try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
                          end
 
           begin
