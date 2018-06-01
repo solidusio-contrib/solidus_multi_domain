@@ -58,6 +58,8 @@
     <% end %>
   </div>
 
+</div>
+<% unless @store.new_record? %>
   <div class='row'>
     <div class="alpha six columns">
       <%= f.field_container :payment_methods do %>
@@ -87,4 +89,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>
