@@ -50,7 +50,7 @@
   </div>
 
   <div class="eight columns">
-    <%= image_tag @store.logo %>
+    <%= image_tag @store.logo.url(:mini) %>
     <%= f.field_container :logo do %>
       <%= f.label :logo, Spree.t(:logo) %><br />
       <%= f.file_field :logo %>
