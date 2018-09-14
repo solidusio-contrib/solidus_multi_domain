@@ -7,13 +7,24 @@ module Spree::Search
 
       base_scope = get_products_conditions_for(base_scope, keywords) unless keywords.blank?
 
-      base_scope = add_search_scopes(base_scope)
-      base_scope
+      add_search_scopes(base_scope)
     end
 
     def prepare(params)
       super
       @properties[:current_store_id] = params[:current_store_id]
+    end
+
+    def current_store_id
+      @properties[:current_store_id]
+    end
+
+    def keywords
+      @properties[:keywords]
+    end
+
+    def taxon
+      @properties[:taxon]
     end
   end
 end
