@@ -31,11 +31,6 @@ module SpreeMultiDomain
 
     config.to_prepare &method(:activate).to_proc
 
-    initializer "templates with dynamic layouts" do |app|
-      require 'spree_multi_domain/dynamic_template_renderer'
-      ActionView::TemplateRenderer.prepend(SpreeMultiDomain::DynamicTemplateRenderer)
-    end
-
     initializer "current order decoration" do |app|
       require 'spree/core/controller_helpers/order'
       ::Spree::Core::ControllerHelpers::Order.prepend(Module.new do

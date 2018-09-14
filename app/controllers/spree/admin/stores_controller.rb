@@ -19,6 +19,6 @@ class Spree::Admin::StoresController < Spree::Admin::ResourceController
     end
 
     def load_shipping_methods
-      @shipping_methods = Spree::ShippingMethod.all
+      @shipping_methods = Spree::ShippingMethod.accessible_by current_ability, :read
     end
 end

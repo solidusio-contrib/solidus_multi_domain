@@ -6,18 +6,18 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to Spree.t(:back_to_store_list), spree.admin_stores_path, :icon => 'icon-arrow-left' %>
+    <%= button_link_to Spree.t(:back_to_store_list), spree.admin_stores_path, class: 'fa fa-icon-arrow-left' %>
   </li>
 <% end %>
 
 <div data-hook="admin_store_edit_form_header">
-  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @store } %>
+  <%= render :partial => 'spree/shared/error_messages', locals: { target: @store } %>
 </div>
 
 <div data-hook="admin_store_edit_form">
-  <%= form_for [:admin, @store], :html => {:multipart => true} do |f| %>
+  <%= form_for [:admin, @store], html: { multipart: true } do |f| %>
     <fieldset class="no-border-top">
-      <%= render :partial => 'form', :locals => { :f => f } %>
+      <%= render :partial => 'form', locals: { f: f } %>
 
       <div class="clear"></div>
 

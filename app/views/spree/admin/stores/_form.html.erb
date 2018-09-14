@@ -58,6 +58,8 @@
     <% end %>
   </div>
 
+</div>
+<% unless @store.new_record? %>
   <div class='row'>
     <div class="alpha six columns">
       <%= f.field_container :payment_methods do %>
@@ -73,7 +75,7 @@
       <% end %>
     </div>
 
-    <div class="omega six columns">
+    <div class="omega six columns" style="display: none;">
       <%= f.field_container :shipping_methods do %>
         <%= f.label :shipping_methods, Spree.t(:shipping_methods) %><br />
         <% @shipping_methods.each do |shipping_method| %>
@@ -87,4 +89,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>
