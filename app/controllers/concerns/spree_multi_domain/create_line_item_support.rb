@@ -10,7 +10,7 @@ module SpreeMultiDomain::CreateLineItemSupport
     private
 
     def product_does_not_belong_to_store
-      render json: { message: Spree.t('errors.products_from_different_stores_may_not_be_added_to_this_order') }, status: 422
+      render json: { message: I18n.t('spree.errors.products_from_different_stores_may_not_be_added_to_this_order') }, status: 422
     end
   end
 end
