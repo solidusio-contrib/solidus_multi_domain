@@ -12,8 +12,9 @@ RSpec.describe "Store promotion rule", js: true do
     if SolidusSupport.solidus_gem_version < Gem::Version.new('2.3.x')
       select2 "Store", from: "Add rule of type"
     else
-      select "Store", from: "Add rule of type"
+      select "Store", from: "promotion_rule_type"
     end
+
     within("#rules_container") { click_button "Add" }
 
     select2_search store.name, from: "Choose Stores"
