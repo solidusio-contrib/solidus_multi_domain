@@ -1,3 +1,3 @@
 <% if can?(:display, Spree::Store) %>
-  <%= configurations_sidebar_menu_item Spree.t(:stores_admin), admin_stores_url %>
+  <%= configurations_sidebar_menu_item I18n.t('spree.stores_admin'), admin_stores_url %>
 <% end %>

@@ -1,13 +1,13 @@
 <%= render :partial => 'spree/admin/shared/configuration_menu' %>
 
 <% content_for :page_title do %>
-  <%= Spree.t(:stores) %>
+  <%= I18n.t('spree.stores') %>
 <% end %>
 
 <% content_for :page_actions do %>
   <% if can?(:create, Spree::Store) %>
     <li>
-      <%= button_link_to Spree.t(:new_store), new_object_url,  :icon => 'icon-plus', :id => 'admin_new_store_link' %>
+      <%= link_to I18n.t('spree.new_store'), new_object_url, :icon => 'icon-plus', :id => 'admin_new_store_link' %>
     </li>
   <% end %>
 <% end %>
@@ -21,10 +21,10 @@
     <col style="width: 15%">
   </colgroup>
   <thead>
-    <th><%= Spree.t(:store_name) %></th>
-    <th><%= Spree.t(:store_code) %></th>
-    <th><%= Spree.t(:send_mails_as) %></th>
-    <th><%= Spree.t(:domains) %></th>
+    <th><%= I18n.t('spree.store_name') %></th>
+    <th><%= I18n.t('spree.store_code') %></th>
+    <th><%= I18n.t('spree.send_mails_as') %></th>
+    <th><%= I18n.t('spree.domains') %></th>
     <th data-hook="admin_stores_index_header_actions" class="actions"></th>
   </thead>
   <tbody>
