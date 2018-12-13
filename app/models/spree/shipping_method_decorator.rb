@@ -1,6 +1,6 @@
 Spree::ShippingMethod.class_eval do
-  has_many :store_shipping_methods
-  has_many :stores, :through => :store_shipping_methods
+  has_many :store_shipping_methods, inverse_of: :shipping_method
+  has_many :stores, through: :store_shipping_methods
 
   # This adds store_match to the list of requirements.
   # This will need to be fixed for Spree 2.0 when split shipments is added
