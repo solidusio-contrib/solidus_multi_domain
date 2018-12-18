@@ -6,7 +6,7 @@ describe Spree::Admin::ProductsController do
   describe "on :index" do
     it "renders index" do
       get :index
-      expect(response).to be_success
+      expect(response).to be_successful
     end
   end
 
