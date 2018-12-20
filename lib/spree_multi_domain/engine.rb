@@ -55,10 +55,5 @@ module SpreeMultiDomain
     initializer 'spree.promo.register.promotions.rules' do |app|
       app.config.spree.promotions.rules << Spree::Promotion::Rules::Store
     end
-
-    # only load store views if solidus < 2.2
-    if SolidusSupport.solidus_gem_version < Gem::Version.new('2.2.x')
-      paths["app/views"] << "lib/views"
-    end
   end
 end
