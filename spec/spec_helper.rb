@@ -32,6 +32,8 @@ require 'cancan/matchers'
 
 Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
 
+FactoryBot.use_parent_strategy = false
+
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.mock_with :rspec
