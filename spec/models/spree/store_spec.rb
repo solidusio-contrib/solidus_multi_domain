@@ -39,4 +39,20 @@ describe Spree::Store do
       expect(store_3.default).to be_falsey
     end
   end
+
+  describe 'associations' do
+    it 'has many shipping methods' do
+      association = described_class.reflect_on_association(:shipping_methods)
+      expect(association.macro).to eq(:has_many)
+    end
+
+    # Regression test for https://github.com/solidusio/solidus/issues/2998
+    it 'is the inverse of store_shipping_method' do
+      association = described_class.reflect_on_association(:store_shipping_methods)
+
+      expect(association.options).to eq({
+        :inverse_of => :store
+      })
+    end
+  end
 end
