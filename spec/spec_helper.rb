@@ -7,11 +7,11 @@ require File.expand_path("../dummy/config/environment.rb",  __FILE__)
 
 require 'rspec/rails'
 require 'ffaker'
-
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
 require 'selenium/webdriver'
+require 'cancan/matchers'
 
 Capybara.register_driver(:selenium_chrome_headless) do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
@@ -27,6 +27,7 @@ end
 
 Capybara.javascript_driver = :selenium_chrome_headless
 Capybara.default_max_wait_time = 10
+FactoryBot.use_parent_strategy = false
 
 # Requires factories defined in spree_core
 require 'spree/testing_support/factories'
@@ -37,12 +38,6 @@ require 'spree/testing_support/preferences'
 require 'spree/api/testing_support/helpers'
 require 'spree/api/testing_support/setup'
 require 'spree/testing_support/capybara_ext'
-
-require 'cancan/matchers'
-
-Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
-
-FactoryBot.use_parent_strategy = false
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
