@@ -1,5 +1,5 @@
-Spree::Core::ControllerHelpers::Order.class_eval do
-  def current_currency
+module OrderControllerHelper
+  def current_pricing_options
     # When using spree_multi_currency the current_currency is stored within session[:currency]
     currency = session[:currency] if session.key?(:currency) && supported_currencies.map(&:iso_code).include?(session[:currency])
     # If there is no session currency fall back to the store default
@@ -9,3 +9,5 @@ Spree::Core::ControllerHelpers::Order.class_eval do
     currency
   end
 end
+
+Spree::Core::ControllerHelpers::Order.prepend(OrderControllerHelper)

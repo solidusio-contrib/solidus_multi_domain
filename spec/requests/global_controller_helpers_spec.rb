@@ -12,8 +12,8 @@ describe "Global controller helpers" do
     expect(controller.current_store).to eq(store)
   end
 
-  describe '.current_currency' do
-    subject { controller.current_currency }
+  describe '.current_pricing_options' do
+    subject { controller.current_pricing_options }
 
     context "when store default_currency is nil" do
       it { is_expected.to eq('USD') }
@@ -43,12 +43,12 @@ describe "Global controller helpers" do
 
       it 'returns supported currencies' do
         allow(controller).to receive(:supported_currencies).and_return([aud, eur, usd])
-        expect(controller.current_currency).to eql('AUD')
+        expect(controller.current_pricing_options).to eql('AUD')
       end
 
       it 'returns store currency if not supported' do
         allow(controller).to receive(:supported_currencies).and_return([eur, usd])
-        expect(controller.current_currency).to eql('EUR')
+        expect(controller.current_pricing_options).to eql('EUR')
       end
     end
   end
