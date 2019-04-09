@@ -1,5 +1,5 @@
-Spree::TaxonsController.class_eval do
-   def show
+module TaxonsControllerDecorator
+  def show
     @taxon = Spree::Taxon.find_by_store_id_and_permalink!(current_store.id, params[:id])
     return unless @taxon
 
@@ -7,4 +7,8 @@ Spree::TaxonsController.class_eval do
     @products = @searcher.retrieve_products
     @taxonomies = get_taxonomies
   end
-end if SpreeMultiDomain::Engine.frontend_available?
+end
+
+if SolidusMultiDomain::Engine.frontend_available?
+  Spree::TaxonsController.prepend(TaxonsControllerDecorator)
+end

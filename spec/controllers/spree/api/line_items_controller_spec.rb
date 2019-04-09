@@ -14,10 +14,10 @@ describe Spree::Api::LineItemsController do
 
     subject { post :create, params: { line_item: line_item, order_id: line_item.order.number } }
 
-    context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
+    context "A SolidusMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
       before(:each) do
         def controller.create
-          raise SpreeMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError
+          raise SolidusMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError
         end
       end
 

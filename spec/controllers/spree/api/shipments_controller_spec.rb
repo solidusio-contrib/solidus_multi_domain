@@ -42,10 +42,10 @@ describe Spree::Api::ShipmentsController do
       stub_authentication!
     end
 
-    context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
+    context "A SolidusMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
       before(:each) do
         def controller.add
-          raise SpreeMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError
+          raise SolidusMultiDomain::LineItemConcerns::ProductDoesNotBelongToStoreError
         end
       end
 

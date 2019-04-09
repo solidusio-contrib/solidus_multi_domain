@@ -2,11 +2,11 @@ module ProductsControllerDecorator
   extend ActiveSupport::Concern
 
   included do
-    prepend(InstanceMethod)
+    prepend(InstanceMethods)
     update.before :set_stores
   end
 
-  module InstanceMethod
+  module InstanceMethods
     private
 
     def set_stores

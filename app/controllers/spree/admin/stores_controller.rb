@@ -2,7 +2,7 @@ module StoresControllerDecorator
   extend ActiveSupport::Concern
 
   included do
-    prepend(InstanceMethod)
+    prepend(InstanceMethods)
     before_action :load_payment_methods
     before_action :load_shipping_methods
 
@@ -17,7 +17,7 @@ module StoresControllerDecorator
     end
   end
 
-  module InstanceMethod
+  module InstanceMethods
     private
 
     def load_payment_methods
