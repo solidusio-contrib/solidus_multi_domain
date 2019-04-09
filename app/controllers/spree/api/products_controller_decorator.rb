@@ -1,3 +1,3 @@
 if SpreeMultiDomain::Engine.api_available?
-  Spree::Api::ProductsController.include(SpreeMultiDomain::ShowProductSupport)
+  Spree::Api::ProductsController.include(SpreeMultiDomain::ProductSupport)
 end

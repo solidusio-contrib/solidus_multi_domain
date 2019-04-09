@@ -1,3 +1,3 @@
 if SpreeMultiDomain::Engine.frontend_available?
-  Spree::ProductsController.include(SpreeMultiDomain::ShowProductSupport)
+  Spree::ProductsController.include(SpreeMultiDomain::ProductSupport)
 end
