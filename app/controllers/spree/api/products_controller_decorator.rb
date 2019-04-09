@@ -1,3 +1,3 @@
-if SpreeMultiDomain::Engine.api_available?
-  Spree::Api::ProductsController.include(SpreeMultiDomain::ShowProductSupport)
+if SolidusMultiDomain::Engine.api_available?
+  Spree::Api::ProductsController.include(SolidusMultiDomain::ShowProductSupport)
 end

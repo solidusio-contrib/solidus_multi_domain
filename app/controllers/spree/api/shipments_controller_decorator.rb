@@ -1,15 +1,11 @@
-module SpreeMultiStore
-  module Api
-    module ShipmentsControllerDecorator
-      def mine
-        super
-        @shipments = @shipments.where(spree_orders: { store_id: current_store.id }) if @shipments
-      end
-    end
+module ShipmentsControllerDecorator
+  def mine
+    super
+    @shipments = @shipments.where(spree_orders: { store_id: current_store.id }) if @shipments
   end
 end
 
-if SpreeMultiDomain::Engine.api_available?
-  Spree::Api::ShipmentsController.prepend(SpreeMultiStore::Api::ShipmentsControllerDecorator)
-  Spree::Api::ShipmentsController.include(SpreeMultiDomain::CreateLineItemSupport)
+if SolidusMultiDomain::Engine.api_available?
+  Spree::Api::ShipmentsController.prepend(ShipmentsControllerDecorator)
+  Spree::Api::ShipmentsController.include(SolidusMultiDomain::LineItemSupport)
 end
