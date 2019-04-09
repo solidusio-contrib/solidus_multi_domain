@@ -72,7 +72,7 @@ Then you can access to your store by going to `http://store1.lvh.me:3000/` in yo
 If you'd like access to Solidus factories for your own tests that work well
 with this extension, add the following to your `spec_helper`:
 ```ruby
-require "spree_multi_domain/testing_support/factory_overrides"
+require "solidus_multi_domain/factories"
 ```
 
 Authorization

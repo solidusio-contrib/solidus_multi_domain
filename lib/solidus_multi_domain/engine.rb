@@ -1,4 +1,4 @@
-module SpreeMultiDomain
+module SolidusMultiDomain
   class Engine < Rails::Engine
     engine_name 'solidus_multi_domain'
 
@@ -13,7 +13,7 @@ module SpreeMultiDomain
         end
 
         Spree::Config.searcher_class = Spree::Search::MultiDomain
-        ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
+        ApplicationController.send :include, SolidusMultiDomain::MultiDomainHelpers
       end
 
       def admin_available?
@@ -27,13 +27,17 @@ module SpreeMultiDomain
       def frontend_available?
         const_defined?('Spree::Frontend::Engine')
       end
+
+      def stores_controller_available?
+        const_defined?('Spree::Admin::Stores')
+      end
     end
 
     config.to_prepare &method(:activate).to_proc
 
     initializer "templates with dynamic layouts" do |app|
-      require 'spree_multi_domain/dynamic_template_renderer'
-      ActionView::TemplateRenderer.prepend(SpreeMultiDomain::DynamicTemplateRenderer)
+      require 'solidus_multi_domain/dynamic_template_renderer'
+      ActionView::TemplateRenderer.prepend(SolidusMultiDomain::DynamicTemplateRenderer)
     end
 
     initializer "current order decoration" do |app|
