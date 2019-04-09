@@ -1,4 +1,4 @@
-module SpreeMultiDomain
+module SolidusMultiDomain
   module DynamicTemplateRenderer
     def find_layout(layout, *args)
       unless api_request?
