@@ -1,12 +1,23 @@
-Spree::Admin::ProductsController.class_eval do
-  update.before :set_stores
+module ProductsControllerDecorator
+  extend ActiveSupport::Concern
 
-  private
+  included do
+    prepend(InstanceMethod)
+    update.before :set_stores
+  end
 
-  def set_stores
-    # Remove all store associations if store data is being passed and no stores are selected
-    if params[:update_store_ids] && !params[:product].key?(:store_ids)
-      @product.stores.clear
+  module InstanceMethod
+    private
+
+    def set_stores
+      # Remove all store associations if store data is being passed and no stores are selected
+      if params[:update_store_ids] && !params[:product].key?(:store_ids)
+        @product.stores.clear
+      end
     end
   end
-end if SpreeMultiDomain::Engine.admin_available?
+end
+
+if SpreeMultiDomain::Engine.admin_available?
+  Spree::Admin::ProductsController.include(ProductsControllerDecorator)
+end
