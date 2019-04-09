@@ -2,7 +2,10 @@ module Spree
   class Promotion
     module Rules
       class Store < PromotionRule
-        has_and_belongs_to_many :stores, :class_name => 'Spree::Store', :join_table => 'spree_promotion_rules_stores', :foreign_key => 'promotion_rule_id'
+        has_and_belongs_to_many :stores,
+                                :class_name => 'Spree::Store',
+                                :join_table => 'spree_promotion_rules_stores',
+                                :foreign_key => 'promotion_rule_id'
 
         def applicable?(promotable)
           promotable.is_a?(Spree::Order)

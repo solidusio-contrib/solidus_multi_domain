@@ -1,1 +1,1 @@
-Spree::LineItem.include(SpreeMultiDomain::LineItemConcerns)
+Spree::LineItem.include(SolidusMultiDomain::LineItemConcerns)
