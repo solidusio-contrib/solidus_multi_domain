@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module SolidusMultiDomain
   module ProductSupport
     extend ActiveSupport::Concern
 
     included do
       prepend(InstanceMethods)
-      before_action :can_show_product, :only => :show
+      before_action :can_show_product, only: :show
     end
 
     module InstanceMethods

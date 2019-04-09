@@ -1,3 +1,9 @@
-Spree::Taxonomy.class_eval do
-  belongs_to :store
+module TaxonomyDecorator
+  extend ActiveSupport::Concern
+
+  included do
+    belongs_to :store
+  end
 end
+
+Spree::Taxonomy.include(TaxonomyDecorator)

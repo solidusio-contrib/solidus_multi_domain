@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module HomeControllerDecorator
   def index
     @searcher = build_searcher(params)
