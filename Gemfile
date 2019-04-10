@@ -19,7 +19,7 @@ else
 end
 
 group :development, :test do
-  gem "pry-rails"
+  gem 'pry-rails'
 
   if branch < "v2.5"
     gem 'factory_bot', '4.10.0'
