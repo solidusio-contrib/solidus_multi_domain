@@ -1,16 +1,23 @@
 require 'spec_helper'
 
 describe Spree::Api::ProductsController, type: :request do
-
   let!(:product) { FactoryBot.create(:product) }
-  let!(:user)  { create(:user, :with_api_key) }
+  let!(:user)  { FactoryBot.create(:user, :with_api_key) }
   let!(:store) { FactoryBot.create(:store) }
 
-  subject {
-    get "/api/products/#{product.to_param}", headers: {
-      'X-Spree-Token' => user.spree_api_key
+  if SolidusSupport.solidus_gem_version < Gem::Version.new('2.8.x')
+    subject {
+      get "/api/products/#{product.to_param}", headers: {
+        'X-Spree-Token' => user.spree_api_key
+      }
     }
-  }
+  else
+    subject {
+      get "/api/products/#{product.to_param}", headers: {
+        'Authorization' => "Bearer #{user.spree_api_key}"
+      }
+    }
+  end
 
   describe :show do
     context 'when the product is not added to the store' do
