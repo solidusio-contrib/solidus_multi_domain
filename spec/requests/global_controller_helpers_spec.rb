@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "Global controller helpers" do
-
-  let!(:store) { FactoryBot.create :store }
+  let!(:store) { create :store }
+  let(:user) { create(:user) }
 
   before(:each) do
     get "http://#{store.url}"
@@ -12,26 +12,25 @@ describe "Global controller helpers" do
     expect(controller.current_store).to eq(store)
   end
 
-  describe '.current_pricing_options' do
-    subject { controller.current_pricing_options }
+  describe '.current_currency' do
+    subject { controller.current_pricing_options.currency }
 
     context "when store default_currency is nil" do
       it { is_expected.to eq('USD') }
     end
 
     context "when the current store default_currency empty" do
-      let!(:store) { FactoryBot.create :store, :default_currency => '' }
+      let!(:store) { create(:store, default_currency: '') }
 
       it { is_expected.to eq('USD') }
     end
 
     context "when the current store default_currency is a currency" do
-      let!(:store) { FactoryBot.create :store, :default_currency => 'EUR' }
+      let!(:store) { create(:store, default_currency: 'EUR') }
       it { is_expected.to eq('EUR') }
     end
 
     context "when session[:currency] set by spree_multi_currency" do
-
       before do
         session[:currency] = 'AUD'
       end
@@ -39,16 +38,15 @@ describe "Global controller helpers" do
       let!(:aud) { ::Money::Currency.find('AUD') }
       let!(:eur) { ::Money::Currency.find('EUR') }
       let!(:usd) { ::Money::Currency.find('USD') }
-      let!(:store) { FactoryBot.create :store, :default_currency => 'EUR' }
+      let!(:store) { create(:store, default_currency: 'EUR') }
 
-      it 'returns supported currencies' do
-        allow(controller).to receive(:supported_currencies).and_return([aud, eur, usd])
-        expect(controller.current_pricing_options).to eql('AUD')
+      it 'returns the session currency' do
+        expect(controller.current_pricing_options.currency).to eql('AUD')
       end
 
-      it 'returns store currency if not supported' do
-        allow(controller).to receive(:supported_currencies).and_return([eur, usd])
-        expect(controller.current_pricing_options).to eql('EUR')
+      it 'returns store currency' do
+        session[:currency] = nil
+        expect(controller.current_pricing_options.currency).to eql('EUR')
       end
     end
   end

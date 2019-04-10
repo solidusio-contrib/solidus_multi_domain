@@ -1,13 +1,26 @@
-module OrderControllerHelper
-  def current_pricing_options
-    # When using spree_multi_currency the current_currency is stored within session[:currency]
-    currency = session[:currency] if session.key?(:currency) && supported_currencies.map(&:iso_code).include?(session[:currency])
-    # If there is no session currency fall back to the store default
-    currency ||= current_store.try(:default_currency)
-    # If there is still no currency fall back to Spree default
-    currency = Spree::Config[:currency] if currency.blank?
-    currency
+module Spree
+  module ControllerHelpers
+    module OrderDecorator
+      def current_order_with_multi_domain(options = {})
+        options[:create_order_if_necessary] ||= false
+        current_order_without_multi_domain(options)
+
+        if @current_order and current_store and @current_order.store.blank?
+          @current_order.update_attribute(:store_id, current_store.id)
+        end
+
+        @current_order
+      end
+
+      def current_pricing_options
+        currency = session[:currency] if session.key?(:currency)
+        currency = current_store.try!(:default_currency).presence || Spree::Config[:currency] if currency.blank?
+
+        Spree::Config.pricing_options_class.new(
+          currency: currency,
+          country_iso: current_store.try!(:cart_tax_country_iso).presence
+        )
+      end
+    end
   end
 end
-
-Spree::Core::ControllerHelpers::Order.prepend(OrderControllerHelper)
