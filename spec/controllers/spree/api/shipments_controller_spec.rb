@@ -2,19 +2,19 @@ require 'spec_helper'
 
 describe Spree::Api::ShipmentsController do
   describe '#mine' do
-    let!(:user) { FactoryBot.create(:user) }
-    let!(:store1) { FactoryBot.create(:store) }
-    let!(:store2) { FactoryBot.create(:store) }
-    let!(:order_from_store1) { FactoryBot.create(:order, store: store1, user: user) }
-    let!(:order_from_store2) { FactoryBot.create(:order, store: store2, user: user) }
+    let!(:user) { create(:user) }
+    let!(:store1) { create(:store) }
+    let!(:store2) { create(:store) }
+    let!(:order_from_store1) { create(:order, store: store1, user: user) }
+    let!(:order_from_store2) { create(:order, store: store2, user: user) }
 
     before(:each) do
       allow(controller).to receive_messages(current_api_user: user)
     end
 
     it 'should return only shipments from the correct store' do
-      FactoryBot.create(:shipment, order: order_from_store1)
-      FactoryBot.create(:shipment, order: order_from_store2)
+      create(:shipment, order: order_from_store1)
+      create(:shipment, order: order_from_store2)
 
       allow(controller).to receive_messages(current_store: store1)
       controller.mine

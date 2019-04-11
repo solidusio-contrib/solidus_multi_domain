@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe Spree::ProductsController do
-
-  let!(:product) { FactoryBot.create(:product) }
+  let!(:product) { create(:product) }
 
   describe 'on :show to a product without any stores' do
-    let!(:store) { FactoryBot.create(:store) }
+    let!(:store) { create(:store) }
 
     it 'returns 404' do
       if SolidusSupport.solidus_gem_version < Gem::Version.new('2.5.x')
@@ -21,8 +20,8 @@ describe Spree::ProductsController do
 
   # Regression test for #75
   describe 'on :show to a product in the wrong store' do
-    let!(:store_1) { FactoryBot.create(:store) }
-    let!(:store_2) { FactoryBot.create(:store) }
+    let!(:store_1) { create(:store) }
+    let!(:store_2) { create(:store) }
 
     before(:each) do
       product.stores << store_1
@@ -43,7 +42,7 @@ describe Spree::ProductsController do
   end
 
   describe 'on :show to a product w/ store' do
-    let!(:store) { FactoryBot.create(:store) }
+    let!(:store) { create(:store) }
 
     before(:each) do
       product.stores << store
