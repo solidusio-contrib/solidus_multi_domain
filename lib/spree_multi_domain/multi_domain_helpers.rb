@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpreeMultiDomain
   module MultiDomainHelpers
     extend ActiveSupport::Concern

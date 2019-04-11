@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree::Search
   class MultiDomain < Spree::Core::Search::Base
     def get_base_scope

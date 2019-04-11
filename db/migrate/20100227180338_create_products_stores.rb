@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateProductsStores < SolidusSupport::Migration[4.2]
   def self.up
     create_table :products_stores, :id => false do |t|

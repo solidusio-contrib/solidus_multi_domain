@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Spree::ShippingMethod.class_eval do
   has_many :store_shipping_methods
   has_many :stores, :through => :store_shipping_methods
