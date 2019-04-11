@@ -4,6 +4,20 @@ module SolidusMultiDomain
 
     config.autoload_paths += %W(#{config.root}/lib)
 
+    initializer "templates with dynamic layouts" do |app|
+      require 'solidus_multi_domain/dynamic_template_renderer'
+      ActionView::TemplateRenderer.prepend(SolidusMultiDomain::DynamicTemplateRenderer)
+    end
+
+    initializer "current order decoration" do |app|
+      require 'spree/core/controller_helpers/order'
+      ::Spree::Core::ControllerHelpers::Order.prepend(Spree::ControllerHelpers::OrderDecorator)
+    end
+
+    initializer 'spree.promo.register.promotions.rules' do |app|
+      app.config.spree.promotions.rules << Spree::Promotion::Rules::Store
+    end
+
     class << self
       def activate
         ['app', 'lib'].each do |dir|
@@ -13,7 +27,7 @@ module SolidusMultiDomain
         end
 
         Spree::Config.searcher_class = Spree::Search::MultiDomain
-        ApplicationController.send :include, SolidusMultiDomain::MultiDomainHelpers
+        ApplicationController.send(:include, SolidusMultiDomain::MultiDomainHelpers)
       end
 
       def admin_available?
@@ -34,30 +48,5 @@ module SolidusMultiDomain
     end
 
     config.to_prepare &method(:activate).to_proc
-
-    initializer "templates with dynamic layouts" do |app|
-      require 'solidus_multi_domain/dynamic_template_renderer'
-      ActionView::TemplateRenderer.prepend(SolidusMultiDomain::DynamicTemplateRenderer)
-    end
-
-    initializer "current order decoration" do |app|
-      require 'spree/core/controller_helpers/order'
-      ::Spree::Core::ControllerHelpers::Order.prepend(Module.new do
-        def current_order_with_multi_domain(options = {})
-          options[:create_order_if_necessary] ||= false
-          current_order_without_multi_domain(options)
-
-          if @current_order and current_store and @current_order.store.blank?
-            @current_order.update_attribute(:store_id, current_store.id)
-          end
-
-          @current_order
-        end
-      end)
-    end
-
-    initializer 'spree.promo.register.promotions.rules' do |app|
-      app.config.spree.promotions.rules << Spree::Promotion::Rules::Store
-    end
   end
 end
