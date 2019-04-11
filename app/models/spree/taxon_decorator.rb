@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TaxonDecorator
   extend ActiveSupport::Concern
 

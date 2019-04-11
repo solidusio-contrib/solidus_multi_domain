@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Spree::LineItem do
   describe "before create" do
-
     let(:order_store) { create(:store) }
     let(:other_store) { create(:store) }
     let(:order)       { create(:order, store: order_store) }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ProductDecorator
   extend ActiveSupport::Concern
 

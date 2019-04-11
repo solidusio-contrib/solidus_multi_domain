@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   class StoreShippingMethod < ActiveRecord::Base
     belongs_to :store

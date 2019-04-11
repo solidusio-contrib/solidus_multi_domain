@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Spree
   module Search
     class MultiDomain < Spree::Core::Search::Base

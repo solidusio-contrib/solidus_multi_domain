@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusMultiDomain
   module MultiDomainHelpers
     extend ActiveSupport::Concern
