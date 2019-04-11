@@ -3,9 +3,9 @@ require 'spec_helper'
 module Spree
   describe ProductsHelper do
     before(:each) do
-      @store     = FactoryBot.create(:store)
-      @taxonomy  = FactoryBot.create(:taxonomy, :store => @store)
-      @taxonomy2 = FactoryBot.create(:taxonomy)
+      @store = create(:store)
+      @taxonomy = create(:taxonomy, :store => @store)
+      @taxonomy2 = create(:taxonomy)
 
       allow(helper).to receive(:current_store) { @store }
     end

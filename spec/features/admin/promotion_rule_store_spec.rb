@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-RSpec.describe "Store promotion rule", js: true do
+describe "Store promotion rule", js: true do
   stub_authorization!
 
   let!(:store) { create(:store, name: "Real fake doors") }
