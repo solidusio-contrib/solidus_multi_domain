@@ -42,18 +42,7 @@ module SolidusMultiDomain
 
     initializer "current order decoration" do |app|
       require 'spree/core/controller_helpers/order'
-      ::Spree::Core::ControllerHelpers::Order.prepend(Module.new do
-        def current_order_with_multi_domain(options = {})
-          options[:create_order_if_necessary] ||= false
-          current_order_without_multi_domain(options)
-
-          if @current_order and current_store and @current_order.store.blank?
-            @current_order.update_attribute(:store_id, current_store.id)
-          end
-
-          @current_order
-        end
-      end)
+      ::Spree::Core::ControllerHelpers::Order.prepend(Spree::ControllerHelpers::OrderDecorator)
     end
 
     initializer 'spree.promo.register.promotions.rules' do |app|
