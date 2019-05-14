@@ -9,5 +9,5 @@ end
 
 if SolidusMultiDomain::Engine.api_available?
   Spree::Api::ShipmentsController.prepend(ShipmentsControllerDecorator)
-  Spree::Api::ShipmentsController.include(SolidusMultiDomain::LineItemSupport)
+  Spree::Api::ShipmentsController.include(SolidusMultiDomain::CreateLineItemSupport)
 end
