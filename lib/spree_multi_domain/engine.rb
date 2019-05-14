@@ -27,6 +27,10 @@ module SpreeMultiDomain
       def frontend_available?
         const_defined?('Spree::Frontend::Engine')
       end
+
+      def stores_controller_available?
+        const_defined?('Spree::Admin::Stores')
+      end
     end
 
     config.to_prepare &method(:activate).to_proc
