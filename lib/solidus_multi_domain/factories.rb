@@ -1,3 +1,5 @@
+require 'spree/testing_support/factories/line_item_factory'
+
 FactoryBot.modify do
   # Products need to belong to the same store as the order.
   factory :line_item do
