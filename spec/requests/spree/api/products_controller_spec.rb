@@ -7,9 +7,15 @@ describe Spree::Api::ProductsController, type: :request do
   let!(:store) { FactoryBot.create(:store) }
 
   subject {
-    get "/api/products/#{product.to_param}", headers: {
-      'X-Spree-Token' => user.spree_api_key
-    }
+    if SolidusSupport.solidus_gem_version < Gem::Version.new('2.8.x')
+      get "/api/products/#{product.to_param}", headers: {
+        'X-Spree-Token' => user.spree_api_key
+      }
+    else
+      get "/api/products/#{product.to_param}", headers: {
+        'Authorization' => "Bearer #{user.spree_api_key}"
+      }
+    end
   }
 
   describe :show do
