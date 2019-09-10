@@ -1,11 +1,11 @@
 Multi Domain Store
 ==================
 
+[![CircleCI](https://circleci.com/gh/solidusio-contrib/solidus_multi_domain.svg?style=svg)](https://circleci.com/gh/solidusio-contrib/solidus_multi_domain)
+
 This extension allows a single Solidus instance to have several customer facing
 stores, with a single shared backend administration system (i.e. multi-store,
 single-vendor).
-
-[![Build Status](https://travis-ci.org/solidusio/solidus_multi_domain.svg?branch=master)](https://travis-ci.org/solidusio/solidus_multi_domain)
 
 Current features:
 ------------------
