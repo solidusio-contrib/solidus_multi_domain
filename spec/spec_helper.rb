@@ -11,16 +11,12 @@ require 'ffaker'
 require 'database_cleaner'
 require 'capybara/rspec'
 require 'capybara-screenshot/rspec'
-require 'capybara/poltergeist'
-Capybara.register_driver(:poltergeist) do |app|
-  Capybara::Poltergeist::Driver.new app, timeout: 90
-end
-Capybara.javascript_driver = :poltergeist
-Capybara.default_max_wait_time = 10
+require 'webdrivers'
+require 'cancan/matchers'
 
-# Requires factories defined in spree_core
 require 'spree/testing_support/factories'
 require 'spree_multi_domain/testing_support/factory_overrides'
+
 require 'spree/testing_support/controller_requests'
 require 'spree/testing_support/authorization_helpers'
 require 'spree/testing_support/preferences'
@@ -28,7 +24,7 @@ require 'spree/api/testing_support/helpers'
 require 'spree/api/testing_support/setup'
 require 'spree/testing_support/capybara_ext'
 
-require 'cancan/matchers'
+require 'solidus_support/extension/feature_helper'
 
 Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
 
