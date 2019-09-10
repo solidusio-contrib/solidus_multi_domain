@@ -1,6 +1,13 @@
 module SpreeMultiDomain
   module ActionView
     module TemplateRendererDecorator
+      if Rails.gem_version >= Gem::Version.new('6.0.0')
+        def render_template(view, template, layout_name, locals)
+          @view = view
+          super
+        end
+      end
+
       def find_layout(layout, *args)
         unless api_request?
           if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
