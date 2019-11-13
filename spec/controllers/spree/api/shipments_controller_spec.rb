@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Spree::Api::ShipmentsController do
@@ -8,11 +10,11 @@ describe Spree::Api::ShipmentsController do
     let!(:order_from_store1) { FactoryBot.create(:order, store: store1, user: user) }
     let!(:order_from_store2) { FactoryBot.create(:order, store: store2, user: user) }
 
-    before(:each) do
+    before do
       allow(controller).to receive_messages(current_api_user: user)
     end
 
-    it 'should return only shipments from the correct store' do
+    it 'returns only shipments from the correct store' do
       FactoryBot.create(:shipment, order: order_from_store1)
       FactoryBot.create(:shipment, order: order_from_store2)
 
@@ -31,19 +33,18 @@ describe Spree::Api::ShipmentsController do
   end
 
   describe "PUT add" do
+    subject { put :add, params: { variant_id: variant.id, id: shipment.number, quantity: 1 } }
 
     let(:current_api_user) { create(:admin_user) }
     let(:shipment) { create(:shipment) }
     let(:variant) { create(:variant) }
 
-    subject { put :add, params: { variant_id: variant.id, id: shipment.number, quantity: 1 } }
-
-    before(:each) do
+    before do
       stub_authentication!
     end
 
     context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
-      before(:each) do
+      before do
         def controller.add
           raise SpreeMultiDomain::ProductDoesNotBelongToStoreError
         end

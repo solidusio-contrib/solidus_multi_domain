@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 module Spree
   describe ProductsHelper do
-    before(:each) do
+    before do
       @store     = FactoryBot.create(:store)
       @taxonomy  = FactoryBot.create(:taxonomy, store: @store)
       @taxonomy2 = FactoryBot.create(:taxonomy, store: FactoryBot.create(:store))
@@ -15,7 +17,7 @@ module Spree
         taxonomies = helper.get_taxonomies
 
         expect(taxonomies).to include(@taxonomy)
-        expect(taxonomies).to_not include(@taxonomy2)
+        expect(taxonomies).not_to include(@taxonomy2)
       end
     end
   end

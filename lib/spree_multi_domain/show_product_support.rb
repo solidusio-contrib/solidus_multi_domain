@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module SpreeMultiDomain
   module ShowProductSupport
     def self.prepended(base)
       base.class_eval do
-        before_action :can_show_product, :only => :show
+        before_action :can_show_product, only: :show
       end
     end
 

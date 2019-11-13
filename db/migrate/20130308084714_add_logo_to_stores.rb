@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddLogoToStores < SolidusSupport::Migration[4.2]
   def self.up
     change_table :spree_stores do |t|

@@ -1,4 +1,4 @@
-# encoding: UTF-8
+# frozen_string_literal: true
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
@@ -11,18 +11,18 @@ Gem::Specification.new do |s|
   s.author       = 'Solidus Team'
   s.email        = 'contact@solidus.io'
   s.homepage     = 'https://solidus.io'
-  s.license      = %q{BSD-3}
+  s.license      = 'BSD-3'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
+  s.add_dependency 'deface', '~> 1.0'
   s.add_dependency 'solidus', ['>= 1.1', '< 3']
   s.add_dependency 'solidus_support'
-  s.add_dependency 'deface', '~> 1.0'
 
-  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'coffee-rails'
+  s.add_development_dependency 'sass-rails'
   s.add_development_dependency 'solidus_extension_dev_tools'
 end

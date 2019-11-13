@@ -1,15 +1,16 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Spree::LineItem do
   describe "before create" do
+    subject { line_item.save! }
 
     let(:order_store) { create(:store) }
     let(:other_store) { create(:store) }
     let(:order)       { create(:order, store: order_store) }
     let(:variant)     { create(:variant, product: product) }
     let(:line_item)   { build(:line_item, order: order, product: product) }
-
-    subject { line_item.save! }
 
     context "the order does not have a store" do
       before do
@@ -19,11 +20,12 @@ describe Spree::LineItem do
         end
       end
 
-      before(:each) { order.update_attributes(store_id: nil) }
-      let(:product) { create(:product, stores: [order_store])}
+      before { order.update(store_id: nil) }
+
+      let(:product) { create(:product, stores: [order_store]) }
 
       it 'does not raise an error' do
-        expect{ subject }.to_not raise_error
+        expect{ subject }.not_to raise_error
       end
     end
 
@@ -36,10 +38,10 @@ describe Spree::LineItem do
     end
 
     context "the line item's product belongs to the order's store" do
-      let(:product) { create(:product, stores: [order_store])}
+      let(:product) { create(:product, stores: [order_store]) }
 
       it "does not raise an error" do
-        expect{ subject }.to_not raise_error
+        expect{ subject }.not_to raise_error
       end
     end
   end
