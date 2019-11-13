@@ -19,4 +19,3 @@ class AddStoreShippingMethods < SolidusSupport::Migration[4.2]
     drop_table :spree_store_shipping_methods
   end
 end
-

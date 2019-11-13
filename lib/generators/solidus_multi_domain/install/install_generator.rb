@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SolidusMultiDomain
   module Generators
     class InstallGenerator < Rails::Generators::Base
@@ -12,7 +14,7 @@ module SolidusMultiDomain
       end
 
       def run_migrations
-        run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask 'Would you like to run the migrations now? [Y/n]')
+        run_migrations = options[:auto_run_migrations] || ['', 'y', 'Y'].include?(ask('Would you like to run the migrations now? [Y/n]'))
         if run_migrations
           run 'bundle exec rake db:migrate'
         else

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class RemoveDatetimeColumnsFromProductsStores < SolidusSupport::Migration[4.2]
   def self.up
     change_table :products_stores do |t|
@@ -6,8 +8,6 @@ class RemoveDatetimeColumnsFromProductsStores < SolidusSupport::Migration[4.2]
   end
 
   def self.down
-    change_table :products_stores do |t|
-      t.timestamps
-    end
+    change_table :products_stores, &:timestamps
   end
 end

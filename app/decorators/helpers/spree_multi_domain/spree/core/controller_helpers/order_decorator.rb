@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpreeMultiDomain
   module Spree
     module Core
@@ -19,7 +21,7 @@ module SpreeMultiDomain
                 options[:create_order_if_necessary] ||= false
                 current_order_without_multi_domain(options)
 
-                if @current_order and current_store and @current_order.store.blank?
+                if @current_order && current_store && @current_order.store.blank?
                   @current_order.update_attribute(:store_id, current_store.id)
                 end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpreeMultiDomain
   module ActionView
     module TemplateRendererDecorator
@@ -12,9 +14,9 @@ module SpreeMultiDomain
         unless api_request?
           if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
             store_layout = if layout.is_a?(String)
-              layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
-            else
-              layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
+                             layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+                           else
+                             layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
             end
 
             begin

@@ -1,31 +1,11 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+# frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
 
-require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require 'solidus_extension_dev_tools/rspec/coverage'
 
-require 'solidus_support/extension/feature_helper'
+require File.expand_path('dummy/config/environment.rb', __dir__)
 
-require 'capybara/rspec'
-require 'cancan/matchers'
+require 'solidus_extension_dev_tools/rspec/feature_helper'
 
-require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/capybara_ext'
-require 'spree/api/testing_support/setup'
-require 'spree/api/testing_support/helpers'
-
-require 'spree_multi_domain/testing_support/factory_overrides'
-
-Dir[File.join(File.dirname(__FILE__), "support/**/*.rb")].each { |f| require f }
-
-FactoryBot.use_parent_strategy = false
-
-RSpec.configure do |config|
-  config.infer_spec_type_from_file_location!
-  config.use_transactional_fixtures = false
-
-  config.include Spree::TestingSupport::ControllerRequests, type: :controller
-  config.include Spree::Api::TestingSupport::Helpers, type: :controller
-end
+Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }

@@ -1,21 +1,22 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Spree::Api::LineItemsController do
-
-  before(:each) do
+  before do
     stub_authentication!
   end
 
   describe "POST create" do
+    subject { post :create, params: { line_item: line_item, order_id: line_item.order.number } }
+
     let(:user) { create(:user) }
     let(:current_api_user) { user }
     let(:order) { create(:order, user: user) }
     let(:line_item) { build(:line_item, order: order) }
 
-    subject { post :create, params: { line_item: line_item, order_id: line_item.order.number } }
-
     context "A SpreeMultiDomain::LineItemDecorator::ProductDoesNotBelongToStoreError is raised" do
-      before(:each) do
+      before do
         def controller.create
           raise SpreeMultiDomain::ProductDoesNotBelongToStoreError
         end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SpreeMultiDomain
   class Engine < Rails::Engine
     engine_name 'solidus_multi_domain'
@@ -13,7 +15,7 @@ module SpreeMultiDomain
         end
 
         ::Spree::Config.searcher_class = ::Spree::Search::MultiDomain
-        ApplicationController.send :include, SpreeMultiDomain::MultiDomainHelpers
+        ApplicationController.include SpreeMultiDomain::MultiDomainHelpers
       end
 
       def admin_available?
