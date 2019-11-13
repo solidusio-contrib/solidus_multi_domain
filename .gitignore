@@ -32,3 +32,4 @@ Gemfile.lock
 .ruby-version
 .ruby-gemset
 pkg
+spec/examples.txt

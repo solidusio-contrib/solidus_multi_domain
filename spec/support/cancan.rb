@@ -1,0 +1,2 @@
+
+require 'cancan/matchers'
