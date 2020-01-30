@@ -46,7 +46,7 @@ Install Instructions
 Add to your Gemfile:
 
 ```ruby
-gem "solidus_multi_domain"
+gem 'solidus_multi_domain', github: 'solidusio/solidus_multi_domain', branch: 'master'
 ```
 
 Then run from the command line:
