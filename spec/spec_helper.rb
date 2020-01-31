@@ -21,4 +21,5 @@ require 'solidus_multi_domain/factories'
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
+  config.include Devise::Test::ControllerHelpers, type: :controller
 end
