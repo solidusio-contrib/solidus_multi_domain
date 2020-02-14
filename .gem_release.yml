@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_multi_domain/version.rb'
+  message: Bump SolidusMultiDomain to %{version}
+  tag: true

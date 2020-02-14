@@ -1,28 +1,39 @@
 # frozen_string_literal: true
 
-Gem::Specification.new do |s|
-  s.platform    = Gem::Platform::RUBY
-  s.name        = 'solidus_multi_domain'
-  s.version     = '2.0.0.alpha'
-  s.summary     = 'Adds multiple site support to Solidus'
-  s.description = 'Multiple Solidus stores on different domains - single unified backed for processing orders.'
-  s.required_ruby_version = '>= 2.1'
+require_relative 'lib/solidus_multi_domain/version'
 
-  s.author       = 'Solidus Team'
-  s.email        = 'contact@solidus.io'
-  s.homepage     = 'https://solidus.io'
-  s.license      = 'BSD-3'
+Gem::Specification.new do |spec|
+  spec.name = 'solidus_multi_domain'
+  spec.version = SolidusMultiDomain::VERSION
+  spec.authors = ['Solidus Team']
+  spec.email = 'contact@solidus.io'
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.require_path = 'lib'
-  s.requirements << 'none'
+  spec.summary = 'Adds multiple site support to Solidus'
+  spec.description = 'Multiple Solidus stores on different domains - single unified backed for processing orders.'
+  spec.homepage = 'https://github.com/solidusio-contrib/solidus_multi_domain#readme'
+  spec.license = 'BSD-3-Clause'
 
-  s.add_dependency 'deface', '~> 1.0'
-  s.add_dependency 'solidus', ['>= 1.1', '< 3']
-  s.add_dependency 'solidus_support'
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/solidusio-contrib/solidus_multi_domain'
+  spec.metadata['changelog_uri'] = 'https://github.com/solidusio-contrib/solidus_multi_domain/releases'
 
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'solidus_extension_dev_tools'
+  spec.required_ruby_version = Gem::Requirement.new('~> 2.4')
+
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  files = Dir.chdir(__dir__) { `git ls-files -z`.split("\x0") }
+
+  spec.files = files.grep_v(%r{^(test|spec|features)/})
+  spec.test_files = files.grep(%r{^(test|spec|features)/})
+  spec.bindir = "exe"
+  spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_dependency 'deface', '~> 1.0'
+  spec.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']
+  spec.add_dependency 'solidus_support', '~> 0.4.0'
+
+  spec.add_development_dependency 'coffee-rails'
+  spec.add_development_dependency 'sass-rails'
+  spec.add_development_dependency 'solidus_dev_support'
 end

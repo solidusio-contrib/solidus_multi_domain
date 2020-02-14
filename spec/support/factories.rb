@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
-require 'spree_multi_domain/testing_support/factory_overrides'
+require 'solidus_multi_domain/factories'
 
 FactoryBot.use_parent_strategy = false

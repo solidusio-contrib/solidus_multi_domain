@@ -1,8 +1,18 @@
 #!/usr/bin/env ruby
+
 # frozen_string_literal: true
 
-ENGINE_ROOT = File.expand_path('..', __dir__)
-ENGINE_PATH = File.expand_path('../lib/spree_multi_domain/engine', __dir__)
+app_root = 'sandbox'
 
-require 'rails/all'
-require 'rails/engine/commands'
+unless File.exist? "#{app_root}/bin/rails"
+  warn 'Creating the sandbox app...'
+  Dir.chdir "#{__dir__}/.." do
+    system "#{__dir__}/sandbox" or begin # rubocop:disable Style/AndOr
+      warn 'Automatic creation of the sandbox app failed'
+      exit 1
+    end
+  end
+end
+
+Dir.chdir app_root
+exec 'bin/rails', *ARGV
