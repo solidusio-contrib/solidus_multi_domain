@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'deface', '~> 1.0'
   spec.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']
-  spec.add_dependency 'solidus_support', '~> 0.4.0'
+  spec.add_dependency 'solidus_support', '>= 0.4', '< 0.6'
 
   spec.add_development_dependency 'coffee-rails'
   spec.add_development_dependency 'sass-rails'
