@@ -31,4 +31,4 @@ gemspec
 
 # Use a local Gemfile to include development dependencies that might not be
 # relevant for the project or for other contributors, e.g.: `gem 'pry-debug'`.
-send :send :eval_gemfile,, 'Gemfile-local' if File.exist? 'Gemfile-local'
+send :eval_gemfile, 'Gemfile-local' if File.exist? 'Gemfile-local'
