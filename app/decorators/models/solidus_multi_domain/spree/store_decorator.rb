@@ -21,8 +21,27 @@ module SolidusMultiDomain
             path: ':rails_root/public/spree/stores/:id/:style/:basename.:extension',
             convert_options: { all: '-strip -auto-orient' }
 
-          validates_attachment_file_name :logo, matches: [/png\Z/i, /jpe?g\Z/i],
-                                                if: -> { respond_to?(:logo_file_name) }
+          validates_attachment_content_type :logo,
+            presence: true,
+            content_type: %w[image/jpeg
+                             image/jpg
+                             image/gif
+                             image/png]
+          def logo_original
+            return logo.url unless logo.nil?
+          end
+
+          def logo_mini
+            return logo.url(:mini) unless logo.nil?
+          end
+
+          def logo_small
+            return logo.url(:small) unless logo.nil?
+          end
+
+          def logo_medium
+            return logo.url(:medium) unless logo.nil?
+          end
         end
       end
 
