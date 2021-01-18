@@ -1,0 +1,25 @@
+es:
+  spree:
+    back_to_store_list: Volver a la lista de la tienda
+    default_currency: Divisa por defecto
+    errors:
+      products_from_different_stores_may_not_be_added_to_this_order: No se pueden añadir productos de diferentes tiendas a este pedido.
+    send_mail_as: Envía el email como
+    logo: Logo
+    shipping_method: Método de Envío
+    store: Tienda
+    stores: Tiendas
+    new_store: Nueva tienda
+    domains: Dominios
+    stores_admin: Tiendas & Dominios
+    manage_stores: Configurar múltiples tiendas y nombres de dominio asociados
+    editing_store: Editar una tienda
+    default: Por defecto
+    store_name: Nombre
+    store_code: Código
+    promotion_rule_types:
+      store:
+        name: Tienda
+        description: La tienda debe coincidir con una de la lista
+    store_rule:
+      choose_stores: Elegir las tiendas

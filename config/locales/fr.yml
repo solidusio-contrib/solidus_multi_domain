@@ -1,9 +1,14 @@
 fr:
-  store: Boutique
-  stores: Boutiques
-  new_store: Nouvelle Boutique
-  domains: Domaines
-  stores_admin: "Boutiques & Domaines"
-  manage_stores: Configurer les boutiques et les domaines associés
-  editing_store: Modifier une boutique
-  default: Defaut
+  spree:
+    default_currency: Default Currency
+    logo: Logo
+    store: Boutique
+    stores: Boutiques
+    new_store: Nouvelle Boutique
+    domains: Domaines
+    stores_admin: "Boutiques & Domaines"
+    manage_stores: Configurer les boutiques et les domaines associés
+    editing_store: Modifier une boutique
+    default: Defaut
+    store_name: Nom
+    store_code: Code

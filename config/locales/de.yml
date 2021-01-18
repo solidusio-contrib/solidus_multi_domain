@@ -1,0 +1,25 @@
+de:
+  spree:
+    back_to_store_list: Zurück zu Shop List
+    default_currency: Standardwährung
+    errors:
+      products_from_different_stores_may_not_be_added_to_this_order: Produkte aus anderen Shops dürfen nicht zu dieser Bestellung hinzugefügt werden.
+    send_mail_as: E-Mail senden als
+    logo: Logo
+    shipping_method: Versandart
+    store: Shop
+    stores: Shops
+    new_store: Neuer Shop
+    domains: Domänen
+    stores_admin: Shops & Domänen
+    manage_stores: Konfigurieren mehrerer Shops und zugehöriger Domainnamen
+    editing_store: Shop bearbeiten
+    default: Standard
+    store_name: Name
+    store_code: Code
+    promotion_rule_types:
+      store:
+        name: Shop
+        description: Shop muss mit einem aus der Liste übereinstimmen
+    store_rule:
+      choose_stores: Shops auswählen
