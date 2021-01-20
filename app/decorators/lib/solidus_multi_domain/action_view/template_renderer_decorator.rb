@@ -11,22 +11,23 @@ module SolidusMultiDomain
       end
 
       def find_layout(layout, *args)
-        unless api_request?
-          if @view.respond_to?(:current_store) && @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
-            store_layout = if layout.is_a?(String)
-                             layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
-                           else
-                             layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
-            end
+        return if api_request?
 
-            begin
-              super(store_layout, *args)
-            rescue ::ActionView::MissingTemplate
-              super(layout, *args)
-            end
-          else
+        if @view.respond_to?(:current_store) && layout.present? &&
+           @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
+          store_layout = if layout.is_a?(String)
+                           layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+                         else
+                           layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
+                         end
+
+          begin
+            super(store_layout, *args)
+          rescue ::ActionView::MissingTemplate
             super(layout, *args)
           end
+        else
+          super(layout, *args)
         end
       end
 
