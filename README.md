@@ -46,7 +46,7 @@ Installation
 Add solidus_multi_domain to your Gemfile:
 
 ```ruby
-gem 'solidus_multi_domain'
+gem 'solidus_multi_domain', github: 'solidusio-contrib/solidus_multi_domain'
 ```
 
 Bundle your dependencies and run the installation generator:
