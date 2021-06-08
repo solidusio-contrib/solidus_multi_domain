@@ -22,9 +22,4 @@ RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.before type: :feature do
-    # There's a CORB error without this.
-    # Ref: https://github.com/twalpole/apparition/issues/29
-    Capybara.current_session.driver.headers = {}
-  end
 end
