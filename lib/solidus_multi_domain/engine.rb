@@ -16,6 +16,15 @@ module SolidusMultiDomain
     end
 
     def self.activate
+      # Previous versions of solidus has the multi domain store selection
+      # logic directly in core (called Spree::Core::CurrentStore or
+      # Spree::CurrentStoreSelector). As long as Spree::Config responds to
+      # current_store_selector_class we can use the new domain selector
+      # class safely.
+      if ::Spree::Config.respond_to?(:current_store_selector_class)
+        ::Spree::Config.current_store_selector_class = ::Spree::StoreSelector::Legacy
+      end
+
       ::Spree::Config.searcher_class = ::Spree::Search::MultiDomain
       ApplicationController.include SolidusMultiDomain::MultiDomainHelpers
     end
