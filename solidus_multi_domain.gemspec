@@ -17,7 +17,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/solidusio-contrib/solidus_multi_domain'
   spec.metadata['changelog_uri'] = 'https://github.com/solidusio-contrib/solidus_multi_domain/releases'
 
-  spec.required_ruby_version = Gem::Requirement.new('~> 2.4')
+  spec.required_ruby_version = Gem::Requirement.new('>= 2.4')
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
