@@ -15,16 +15,11 @@ require 'solidus_dev_support/rspec/feature_helper'
 # in spec/support/ and its subdirectories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
-# Requires factories defined in lib/solidus_multi_domain/factories.rb
-require 'solidus_multi_domain/factories'
+# Requires factories defined in lib/solidus_multi_domain/testing_support/factories.rb
+SolidusDevSupport::TestingSupport::Factories.load_for(SolidusMultiDomain::Engine)
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
   config.include Devise::Test::ControllerHelpers, type: :controller
-  config.before type: :feature do
-    # There's a CORB error without this.
-    # Ref: https://github.com/twalpole/apparition/issues/29
-    Capybara.current_session.driver.headers = {}
-  end
 end

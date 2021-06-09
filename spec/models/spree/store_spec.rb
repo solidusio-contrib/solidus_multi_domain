@@ -7,26 +7,6 @@ describe Spree::Store do
   let!(:store_2)       { FactoryBot.create(:store, code: 'STORE2', url: 'freethewhales.com') }
   let!(:store_3)       { FactoryBot.create(:store, code: 'STORE3', url: "website1.com\nwww.subdomain.com") }
 
-  it "finds stores by url" do
-    by_url = described_class.by_url('www.subdomain.com')
-
-    expect(by_url).to include(store_3)
-    expect(by_url).not_to include(default_store)
-    expect(by_url).not_to include(store_2)
-  end
-
-  it "finds the current store by url" do
-    current_store = described_class.current('website1.com')
-
-    expect(current_store) == store_3
-  end
-
-  it "finds the current store by code" do
-    current_store = described_class.current('STORE2')
-
-    expect(current_store) == store_2
-  end
-
   describe "default" do
     it "ensures there is a default if one doesn't exist yet" do
       expect(default_store.default).to be_truthy

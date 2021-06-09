@@ -22,10 +22,6 @@ module SolidusMultiDomain
 
     config.to_prepare &method(:activate).to_proc
 
-    initializer 'spree.promo.register.promotions.rules' do |app|
-      app.config.spree.promotions.rules << ::Spree::Promotion::Rules::Store
-    end
-
     def self.admin_available?
       const_defined?('::Spree::Backend::Engine')
     end
