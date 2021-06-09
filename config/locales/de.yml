@@ -17,9 +17,5 @@ de:
     default: Standard
     store_name: Name
     store_code: Code
-    promotion_rule_types:
-      store:
-        name: Shop
-        description: Shop muss mit einem aus der Liste übereinstimmen
     store_rule:
       choose_stores: Shops auswählen

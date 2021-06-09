@@ -17,9 +17,5 @@ es:
     default: Por defecto
     store_name: Nombre
     store_code: Código
-    promotion_rule_types:
-      store:
-        name: Tienda
-        description: La tienda debe coincidir con una de la lista
     store_rule:
       choose_stores: Elegir las tiendas
