@@ -1,4 +1,4 @@
 <p>
-  <label><%= Spree.t(:store) %></label><br />
+  <label><%= I18n.t('spree.store') %></label><br />
   <%= f.select :stores_id_eq, Spree::Store.all.collect {|s| [s.name, s.id ] }, {:include_blank => true} %></p>
 </p>
