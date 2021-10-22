@@ -1,0 +1,21 @@
+it:
+  spree:
+    back_to_store_list: Torna alla lista Negozi
+    default_currency: Valuta predefinita
+    errors:
+      products_from_different_stores_may_not_be_added_to_this_order: "Non &egrave; possibile aggiungere a questo ordine prodotti da negozi differenti."
+    send_mail_as: Invia Mail come
+    logo: Logo
+    shipping_method: Metodo di Spedizione
+    store: Negozio
+    stores: Negozi
+    new_store: Nuovo Negozio
+    domains: Domini
+    stores_admin: "Negozi & Domini"
+    manage_stores: "Configura pi&ugrave; negozi e nomi a dominio associati"
+    editing_store: Modifica Negozio
+    default: predefinito
+    store_name: Nome
+    store_code: Codice
+    store_rule:
+      choose_stores: "Seleziona Negozio"
