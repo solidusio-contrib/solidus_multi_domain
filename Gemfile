@@ -3,8 +3,8 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-branch = ENV.fetch('SOLIDUS_BRANCH', 'master')
-solidus_git, solidus_frontend_git = if (branch == 'master') || (branch >= 'v3.2')
+branch = ENV.fetch('SOLIDUS_BRANCH', 'main')
+solidus_git, solidus_frontend_git = if (branch == 'main') || (branch >= 'v3.2')
                                       %w[solidusio/solidus solidusio/solidus_frontend]
                                     else
                                       %w[solidusio/solidus] * 2
