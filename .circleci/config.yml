@@ -9,11 +9,15 @@ orbs:
 
 jobs:
   run-specs-with-postgres:
-    executor: solidusio_extensions/postgres
+    executor:
+      name: solidusio_extensions/postgres
+      ruby_version: "3.0"
     steps:
       - solidusio_extensions/run-tests
   run-specs-with-mysql:
-    executor: solidusio_extensions/mysql
+    executor:
+      name: solidusio_extensions/mysql
+      ruby_version: "3.0"
     steps:
       - solidusio_extensions/run-tests
 
