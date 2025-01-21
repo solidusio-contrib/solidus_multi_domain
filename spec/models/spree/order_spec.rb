@@ -1,6 +1,3 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
-
-describe Spree::Order do
-end
+require 'solidus_multi_domain_spec_helper'

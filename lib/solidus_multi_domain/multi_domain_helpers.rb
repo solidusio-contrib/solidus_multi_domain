@@ -4,10 +4,9 @@ module SolidusMultiDomain
   module MultiDomainHelpers
     extend ActiveSupport::Concern
 
-    include ::Spree::Core::ControllerHelpers::Common # layout :get_layout
-    include ::Spree::Core::ControllerHelpers::Store # current_store
-
     included do
+      include ::Spree::Core::ControllerHelpers::Store # current_store
+      include ::Spree::Core::ControllerHelpers::Common # layout :get_layout
       helper 'spree/products'
       helper 'spree/taxons'
 
@@ -16,7 +15,12 @@ module SolidusMultiDomain
     end
 
     def get_taxonomies
-      @taxonomies ||= current_store.present? ? ::Spree::Taxonomy.where(["store_id = ?", current_store.id]) : ::Spree::Taxonomy
+      @taxonomies ||= if current_store.present?
+                        ::Spree::Taxonomy.where(["store_id = ?",
+                                                 current_store.id])
+                      else
+                        ::Spree::Taxonomy
+                      end
       @taxonomies = @taxonomies.includes(root: :children)
       @taxonomies
     end

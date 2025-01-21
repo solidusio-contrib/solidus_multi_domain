@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe "Global controller helpers" do
+RSpec.describe "Global controller helpers" do
   let!(:store) { FactoryBot.create :store }
 
   before do

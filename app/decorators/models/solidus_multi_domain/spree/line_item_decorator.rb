@@ -12,9 +12,9 @@ module SolidusMultiDomain
       private
 
       def ensure_product_belongs_to_store
-        if order.store.present? && !product.stores.include?(order.store)
-          raise ProductDoesNotBelongToStoreError
-        end
+        return unless order.store.present? && !product.stores.include?(order.store)
+
+        raise ProductDoesNotBelongToStoreError
       end
 
       ::Spree::LineItem.prepend self

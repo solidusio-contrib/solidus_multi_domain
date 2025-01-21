@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Product do
+RSpec.describe Spree::Product do
   before do
     @store = FactoryBot.create(:store)
     @product = FactoryBot.create(:product, stores: [@store])

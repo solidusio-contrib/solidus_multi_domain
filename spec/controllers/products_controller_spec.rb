@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::ProductsController do
+RSpec.describe ::ProductsController do
   let!(:product) { FactoryBot.create(:product) }
 
   describe 'on :show to a product without any stores' do

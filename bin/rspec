@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Updating the dummy app..."
+bin/rails-dummy-app generate solidus_multi_domain:install --force --auto-run-migrations --specs=all
+
+cd dummy-app/
+rspec "$@"
+exit_status=$?
+cd -
+exit $exit_status

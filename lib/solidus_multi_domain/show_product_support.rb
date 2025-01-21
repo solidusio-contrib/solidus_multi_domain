@@ -12,9 +12,9 @@ module SolidusMultiDomain
 
     def can_show_product
       @product ||= ::Spree::Product.friendly.find(params[:id])
-      if @product.stores.empty? || !@product.stores.include?(current_store)
-        raise ActiveRecord::RecordNotFound
-      end
+      return unless @product.stores.empty? || !@product.stores.include?(current_store)
+
+      raise ActiveRecord::RecordNotFound
     end
   end
 end

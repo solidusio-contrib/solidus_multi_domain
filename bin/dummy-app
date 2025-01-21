@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+set -e
+
+extension_name="solidus_multi_domain"
+# Stay away from the bundler env of the containing extension.
+function unbundled {
+  ruby -rbundler -e'b = proc {system *ARGV}; Bundler.respond_to?(:with_unbundled_env) ? Bundler.with_unbundled_env(&b) : Bundler.with_clean_env(&b)' -- "$@"
+}
+
+# "sqlite" is set by the ORB extension instead of "sqlite3",
+# all other options are already in the format expected by `rails new`.
+test "$DB" = "sqlite" && export DB="sqlite3"
+
+rm -rf ./dummy-app
+rails_version=`bundle exec ruby -e'require "rails"; puts Rails.version'`
+rails _${rails_version}_ new dummy-app \
+  --database=${DB:-sqlite3} \
+  --skip-git \
+  --skip-keeps \
+  --skip-rc \
+  --skip-bootsnap \
+  --skip-test
+
+if [ ! -d "dummy-app" ]; then
+  echo 'dummy-app rails application failed'
+  exit 1
+fi
+
+cd ./dummy-app
+cat <<RUBY >> Gemfile
+group :test, :development do
+  platforms :mri do
+    gem 'pry'
+  end
+end
+RUBY
+unbundled bundle add solidus --github solidusio/solidus --branch "${BRANCH:-main}" --version '> 0.a'
+unbundled bundle exec rake db:drop db:create
+export FRONTEND_SPECS=skip
+unbundled bundle exec rails generate solidus:install --auto-accept --payment-method=none --no-seed --no-sample"$@"
+unbundled bundle add $extension_name --path ..
+unbundled bundle exec rails generate $extension_name:install --auto-run-migrations --specs=all

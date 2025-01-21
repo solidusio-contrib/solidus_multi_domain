@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
 module Spree
-  describe ProductsHelper do
+  RSpec.describe ProductsHelper do
     before do
       @store     = FactoryBot.create(:store)
       @taxonomy  = FactoryBot.create(:taxonomy, store: @store)
