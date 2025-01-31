@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::ShippingMethod do
+RSpec.describe Spree::ShippingMethod do
   let(:shipping_method) { create :shipping_method }
   let(:order) { create :order, store: store }
   let(:store) { create :store }

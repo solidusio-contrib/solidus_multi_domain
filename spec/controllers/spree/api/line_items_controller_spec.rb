@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Api::LineItemsController do
+RSpec.describe Spree::Api::LineItemsController do
+  routes { Spree::Core::Engine.routes }
   before do
     stub_authentication!
   end

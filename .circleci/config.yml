@@ -1,31 +1,71 @@
 version: 2.1
 
 orbs:
+  # Required for feature specs.
+  browser-tools: circleci/browser-tools@1.1
+
   # Always take the latest version of the orb, this allows us to
   # run specs against Solidus supported versions only without the need
   # to change this configuration every time a Solidus version is released
   # or goes EOL.
   solidusio_extensions: solidusio/extensions@volatile
 
+commands:
+  test-with-starter-frontend:
+    steps:
+      - checkout
+      - browser-tools/install-chrome
+      - run:
+          name: Install libvips
+          command: |
+            sudo apt-get update
+            sudo apt-get install -yq libvips-dev
+      - solidusio_extensions/test-branch:
+          branch: main
+          command: |
+            export FRONTEND=starter
+            sudo gem update --system
+            gem install bundler rails:'~>7.2'
+            bundle exec rake
+      - solidusio_extensions/store-test-results
+
 jobs:
   run-specs-with-postgres:
     executor:
       name: solidusio_extensions/postgres
-      ruby_version: "3.0"
+      ruby_version: "3.2"
     steps:
-      - solidusio_extensions/run-tests
+      - test-with-starter-frontend
+
   run-specs-with-mysql:
     executor:
       name: solidusio_extensions/mysql
-      ruby_version: "3.0"
+      ruby_version: "3.2"
     steps:
-      - solidusio_extensions/run-tests
+      - test-with-starter-frontend
+
+  run-specs-with-sqlite:
+    executor:
+      name: solidusio_extensions/sqlite
+      ruby_version: "3.1"
+    steps:
+      - test-with-starter-frontend
+
+  lint-code:
+    executor:
+      name: solidusio_extensions/sqlite-memory
+      ruby_version: "3.2"
+    steps:
+      - solidusio_extensions/lint-code
 
 workflows:
   "Run specs on supported Solidus versions":
     jobs:
       - run-specs-with-postgres
       - run-specs-with-mysql
+      - run-specs-with-sqlite
+      - lint-code
+
   "Weekly run specs against master":
     triggers:
       - schedule:
@@ -37,3 +77,4 @@ workflows:
     jobs:
       - run-specs-with-postgres
       - run-specs-with-mysql
+      - run-specs-with-sqlite

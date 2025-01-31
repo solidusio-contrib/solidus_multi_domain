@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Store do
+RSpec.describe Spree::Store do
   let!(:default_store) { FactoryBot.create(:store, default: true, url: "default.com") }
   let!(:store_2)       { FactoryBot.create(:store, code: 'STORE2', url: 'freethewhales.com') }
   let!(:store_3)       { FactoryBot.create(:store, code: 'STORE3', url: "website1.com\nwww.subdomain.com") }

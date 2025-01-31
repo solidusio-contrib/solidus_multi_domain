@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Admin::ProductsController do
+RSpec.describe Spree::Admin::ProductsController do
+  routes { Spree::Core::Engine.routes }
   stub_authorization!
 
   describe "on :index" do

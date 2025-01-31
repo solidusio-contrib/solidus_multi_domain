@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Taxon do
+RSpec.describe Spree::Taxon do
   describe ".find_by_store_id_and_permalink!" do
     context "taxon exist in given store" do
       let!(:store) { FactoryBot.create :store }

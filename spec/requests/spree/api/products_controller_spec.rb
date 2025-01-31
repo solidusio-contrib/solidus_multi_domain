@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Api::ProductsController, type: :request do
+RSpec.describe Spree::Api::ProductsController, type: :request do
+  subject {
+    get "/api/products/#{product.to_param}", headers: headers
+  }
+
   let!(:product) { FactoryBot.create(:product) }
   let!(:user)  { create(:user, :with_api_key) }
   let!(:store) { FactoryBot.create(:store) }
@@ -12,10 +16,6 @@ describe Spree::Api::ProductsController, type: :request do
   else
     let!(:headers) { { 'X-Spree-Token' => user.spree_api_key } }
   end
-
-  subject {
-    get "/api/products/#{product.to_param}", headers: headers
-  }
 
   describe :show do
     context 'when the product is not added to the store' do

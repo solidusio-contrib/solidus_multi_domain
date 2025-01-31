@@ -37,7 +37,7 @@ module SolidusMultiDomain
       end
 
       def api_request?
-        return true if controller_name.include?('::Api::')
+        true if controller_name.include?('::Api::')
       end
 
       ::ActionView::TemplateRenderer.prepend self

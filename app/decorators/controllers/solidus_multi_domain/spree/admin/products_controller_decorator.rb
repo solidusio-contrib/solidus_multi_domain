@@ -14,9 +14,9 @@ module SolidusMultiDomain
 
         def set_stores
           # Remove all store associations if store data is being passed and no stores are selected
-          if params[:update_store_ids] && !params[:product].key?(:store_ids)
-            @product.stores.clear
-          end
+          return unless params[:update_store_ids] && !params[:product].key?(:store_ids)
+
+          @product.stores.clear
         end
 
         if SolidusMultiDomain::Engine.admin_available?

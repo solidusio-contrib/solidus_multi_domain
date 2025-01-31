@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::Api::ShipmentsController do
+RSpec.describe Spree::Api::ShipmentsController do
+  routes { Spree::Core::Engine.routes }
   describe '#mine' do
     let!(:user) { FactoryBot.create(:user) }
     let!(:store1) { FactoryBot.create(:store) }

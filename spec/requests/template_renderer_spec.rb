@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe "Template renderer with dynamic layouts" do
+RSpec.describe "Template renderer with dynamic layouts" do
   before do
     @old_view_paths = ApplicationController.view_paths
 
     ApplicationController.view_paths = [ActionView::FixtureResolver.new(
       "spree/layouts/spree_application.html.erb" => "Default layout <%= yield %>",
       "spree/layouts/my_store/spree_application.html.erb" => "Store layout <%= yield %>",
+      "layouts/my_store/storefront.html.erb" => "Storefront layout <%= yield %>",
+      "layouts/storefront.html.erb" => "Default storefront layout <%= yield %>",
       "application/index.html.erb" => "hello"
     )]
   end
@@ -21,12 +23,12 @@ describe "Template renderer with dynamic layouts" do
 
   it "renders the layout corresponding to the current store" do
     get "http://#{store.url}"
-    expect(response.body).to eql("Store layout hello")
+    expect(response.body).to eql("Storefront layout hello")
   end
 
   it "falls back to the default layout if none are found for the current store" do
     get "http://www.example.com"
-    expect(response.body).to eql("Default layout hello")
+    expect(response.body).to eql("Default storefront layout hello")
   end
 
   context "for a controller inheriting from ApplicationController" do
@@ -40,7 +42,7 @@ describe "Template renderer with dynamic layouts" do
       )]
 
       Rails.application.routes.draw do
-        get 'normal', to: 'normal#index' # rubocop:disable Rails/HttpPositionalArguments
+        get 'normal', to: 'normal#index'
       end
     end
 
@@ -75,9 +77,7 @@ describe "Template renderer with dynamic layouts" do
       )]
 
       Rails.application.routes.draw do
-        # rubocop:disable Rails/HttpPositionalArguments
         get 'explicit_layout', to: 'explicit_layout#index'
-        # rubocop:enable Rails/HttpPositionalArguments
       end
     end
 

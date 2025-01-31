@@ -6,7 +6,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to I18n.t('spree.back_to_store_list'), spree.admin_stores_path, :icon => 'icon-arrow-left' %>
+    <%= link_to I18n.t('spree.back_to_store_list'), spree.admin_stores_path, :icon => 'icon-arrow-left' %>
   </li>
 <% end %>
 

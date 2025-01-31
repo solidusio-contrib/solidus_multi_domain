@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::LineItem do
+RSpec.describe Spree::LineItem do
   describe "before create" do
     subject { line_item.save! }
 
@@ -18,9 +18,8 @@ describe Spree::LineItem do
         if version && version >= Gem::Version.new("1.3.0.alpha")
           skip "As of 1.3.0 Orders must have a store"
         end
+        order.update(store_id: nil)
       end
-
-      before { order.update(store_id: nil) }
 
       let(:product) { create(:product, stores: [order_store]) }
 

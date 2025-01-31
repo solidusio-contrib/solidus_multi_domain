@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'spec_helper'
+require 'solidus_multi_domain_spec_helper'
 
-describe Spree::PermissionSets::StoreManagement do
+RSpec.describe Spree::PermissionSets::StoreManagement do
   subject { ability }
 
   let(:ability) { Spree::Ability.new nil }
