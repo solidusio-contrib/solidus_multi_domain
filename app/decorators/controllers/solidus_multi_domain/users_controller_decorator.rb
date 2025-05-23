@@ -7,6 +7,8 @@ module SolidusMultiDomain
       @orders = @user.orders.complete.by_store(current_store).order('completed_at desc')
     end
 
-    ::UsersController.prepend(self)
+    if const_defined?('::UsersController')
+      ::UsersController.prepend(self)
+    end
   end
 end

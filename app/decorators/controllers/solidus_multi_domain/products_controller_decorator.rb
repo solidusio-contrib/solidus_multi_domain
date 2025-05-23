@@ -18,6 +18,8 @@ module SolidusMultiDomain
       @similar_products = @product.similar_products.select { |product| product.stores.include?(current_store) }
     end
 
-    ::ProductsController.prepend(self)
+    if const_defined?('::ProductsController')
+      ::ProductsController.prepend(self)
+    end
   end
 end

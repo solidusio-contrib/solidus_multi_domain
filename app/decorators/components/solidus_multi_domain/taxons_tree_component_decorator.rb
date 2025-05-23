@@ -33,6 +33,8 @@ module SolidusMultiDomain
       end
     end
 
-    ::TaxonsTreeComponent.prepend self
+    if const_defined?('::TaxonsTreeComponent')
+      ::TaxonsTreeComponent.prepend(self)
+    end
   end
 end
