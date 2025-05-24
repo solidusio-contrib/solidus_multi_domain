@@ -1,28 +1,21 @@
-<%= render :partial => 'spree/admin/shared/configuration_menu' %>
+<%= render 'spree/admin/shared/configuration_menu' %>
 
-<% content_for :page_title do %>
-  <%= I18n.t('spree.new_store') %>
-<% end %>
+<% admin_breadcrumb(link_to(plural_resource_name(Spree::Store), admin_stores_path)) %>
+<% admin_breadcrumb(t('spree.new_store')) %>
 
 <% content_for :page_actions do %>
   <li>
-    <%= link_to I18n.t('spree.back_to_store_list'), spree.admin_stores_path, :icon => 'icon-arrow-left' %>
+    <%= link_to I18n.t('spree.back_to_store_list'), spree.admin_stores_path, class: 'btn btn-primary' %>
   </li>
 <% end %>
-
-<div data-hook="admin_store_new_form_header">
-  <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @store } %>
-</div>
 
 <div data-hook="admin_store_new_form">
   <%= form_for [:admin, @store], :html => {:multipart => true}  do |f| %>
     <fieldset class="no-border-top">
-      <%= render :partial => 'form', :locals => { :f => f } %>
-
-      <div class="clear"></div>
+      <%= render 'form', f: f %>
 
       <div data-hook="admin_store_new_form_buttons">
-        <%= render :partial => 'spree/admin/shared/new_resource_links' %>
+        <%= render 'spree/admin/shared/new_resource_links' %>
       </div>
     </fieldset>
   <% end %>
