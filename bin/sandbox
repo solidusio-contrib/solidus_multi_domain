@@ -33,6 +33,14 @@ function unbundled {
 }
 
 rm -rf ./sandbox
+
+mkdir -p sandbox/app/assets/config
+cat <<MANIFEST > sandbox/app/assets/config/manifest.js
+//= link_tree ../images
+//= link_directory ../javascripts .js
+//= link_directory ../stylesheets .css
+MANIFEST
+
 rails new sandbox \
   --database="$RAILSDB" \
   --skip-git \
