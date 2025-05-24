@@ -15,6 +15,7 @@
 <table class="index">
   <thead>
     <tr>
+      <th><%= I18n.t('spree.logo') %></th>
       <th><%= I18n.t('spree.store_name') %></th>
       <th><%= I18n.t('spree.store_code') %></th>
       <th><%= I18n.t('spree.send_mails_as') %></th>
@@ -25,6 +26,7 @@
   <tbody>
     <% @stores.each do |store| %>
       <tr>
+        <td><%= image_tag store.logo.url(:mini) %></td>
         <td>
           <%= store.name %>
           <% if store.default? %>
