@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe "spree core factories should not raise ProductDoesNotBelongToStoreError" do
   it "is able to build a line_item" do

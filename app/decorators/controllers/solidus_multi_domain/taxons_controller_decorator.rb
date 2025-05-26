@@ -10,7 +10,7 @@ module SolidusMultiDomain
       @taxonomies = get_taxonomies
     end
 
-    if const_defined?('::TaxonsController')
+    if const_defined?("::TaxonsController")
       ::TaxonsController.prepend(self)
     end
   end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe Spree::Taxon do
   describe ".find_by_store_id_and_permalink!" do
@@ -24,7 +24,7 @@ RSpec.describe Spree::Taxon do
 
     context "taxon does not exist in given store" do
       it "raise active_record::not_found" do
-        expect{
+        expect {
           # rubocop:disable Rails/DynamicFindBy
           described_class.find_by_store_id_and_permalink!(1, "non-existing-permalink")
           # rubocop:enable Rails/DynamicFindBy

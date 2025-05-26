@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'spree/core'
+require "spree/core"
 
 module SolidusMultiDomain
   class Engine < Rails::Engine
@@ -8,7 +8,7 @@ module SolidusMultiDomain
 
     isolate_namespace ::Spree
 
-    engine_name 'solidus_multi_domain'
+    engine_name "solidus_multi_domain"
 
     # use rspec for tests
     config.generators do |g|
@@ -31,11 +31,11 @@ module SolidusMultiDomain
     config.to_prepare(&method(:activate).to_proc)
 
     def self.admin_available?
-      const_defined?('::Spree::Backend::Engine')
+      const_defined?("::Spree::Backend::Engine")
     end
 
     def self.api_available?
-      const_defined?('::Spree::Api::Engine')
+      const_defined?("::Spree::Api::Engine")
     end
   end
 end

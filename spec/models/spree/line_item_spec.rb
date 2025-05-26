@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe Spree::LineItem do
   describe "before create" do
@@ -8,9 +8,9 @@ RSpec.describe Spree::LineItem do
 
     let(:order_store) { create(:store) }
     let(:other_store) { create(:store) }
-    let(:order)       { create(:order, store: order_store) }
-    let(:variant)     { create(:variant, product: product) }
-    let(:line_item)   { build(:line_item, order: order, product: product) }
+    let(:order) { create(:order, store: order_store) }
+    let(:variant) { create(:variant, product: product) }
+    let(:line_item) { build(:line_item, order: order, product: product) }
 
     context "the order does not have a store" do
       before do
@@ -23,16 +23,16 @@ RSpec.describe Spree::LineItem do
 
       let(:product) { create(:product, stores: [order_store]) }
 
-      it 'does not raise an error' do
-        expect{ subject }.not_to raise_error
+      it "does not raise an error" do
+        expect { subject }.not_to raise_error
       end
     end
 
     context "the line item's product does not belong to the order's store" do
       let(:product) { create(:product, stores: [other_store]) }
 
-      it 'raises the correct error' do
-        expect{ subject }.to raise_error(SolidusMultiDomain::ProductDoesNotBelongToStoreError)
+      it "raises the correct error" do
+        expect { subject }.to raise_error(SolidusMultiDomain::ProductDoesNotBelongToStoreError)
       end
     end
 
@@ -40,7 +40,7 @@ RSpec.describe Spree::LineItem do
       let(:product) { create(:product, stores: [order_store]) }
 
       it "does not raise an error" do
-        expect{ subject }.not_to raise_error
+        expect { subject }.not_to raise_error
       end
     end
   end

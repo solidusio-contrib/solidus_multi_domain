@@ -3,7 +3,7 @@
 module SolidusMultiDomain
   module ActionView
     module TemplateRendererDecorator
-      if Rails.gem_version >= Gem::Version.new('6.0.0')
+      if Rails.gem_version >= Gem::Version.new("6.0.0")
         def render_template(view, template, layout_name, locals)
           @view = view
           super
@@ -14,20 +14,20 @@ module SolidusMultiDomain
         return if api_request?
 
         if @view.respond_to?(:current_store) && layout.present? &&
-           @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
+            @view.current_store && !@view.controller.is_a?(::Spree::Admin::BaseController)
           store_layout = if layout.is_a?(String)
-                           layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
-                         else
-                           layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
-                         end
+            layout.gsub("layouts/", "layouts/#{@view.current_store.code}/")
+          else
+            layout.call.try(:gsub, "layouts/", "layouts/#{@view.current_store.code}/")
+          end
 
           begin
             super(store_layout, *args)
           rescue ::ActionView::MissingTemplate
-            super(layout, *args)
+            super
           end
         else
-          super(layout, *args)
+          super
         end
       end
 
@@ -37,7 +37,7 @@ module SolidusMultiDomain
       end
 
       def api_request?
-        true if controller_name.include?('::Api::')
+        true if controller_name.include?("::Api::")
       end
 
       ::ActionView::TemplateRenderer.prepend self
