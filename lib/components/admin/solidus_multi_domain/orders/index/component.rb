@@ -21,10 +21,10 @@ module SolidusMultiDomain
         def filters
           super + [
             {
-              label: t('.filters.promotions'),
-              combinator: 'or',
+              label: t(".filters.promotions"),
+              combinator: "or",
               attribute: promotion_attribute,
-              predicate: 'in',
+              predicate: "in",
               options: promotion_options
             }
           ]
@@ -33,7 +33,7 @@ module SolidusMultiDomain
         private
 
         def promotion_attribute
-          Object.const_defined?('Spree::Promotion') ? 'promotions_id' : 'solidus_promotions_id'
+          Object.const_defined?("Spree::Promotion") ? "promotions_id" : "solidus_promotions_id"
         end
 
         def promotion_options
@@ -41,7 +41,7 @@ module SolidusMultiDomain
         end
 
         def promotion_class
-          if Object.const_defined?('Spree::Promotion')
+          if Object.const_defined?("Spree::Promotion")
             ::Spree::Promotion
           else
             ::SolidusPromotions::Promotion

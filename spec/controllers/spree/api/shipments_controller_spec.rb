@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe Spree::Api::ShipmentsController do
   routes { Spree::Core::Engine.routes }
-  describe '#mine' do
+  describe "#mine" do
     let!(:user) { FactoryBot.create(:user) }
     let!(:store1) { FactoryBot.create(:store) }
     let!(:store2) { FactoryBot.create(:store) }
@@ -15,7 +15,7 @@ RSpec.describe Spree::Api::ShipmentsController do
       allow(controller).to receive_messages(current_api_user: user)
     end
 
-    it 'returns only shipments from the correct store' do
+    it "returns only shipments from the correct store" do
       FactoryBot.create(:shipment, order: order_from_store1)
       FactoryBot.create(:shipment, order: order_from_store2)
 
@@ -34,7 +34,7 @@ RSpec.describe Spree::Api::ShipmentsController do
   end
 
   describe "PUT add" do
-    subject { put :add, params: { variant_id: variant.id, id: shipment.number, quantity: 1 } }
+    subject { put :add, params: {variant_id: variant.id, id: shipment.number, quantity: 1} }
 
     let(:current_api_user) { create(:admin_user) }
     let(:shipment) { create(:shipment) }

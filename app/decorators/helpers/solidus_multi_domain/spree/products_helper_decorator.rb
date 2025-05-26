@@ -7,11 +7,11 @@ module SolidusMultiDomain
         base.module_eval do
           def get_taxonomies
             @taxonomies ||= if current_store.present?
-                              ::Spree::Taxonomy.where(["store_id = ?",
-                                                       current_store.id])
-                            else
-                              ::Spree::Taxonomy
-                            end
+              ::Spree::Taxonomy.where(["store_id = ?",
+                current_store.id])
+            else
+              ::Spree::Taxonomy
+            end
             @taxonomies = @taxonomies.includes(root: :children)
             @taxonomies
           end

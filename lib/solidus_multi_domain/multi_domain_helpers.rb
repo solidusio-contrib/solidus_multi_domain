@@ -7,8 +7,8 @@ module SolidusMultiDomain
     included do
       include ::Spree::Core::ControllerHelpers::Store # current_store
       include ::Spree::Core::ControllerHelpers::Common # layout :get_layout
-      helper 'spree/products'
-      helper 'spree/taxons'
+      helper "spree/products"
+      helper "spree/taxons"
 
       before_action :add_current_store_id_to_params
       helper_method :current_store
@@ -16,11 +16,11 @@ module SolidusMultiDomain
 
     def get_taxonomies
       @taxonomies ||= if current_store.present?
-                        ::Spree::Taxonomy.where(["store_id = ?",
-                                                 current_store.id])
-                      else
-                        ::Spree::Taxonomy
-                      end
+        ::Spree::Taxonomy.where(["store_id = ?",
+          current_store.id])
+      else
+        ::Spree::Taxonomy
+      end
       @taxonomies = @taxonomies.includes(root: :children)
       @taxonomies
     end
