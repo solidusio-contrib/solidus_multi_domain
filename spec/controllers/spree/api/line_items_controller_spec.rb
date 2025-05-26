@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe Spree::Api::LineItemsController do
   routes { Spree::Core::Engine.routes }
@@ -9,7 +9,7 @@ RSpec.describe Spree::Api::LineItemsController do
   end
 
   describe "POST create" do
-    subject { post :create, params: { line_item: line_item, order_id: line_item.order.number } }
+    subject { post :create, params: {line_item: line_item, order_id: line_item.order.number} }
 
     let(:user) { create(:user) }
     let(:current_api_user) { user }

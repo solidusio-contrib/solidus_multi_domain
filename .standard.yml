@@ -1,0 +1,5 @@
+parallel: true # default: false
+format: progress # default: Standard::Formatter
+ignore:
+  - "dummy-app/**/*"
+  - "sandbox/**/*"
