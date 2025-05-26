@@ -1,6 +1,14 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
+
+NormalController = Class.new(ApplicationController)
+
+ExplicitLayoutController = Class.new(ApplicationController) do
+  def index
+    render :index, layout: "fancy"
+  end
+end
 
 RSpec.describe "Template renderer with dynamic layouts" do
   before do
@@ -32,17 +40,13 @@ RSpec.describe "Template renderer with dynamic layouts" do
   end
 
   context "for a controller inheriting from ApplicationController" do
-    before(:all) do
-      NormalController = Class.new(ApplicationController)
-    end
-
     before do
       ApplicationController.view_paths += [ActionView::FixtureResolver.new(
         "normal/index.html.erb" => "just normal"
       )]
 
       Rails.application.routes.draw do
-        get 'normal', to: 'normal#index'
+        get "normal", to: "normal#index"
       end
     end
 
@@ -62,14 +66,6 @@ RSpec.describe "Template renderer with dynamic layouts" do
   end
 
   context "with an explicit `layout` passed to render" do
-    before(:all) do
-      ExplicitLayoutController = Class.new(ApplicationController) do
-        def index
-          render :index, layout: 'fancy'
-        end
-      end
-    end
-
     before do
       ApplicationController.view_paths += [ActionView::FixtureResolver.new(
         "layouts/fancy.html.erb" => "Fancy <%= yield %>",
@@ -77,7 +73,7 @@ RSpec.describe "Template renderer with dynamic layouts" do
       )]
 
       Rails.application.routes.draw do
-        get 'explicit_layout', to: 'explicit_layout#index'
+        get "explicit_layout", to: "explicit_layout#index"
       end
     end
 

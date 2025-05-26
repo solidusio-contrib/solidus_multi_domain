@@ -17,7 +17,7 @@ module SolidusMultiDomain
               classes = item_classes
               if current_item_classes && current_taxon&.self_and_ancestors&.include?(taxon)
                 classes = [classes,
-                           current_item_classes].join(' ')
+                  current_item_classes].join(" ")
               end
 
               content_tag :li, class: classes do
@@ -33,6 +33,8 @@ module SolidusMultiDomain
       end
     end
 
-    ::TaxonsTreeComponent.prepend self
+    if const_defined?("::TaxonsTreeComponent")
+      ::TaxonsTreeComponent.prepend(self)
+    end
   end
 end

@@ -10,7 +10,7 @@ module SolidusMultiDomain
 
         def mine
           super
-          @shipments = @shipments.where(spree_orders: { store_id: current_store.id }) if @shipments
+          @shipments = @shipments.where(spree_orders: {store_id: current_store.id}) if @shipments
         end
 
         ::Spree::Api::ShipmentsController.prepend(self) if SolidusMultiDomain::Engine.api_available?

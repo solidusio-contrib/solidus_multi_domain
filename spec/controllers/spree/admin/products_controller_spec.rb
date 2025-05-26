@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'solidus_multi_domain_spec_helper'
+require "solidus_multi_domain_spec_helper"
 
 RSpec.describe Spree::Admin::ProductsController do
   routes { Spree::Core::Engine.routes }
@@ -26,8 +26,8 @@ RSpec.describe Spree::Admin::ProductsController do
         put :update,
           params: {
             id: @product.to_param,
-            product: { name: @product.name },
-            update_store_ids: 'true'
+            product: {name: @product.name},
+            update_store_ids: "true"
           }
 
         expect(@product.reload.store_ids).to be_empty
@@ -39,8 +39,8 @@ RSpec.describe Spree::Admin::ProductsController do
         put :update,
           params: {
             id: @product.to_param,
-            product: { name: @product.name, store_ids: [@store.id] },
-            update_store_ids: 'true'
+            product: {name: @product.name, store_ids: [@store.id]},
+            update_store_ids: "true"
           }
 
         expect(@product.reload.store_ids).to eq [@store.id]

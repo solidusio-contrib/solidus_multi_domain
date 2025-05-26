@@ -15,6 +15,8 @@ module SolidusMultiDomain
       @new_arrivals = homepage_groups[3]
     end
 
-    ::HomeController.prepend(self)
+    if const_defined?("::HomeController")
+      ::HomeController.prepend(self)
+    end
   end
 end
