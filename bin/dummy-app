@@ -13,6 +13,14 @@ function unbundled {
 test "$DB" = "sqlite" && export DB="sqlite3"
 
 rm -rf ./dummy-app
+
+mkdir -p dummy-app/app/assets/config
+cat <<MANIFEST > dummy-app/app/assets/config/manifest.js
+//= link_tree ../images
+//= link_directory ../javascripts .js
+//= link_directory ../stylesheets .css
+MANIFEST
+
 rails_version=`bundle exec ruby -e'require "rails"; puts Rails.version'`
 rails _${rails_version}_ new dummy-app \
   --database=${DB:-sqlite3} \
