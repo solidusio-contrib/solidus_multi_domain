@@ -4,10 +4,10 @@ module SolidusMultiDomain
   module MultiDomainHelpers
     extend ActiveSupport::Concern
 
-    include ::Spree::Core::ControllerHelpers::Common # layout :get_layout
-    include ::Spree::Core::ControllerHelpers::Store # current_store
-
     included do
+      include ::Spree::Core::ControllerHelpers::Common # layout :get_layout
+      include ::Spree::Core::ControllerHelpers::Store # current_store
+
       helper 'spree/products'
       helper 'spree/taxons'
 
